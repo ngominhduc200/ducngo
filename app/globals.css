@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ── Design tokens ───────────────────────────────────────────────── */
+@theme {
+  /* Colors */
+  --color-surface-bg:      #f2f2f2;
+  --color-ink-primary:     #000000;
+  --color-ink-inverse:     #ffffff;
+  --color-accent-primary:  #ef4526;
+  --color-accent-coral:    #fb644c;
+  --color-accent-green:    #52aa74;
+  --color-accent-olive:    #7a8000;
+  --color-footer-bg:       #0f45aa;
+
+  /* Fonts — CSS vars injected by next/font/google on <html> */
+  --font-besley: var(--font-besley-loaded), serif;
+  --font-mako:   var(--font-mako-loaded), sans-serif;
+
+  /* Font sizes — --text-* generates Tailwind text-{name} utilities */
+  --text-display-footer: 76px;
+  --text-display-about:  83px;
+  --text-display:        45px;
+  --text-display-case:   45px;
+  --text-heading:        24px;
+  --text-heading-light:  24px;
+  --text-quote:          18px;
+  --text-quote-sm:       16px;
+  --text-stat:           18px;
+  --text-body:           16px;
+  --text-label:          16px;
+  --text-btn:            12px;
+
+  /* Line heights — paired with text sizes via --text-*--line-height */
+  --text-display-footer--line-height: 0.72;
+  --text-display--line-height:        1.3;
+  --text-heading--line-height:        1.3;
+  --text-body--line-height:           1;
+
+  /* Border radius */
+  --radius-card:  5px;
+  --radius-image: 10px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ── Reset ───────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-surface-bg);
+  color: var(--color-ink-primary);
+  font-family: var(--font-mako);
 }
+
+/* ── Per-page backgrounds (fixed behind all content) ────────────── */
+[data-bg="landing"] { background-image: url('/images/BG_landing.png'); }
+[data-bg="fun"]     { background-image: url('/images/BG_fun.png');     }
+[data-bg="about"]   { background-image: url('/images/BG_about.png');   }
+
+[data-bg] {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.page-wrapper {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  background-color: var(--color-surface-bg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+[data-bg="landing"] .page-wrapper { background-image: url('/images/BG_landing.png'); }
+[data-bg="fun"]     .page-wrapper { background-image: url('/images/BG_fun.png');     }
+[data-bg="about"]   .page-wrapper { background-image: url('/images/BG_about.png');   }
