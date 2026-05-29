@@ -40,33 +40,15 @@ export default function ProjectGrid() {
           imageAlt="Hootsuite Deck of Truth preview"
         />
         <ProjectCard
-          id="project-holland"
+          id="project-more"
           className="py-[150px]"
-          title="Holland Festival"
-          meta="Case Study In Progress · 2026"
-          href="/work/peak-create"
+          title="More of my work"
+          meta="Archive · 2022-2025"
+          href="https://ducngo.framer.website/"
           image="/images/Example.png"
-          imageAlt="Holland Festival case study preview"
+          imageAlt="More work archive"
+          external
         />
-      </section>
-
-      <section id="more-work" aria-label="More Work" className="w-full flex flex-col items-center py-[150px] mb-[150px]">
-        <div className="w-full max-w-[56.25rem] px-6">
-          <h2 className="font-serif font-normal text-4xl text-neutral-900 mb-[50px]">More <em className="italic text-teal-500">work</em></h2>
-          <div className="grid grid-cols-2 gap-x-6 gap-y-8">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <ProjectCard
-                key={i}
-                compact
-                title="Project Title"
-                meta="Case Study In Progress · 2026"
-                href="/work/peak-create"
-                image="/images/Example.png"
-                imageAlt="Project placeholder"
-              />
-            ))}
-          </div>
-        </div>
       </section>
     </>
   )

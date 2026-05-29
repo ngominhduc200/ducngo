@@ -8,7 +8,7 @@ const PROJECTS = [
   { label: 'Airbnb Collaborative Planning', id: 'project-airbnb' },
   { label: 'Hootsuite Composer', id: 'project-hootsuite' },
   { label: 'Hootsuite Deck of Truth', id: 'project-hootsuite-deck' },
-  { label: 'Holland Festival', id: 'project-holland' },
+  { label: 'More of my work', id: 'project-more' },
 ]
 
 const baseClass = 'font-sans text-sm no-underline hover:text-orange-500 active:text-orange-500'
@@ -111,14 +111,6 @@ export default function LandingNav() {
                 {label}
               </a>
             ))}
-          </div>
-          <div className="mt-12">
-            <a
-              href="#more-work"
-              className={`${baseClass} ${atMoreWork ? 'text-orange-500' : 'text-neutral-900'} transition-colors duration-300`}
-            >
-              More work
-            </a>
           </div>
         </div>
       </div>

@@ -11,11 +11,12 @@ interface ProjectCardProps {
   video?: string
   compact?: boolean
   dark?: boolean
+  external?: boolean
 }
 
-export default function ProjectCard({ id, className, title, meta, href, image, imageAlt = '', video, compact = false, dark = false }: ProjectCardProps) {
+export default function ProjectCard({ id, className, title, meta, href, image, imageAlt = '', video, compact = false, dark = false, external = false }: ProjectCardProps) {
   return (
-    <Link id={id} href={href} className={`block no-underline w-full${className ? ` ${className}` : ''}`}>
+    <Link id={id} href={href} className={`block no-underline w-full${className ? ` ${className}` : ''}`} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
       <div className={`flex flex-col w-full ${compact ? 'items-start gap-3' : 'items-center gap-6'}`}>
 
         <div className={`w-full overflow-hidden rounded-none ${compact ? 'aspect-[3/4]' : 'aspect-[1440/847]'}`}>
