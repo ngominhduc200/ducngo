@@ -8,7 +8,7 @@ export default function AboutPage() {
         <em className="italic" style={{ color: '#0ea5e9' }}>Duc.</em>
       </PageHero>
 
-      <div className="flex flex-col gap-[100px] w-full max-w-[56.25rem] px-6 mt-[150px] pb-[165px]">
+      <div className="flex flex-col gap-[60px] md:gap-[100px] w-full max-w-[56.25rem] px-6 mt-16 md:mt-[150px] pb-16 md:pb-[165px]">
 
         {/* Bio + credentials */}
         <div className="flex flex-col gap-6 font-sans text-base text-neutral-900">
@@ -44,7 +44,7 @@ export default function AboutPage() {
           <hr className="border-t border-neutral-900 w-full opacity-10" />
 
           {/* Experience + Education */}
-          <div className="flex gap-6 items-start w-full">
+          <div className="flex flex-col gap-10 md:flex-row md:gap-6 items-start w-full">
 
             {/* Experience */}
             <div className="flex flex-1 flex-col gap-6 min-w-0">
@@ -88,17 +88,17 @@ export default function AboutPage() {
 
         {/* Photo grid */}
         <div className="flex flex-col gap-6 w-full">
-          <div className="flex gap-6">
-            <div className="flex-1 overflow-hidden" style={{ height: '404px' }}>
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+            <div className="flex-1 overflow-hidden" style={{ height: '280px' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/Example.png" alt="" className="w-full h-full object-cover block" />
             </div>
-            <div className="flex-1 overflow-hidden" style={{ height: '404px' }}>
+            <div className="flex-1 overflow-hidden" style={{ height: '280px' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/Example.png" alt="" className="w-full h-full object-cover block" />
             </div>
           </div>
-          <div className="overflow-hidden w-full" style={{ height: '404px' }}>
+          <div className="overflow-hidden w-full" style={{ height: '280px' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/images/Example.png" alt="" className="w-full h-full object-cover block" />
           </div>

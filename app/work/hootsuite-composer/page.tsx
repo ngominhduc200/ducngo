@@ -43,12 +43,12 @@ export default function HootsuiteComposerPage() {
 
       <CaseStudyNav navItems={NAV_ITEMS} />
 
-      <div className="flex w-[50rem] py-[150px] flex-col items-center shrink-0">
+      <div className="flex w-full max-w-[50rem] py-16 md:py-[150px] flex-col items-center px-4 sm:px-6 md:px-0">
 
         {/* Title + cover + meta */}
         <div className="flex flex-col gap-[30px] py-[50px] w-full">
           <div className="flex flex-col gap-[20px]">
-            <h1 className="font-serif font-normal text-4xl text-neutral-900">
+            <h1 className="font-serif font-normal text-2xl md:text-4xl text-neutral-900">
               Increasing Feature Discovery for Hootsuite
             </h1>
             <p className="font-sans text-base text-neutral-900">
@@ -56,7 +56,7 @@ export default function HootsuiteComposerPage() {
             </p>
           </div>
           <ImageBlock alt="Hootsuite Composer — cover" src={a('Cover.png')} />
-          <div className="grid grid-cols-2 gap-[50px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-[50px]">
             {[
               { label: 'Team', value: 'Duc Ngo (Product Designer Lead), 1 Mentor, 2 Project Managers, 1 Senior UX Designer' },
               { label: 'Duration', value: 'November 2025 (1 month)' },
@@ -75,7 +75,7 @@ export default function HootsuiteComposerPage() {
         <section id="context" className="flex flex-col gap-[20px] py-[50px] w-full">
           <div className="flex flex-col gap-[10px]">
             <SectionLabel>context</SectionLabel>
-            <h2 className="font-serif font-medium text-3xl text-neutral-900">
+            <h2 className="font-serif font-medium text-xl md:text-3xl text-neutral-900">
               Composer is where Hootsuite users draft their social posts.
             </h2>
           </div>
@@ -94,7 +94,7 @@ export default function HootsuiteComposerPage() {
         <section id="problem" className="flex flex-col gap-[30px] py-[50px] w-full">
           <div className="flex flex-col gap-[10px]">
             <SectionLabel>problem</SectionLabel>
-            <h2 className="font-serif font-medium text-3xl text-neutral-900">
+            <h2 className="font-serif font-medium text-xl md:text-3xl text-neutral-900">
               Many Hootsuite users were posting Instagram Stories without the Hootsuite app.
             </h2>
           </div>
@@ -114,7 +114,7 @@ export default function HootsuiteComposerPage() {
         <section id="solution" className="flex flex-col gap-[30px] py-[50px] w-full">
           <div className="flex flex-col gap-[10px]">
             <SectionLabel>solution</SectionLabel>
-            <h2 className="font-serif font-medium text-3xl text-neutral-900">
+            <h2 className="font-serif font-medium text-xl md:text-3xl text-neutral-900">
               A homepage widget that puts formats in front of users before they go looking.
             </h2>
           </div>
@@ -133,7 +133,7 @@ export default function HootsuiteComposerPage() {
         <section id="learning" className="flex flex-col gap-[20px] py-[50px] w-full">
           <div className="flex flex-col gap-[10px]">
             <SectionLabel>learning</SectionLabel>
-            <h2 className="font-serif font-medium text-3xl text-neutral-900">
+            <h2 className="font-serif font-medium text-xl md:text-3xl text-neutral-900">
               I learned how a cross-functional team sharpens the design.
             </h2>
           </div>

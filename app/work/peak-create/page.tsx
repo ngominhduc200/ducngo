@@ -46,12 +46,12 @@ export default function PeakCreatePage() {
       <CaseStudyNav />
 
       {/* ── Main content ───────────────────────────────────────────── */}
-      <div className="flex w-[50rem] py-[150px] flex-col items-center shrink-0">
+      <div className="flex w-full max-w-[50rem] py-16 md:py-[150px] flex-col items-center px-4 sm:px-6 md:px-0">
 
         {/* Title + hero + meta */}
         <div className="flex flex-col gap-[30px] py-[50px] w-full">
           <div className="flex flex-col gap-[20px]">
-            <h1 className="font-serif font-normal text-4xl text-neutral-900">
+            <h1 className="font-serif font-normal text-2xl md:text-4xl text-neutral-900">
               Streamlining how The Peak&apos;s editorial team briefs, tracks, and pays illustrators with Peak Create
             </h1>
             <p className="font-sans text-base text-neutral-900">
@@ -59,7 +59,7 @@ export default function PeakCreatePage() {
             </p>
           </div>
           <ImageBlock alt="Peak Create — hero" src={a('Cover image.png')} />
-          <div className="grid grid-cols-3 gap-[50px]">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-[50px]">
             {[
               { label: 'Team', value: 'Duc Ngo (Product Designer), Kelvin Kwan (UX Researcher), Sarah Luong (UX Writer), Hazel Hau (UX Writer)' },
               { label: 'Skills', value: 'Product Design, User Interface Design, Prototyping' },
@@ -98,7 +98,7 @@ export default function PeakCreatePage() {
             <div className="flex flex-col gap-[20px]">
               <div className="flex flex-col gap-[10px]">
                 <SectionLabel>research</SectionLabel>
-                <h2 className="font-serif font-medium text-3xl text-neutral-900">
+                <h2 className="font-serif font-medium text-xl md:text-3xl text-neutral-900">
                   To find out, my team and I went straight to the people doing the work.
                 </h2>
               </div>
@@ -111,7 +111,7 @@ export default function PeakCreatePage() {
           </div>
           <div className="flex flex-col gap-[10px]">
             <SectionLabel>Who&apos;s involved</SectionLabel>
-            <div className="grid grid-cols-3 gap-[50px]">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-[50px]">
               {[
                 { title: '5 Section Editors', body: 'writes articles, determines when illustrations are needed and submits requests.' },
                 { title: '1 Production Editor', body: 'reviews and releases requests, monitors submissions, prepare files for production day.' },
@@ -160,7 +160,7 @@ export default function PeakCreatePage() {
           <div className="flex flex-col gap-[20px]">
             <div className="flex flex-col gap-[10px]">
               <SectionLabel>findings</SectionLabel>
-              <h2 className="font-serif font-medium text-3xl text-neutral-900">
+              <h2 className="font-serif font-medium text-xl md:text-3xl text-neutral-900">
                 The friction comes from the tools, not the people.
               </h2>
             </div>
@@ -193,7 +193,7 @@ export default function PeakCreatePage() {
           ].map(({ label, bold }) => (
             <div key={label} className="flex flex-col gap-[10px]">
               <SectionLabel>{label}</SectionLabel>
-              <p className="font-serif font-normal text-3xl text-neutral-900">
+              <p className="font-serif font-normal text-xl md:text-3xl text-neutral-900">
                 How might we <strong className="font-bold">{bold}</strong>
               </p>
             </div>
@@ -207,7 +207,7 @@ export default function PeakCreatePage() {
           <div className="flex flex-col gap-[20px]">
             <div className="flex flex-col gap-[10px]">
               <SectionLabel>design process</SectionLabel>
-              <h2 className="font-serif font-normal text-3xl text-neutral-900">
+              <h2 className="font-serif font-normal text-xl md:text-3xl text-neutral-900">
                 From task management tool to an illustration-focused system.
               </h2>
             </div>
@@ -227,7 +227,7 @@ export default function PeakCreatePage() {
           <div className="flex flex-col gap-[20px]">
             <div className="flex flex-col gap-[10px]">
               <SectionLabel>pivot</SectionLabel>
-              <h2 className="font-serif font-normal text-3xl text-neutral-900">
+              <h2 className="font-serif font-normal text-xl md:text-3xl text-neutral-900">
                 I stripped it back to something built only for The Peak
               </h2>
             </div>
@@ -318,7 +318,7 @@ export default function PeakCreatePage() {
             <div key={label} className="flex flex-col gap-[20px]">
               <div className="flex flex-col gap-[10px]">
                 <SectionLabel>{label}</SectionLabel>
-                <h3 className="font-serif font-normal text-3xl text-neutral-900">{heading}</h3>
+                <h3 className="font-serif font-normal text-xl md:text-3xl text-neutral-900">{heading}</h3>
               </div>
               <AutoPlayVideo src={a(`Final solution_Step ${step}.mov`)} />
             </div>
@@ -332,7 +332,7 @@ export default function PeakCreatePage() {
           <div className="flex flex-col gap-[30px]">
             <div className="flex flex-col gap-[10px]">
               <SectionLabel>result</SectionLabel>
-              <h2 className="font-serif font-normal text-3xl text-neutral-900">
+              <h2 className="font-serif font-normal text-xl md:text-3xl text-neutral-900">
                 Stakeholder feedback showed strong potential to better support for managing requests from draft to completion,...
               </h2>
             </div>
@@ -357,7 +357,7 @@ export default function PeakCreatePage() {
           <div className="flex flex-col gap-[30px]">
             <div className="flex flex-col gap-[10px]">
               <SectionLabel>learning</SectionLabel>
-              <h2 className="font-serif font-normal text-3xl text-neutral-900">
+              <h2 className="font-serif font-normal text-xl md:text-3xl text-neutral-900">
                 Stakeholder feedback showed strong potential to better support for managing requests from draft to completion,...
               </h2>
             </div>

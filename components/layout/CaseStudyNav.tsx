@@ -86,7 +86,7 @@ export default function CaseStudyNav({ navItems = DEFAULT_navItems }: {
   if (!mounted) return null
 
   return createPortal(
-    <nav className={`fixed left-6 top-0 bottom-0 z-10 flex flex-col gap-[24px] w-auto justify-center transition-opacity duration-300 ${atFooter ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+    <nav className={`hidden lg:flex fixed left-6 top-0 bottom-0 z-10 flex-col gap-[24px] w-auto justify-center transition-opacity duration-300 ${atFooter ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
       <Link href="/" className={`${baseClass} ${textColor} transition-colors duration-300`} aria-label="Home">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="size-6">
           <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />

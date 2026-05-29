@@ -31,7 +31,6 @@ const ALL_ITEMS: { src: string; type: 'image' | 'video' }[] = [
   { src: f('Duc 13a.png'),                                                                         type: 'image' },
   { src: f('1-2, 14 Cover 2.jpg'),                                                                 type: 'image' },
   { src: f('IndigenousSportsIcons.png'),                                                           type: 'image' },
-  { src: f('douglas0.jpg'),                                                                        type: 'image' },
   { src: f('8-9 Feach 1.jpg'),                                                                     type: 'image' },
   { src: f('Test poster 1.png'),                                                                   type: 'image' },
   { src: f('photo 4-1-min.jpg'),                                                                   type: 'image' },
@@ -41,7 +40,6 @@ const ALL_ITEMS: { src: string; type: 'image' | 'video' }[] = [
   { src: f('1-2, 14 Cover 3.jpg'),                                                                 type: 'image' },
   { src: f('HonrandoLaVida.jpg'),                                                                  type: 'image' },
   { src: f('photo 2-2-min.jpg'),                                                                   type: 'image' },
-  { src: f('8-9 Feach 2.jpg'),                                                                     type: 'image' },
   { src: f('Screenshot 2023-06-29 at 5.34 1.png'),                                                type: 'image' },
   { src: f('photo 3-2-min.jpg'),                                                                   type: 'image' },
   { src: f('Game 2.mov'),                                                                          type: 'video' },
@@ -66,7 +64,7 @@ export default function FunPage() {
         {' '}of the game.
       </PageHero>
 
-      <section aria-label="Fun work" className="w-full mt-[150px] pb-[165px]">
+      <section aria-label="Fun work" className="w-full mt-16 md:mt-[150px] pb-16 md:pb-[165px]">
         <FunMarquee items={ALL_ITEMS} />
       </section>
     </main>

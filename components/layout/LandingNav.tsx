@@ -8,14 +8,13 @@ const PROJECTS = [
   { label: 'Airbnb Collaborative Planning', id: 'project-airbnb' },
   { label: 'Hootsuite Composer', id: 'project-hootsuite' },
   { label: 'Hootsuite Deck of Truth', id: 'project-hootsuite-deck' },
-  { label: 'More of my work', id: 'project-more' },
+  { label: 'Archive', id: 'archive' },
 ]
 
 const baseClass = 'font-sans text-sm no-underline hover:text-orange-500 active:text-orange-500'
 
 export default function LandingNav() {
   const [activeIdx, setActiveIdx] = useState<number | null>(null)
-  const [atMoreWork, setAtMoreWork] = useState(false)
   const [atTop, setAtTop] = useState(true)
   const [atFooter, setAtFooter] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
@@ -41,13 +40,6 @@ export default function LandingNav() {
       if (el) observer.observe(el)
     })
 
-    const moreWorkObserver = new IntersectionObserver(
-      ([entry]) => setAtMoreWork(entry.isIntersecting),
-      { rootMargin: '-40% 0px -55% 0px' }
-    )
-    const moreWorkEl = document.getElementById('more-work')
-    if (moreWorkEl) moreWorkObserver.observe(moreWorkEl)
-
     setMounted(true)
 
     const checkTop = () => setAtTop(window.scrollY < 50)
@@ -63,7 +55,6 @@ export default function LandingNav() {
 
     return () => {
       observer.disconnect()
-      moreWorkObserver.disconnect()
       footerObserver.disconnect()
       window.removeEventListener('scroll', checkTop)
     }
@@ -73,7 +64,7 @@ export default function LandingNav() {
 
   return createPortal(
     <nav
-      className={`fixed left-6 top-0 bottom-0 z-10 flex flex-col justify-center w-auto pointer-events-none transition-opacity duration-300 ${
+      className={`hidden lg:flex fixed left-6 top-0 bottom-0 z-10 flex-col justify-center w-auto pointer-events-none transition-opacity duration-300 ${
         navVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >
@@ -82,14 +73,11 @@ export default function LandingNav() {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* Counter / icon — crossfade between the two */}
+        {/* Counter */}
         <div className="relative h-5 flex items-center">
-          <span className={`font-sans text-sm select-none transition-all duration-300 ${atMoreWork ? 'opacity-0' : 'opacity-100'} ${activeIdx !== null ? 'text-orange-500' : 'text-neutral-900'}`}>
+          <span className={`font-sans text-sm select-none ${activeIdx !== null ? 'text-orange-500' : 'text-neutral-900'}`}>
             {activeIdx !== null ? activeIdx + 1 : 0}/{PROJECTS.length}
           </span>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-4 text-orange-500 absolute left-0 transition-all duration-300 ${atMoreWork ? 'opacity-100' : 'opacity-0'}`}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
-          </svg>
         </div>
 
         {/* Project list — only expands on hover */}
@@ -106,7 +94,7 @@ export default function LandingNav() {
               <a
                 key={id}
                 href={`#${id}`}
-                className={`${baseClass} ${!atMoreWork && activeIdx === idx ? 'text-orange-500' : 'text-neutral-900'}`}
+                className={`${baseClass} ${activeIdx === idx ? 'text-orange-500' : 'text-neutral-900'}`}
               >
                 {label}
               </a>

@@ -46,7 +46,7 @@ function PullQuote({ children, attribution }: { children: React.ReactNode; attri
 }
 
 function TwoCol({ children }: { children: React.ReactNode }) {
-  return <div className="grid grid-cols-2 gap-[50px]">{children}</div>
+  return <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-[50px]">{children}</div>
 }
 
 function FocusItem({ heading, body }: { heading: string; body: string }) {
@@ -64,12 +64,12 @@ export default function AirbnbPage() {
 
       <CaseStudyNav navItems={NAV_ITEMS} />
 
-      <div className="flex w-[50rem] py-[150px] flex-col items-center shrink-0">
+      <div className="flex w-full max-w-[50rem] py-16 md:py-[150px] flex-col items-center px-4 sm:px-6 md:px-0">
 
         {/* ── Hero ──────────────────────────────────────────────────── */}
         <div className="flex flex-col gap-[30px] py-[50px] w-full">
           <div className="flex flex-col gap-[20px]">
-            <h1 className="font-serif font-normal text-4xl text-neutral-900">
+            <h1 className="font-serif font-normal text-2xl md:text-4xl text-neutral-900">
               Collaborative Trip Planning
             </h1>
             <p className="font-sans text-base text-neutral-900">
@@ -77,7 +77,7 @@ export default function AirbnbPage() {
             </p>
           </div>
           <ImageBlock alt="Collaborative Trip Planning — cover" src={a('Cover.png')} />
-          <div className="grid grid-cols-3 gap-[50px]">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-[50px]">
             {[
               { label: 'Team', value: 'Duc Ngo (Product Designer), Kelvin Kwan (UX Researcher), Sarah Luong (UX Designer), Hazel Hau (UX Designer)' },
               { label: 'Skills', value: 'UX Research, User Interface Design, Prototyping' },
@@ -97,7 +97,7 @@ export default function AirbnbPage() {
         <section id="how-it-started" className="flex flex-col gap-[20px] py-[50px] w-full">
           <div className="flex flex-col gap-[10px]">
             <SectionLabel>how it started</SectionLabel>
-            <h2 className="font-serif font-medium text-3xl text-neutral-900">
+            <h2 className="font-serif font-medium text-xl md:text-3xl text-neutral-900">
               Studied Airbnb&apos;s business and product
             </h2>
           </div>
@@ -119,7 +119,7 @@ export default function AirbnbPage() {
         <section id="primary-research" className="flex flex-col gap-[20px] py-[50px] w-full">
           <div className="flex flex-col gap-[10px]">
             <SectionLabel>primary research</SectionLabel>
-            <h2 className="font-serif font-medium text-3xl text-neutral-900">
+            <h2 className="font-serif font-medium text-xl md:text-3xl text-neutral-900">
               Interviewed Airbnb&apos;s users about travel experience
             </h2>
           </div>
@@ -160,7 +160,7 @@ export default function AirbnbPage() {
         <section id="research-synthesis" className="flex flex-col gap-[20px] py-[50px] w-full">
           <div className="flex flex-col gap-[10px]">
             <SectionLabel>research synthesis</SectionLabel>
-            <h2 className="font-serif font-medium text-3xl text-neutral-900">
+            <h2 className="font-serif font-medium text-xl md:text-3xl text-neutral-900">
               Navigated through rich data to find common themes
             </h2>
           </div>
@@ -201,7 +201,7 @@ export default function AirbnbPage() {
         <section id="persona" className="flex flex-col gap-[20px] py-[50px] w-full">
           <div className="flex flex-col gap-[10px]">
             <SectionLabel>persona</SectionLabel>
-            <h2 className="font-serif font-medium text-3xl text-neutral-900">
+            <h2 className="font-serif font-medium text-xl md:text-3xl text-neutral-900">
               Developed personas for 2 different types of traveler
             </h2>
           </div>
@@ -218,7 +218,7 @@ export default function AirbnbPage() {
         <section id="proposed-solution" className="flex flex-col gap-[20px] py-[50px] w-full">
           <div className="flex flex-col gap-[10px]">
             <SectionLabel>proposed solution 01</SectionLabel>
-            <h2 className="font-serif font-medium text-3xl text-neutral-900">
+            <h2 className="font-serif font-medium text-xl md:text-3xl text-neutral-900">
               Arrival Pods is for Andy who needs clear info on arrival and proof if something goes wrong.
             </h2>
           </div>
@@ -259,7 +259,7 @@ export default function AirbnbPage() {
         <section className="flex flex-col gap-[20px] py-[50px] w-full">
           <div className="flex flex-col gap-[10px]">
             <SectionLabel>proposed solution 02</SectionLabel>
-            <h2 className="font-serif font-medium text-3xl text-neutral-900">
+            <h2 className="font-serif font-medium text-xl md:text-3xl text-neutral-900">
               Collaborative planning is for Jennie who needs a way to contribute without losing her voice in the group.
             </h2>
           </div>
@@ -289,7 +289,7 @@ export default function AirbnbPage() {
         <section id="final-solution" className="flex flex-col gap-[20px] py-[50px] w-full">
           <div className="flex flex-col gap-[10px]">
             <SectionLabel>final solution</SectionLabel>
-            <h2 className="font-serif font-medium text-3xl text-neutral-900">
+            <h2 className="font-serif font-medium text-xl md:text-3xl text-neutral-900">
               Collaborative Planning was chosen because it solved every pain point without forcing a rigid user flow.
             </h2>
           </div>
@@ -306,7 +306,7 @@ export default function AirbnbPage() {
           <div className="flex flex-col gap-[20px]">
             <div className="flex flex-col gap-[10px]">
               <SectionLabel>prototype walkthrough</SectionLabel>
-              <h2 className="font-serif font-normal text-3xl text-neutral-900">
+              <h2 className="font-serif font-normal text-xl md:text-3xl text-neutral-900">
                 Final prototype is built with interactions that feel native with the app.
               </h2>
             </div>
@@ -339,7 +339,7 @@ export default function AirbnbPage() {
             <div key={label} className="flex flex-col gap-[20px]">
               <div className="flex flex-col gap-[10px]">
                 <SectionLabel>{label}</SectionLabel>
-                <h3 className="font-serif font-normal text-3xl text-neutral-900">{heading}</h3>
+                <h3 className="font-serif font-normal text-xl md:text-3xl text-neutral-900">{heading}</h3>
               </div>
               <AutoPlayVideo src={video} />
             </div>
@@ -352,7 +352,7 @@ export default function AirbnbPage() {
         <section id="result" className="flex flex-col gap-[20px] py-[50px] w-full">
           <div className="flex flex-col gap-[10px]">
             <SectionLabel>result</SectionLabel>
-            <h2 className="font-serif font-normal text-3xl text-neutral-900">
+            <h2 className="font-serif font-normal text-xl md:text-3xl text-neutral-900">
               User testing shows positive feedback about how it made group consensus visible without a separate conversation.
             </h2>
           </div>
@@ -370,7 +370,7 @@ export default function AirbnbPage() {
         <section id="learning" className="flex flex-col gap-[20px] py-[50px] w-full">
           <div className="flex flex-col gap-[10px]">
             <SectionLabel>learning</SectionLabel>
-            <h2 className="font-serif font-normal text-3xl text-neutral-900">
+            <h2 className="font-serif font-normal text-xl md:text-3xl text-neutral-900">
               What I learned
             </h2>
           </div>

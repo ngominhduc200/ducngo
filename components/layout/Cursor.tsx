@@ -5,6 +5,13 @@ import { useState, useEffect } from 'react'
 export default function Cursor() {
   const [pos, setPos] = useState({ x: -100, y: -100 })
   const [pressed, setPressed] = useState(false)
+  const [hidden, setHidden] = useState(false)
+
+  useEffect(() => {
+    const onCursorImage = (e: Event) => setHidden((e as CustomEvent).detail.active)
+    window.addEventListener('cursor-image', onCursorImage)
+    return () => window.removeEventListener('cursor-image', onCursorImage)
+  }, [])
 
   useEffect(() => {
     // Inject a style tag to hide the native cursor everywhere
@@ -27,6 +34,8 @@ export default function Cursor() {
       window.removeEventListener('mouseup', onUp)
     }
   }, [])
+
+  if (hidden) return null
 
   return (
     <div

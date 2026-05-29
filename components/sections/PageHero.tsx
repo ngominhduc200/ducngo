@@ -9,11 +9,11 @@ export default function PageHero({
 }) {
   return (
     <section
-      className={`flex flex-col gap-2 w-full max-w-[56.25rem] px-6 pt-[150px] ${
+      className={`flex flex-col gap-2 w-full max-w-[56.25rem] px-6 pt-20 md:pt-[150px] ${
         align === 'center' ? 'items-center text-center' : 'items-start text-left'
       }`}
     >
-      <h1 className="font-serif font-normal text-5xl text-neutral-900 w-full">{children}</h1>
+      <h1 className="font-serif font-normal text-3xl md:text-5xl text-neutral-900 w-full">{children}</h1>
       {tagline && <p className="font-sans text-base text-neutral-900">{tagline}</p>}
     </section>
   )

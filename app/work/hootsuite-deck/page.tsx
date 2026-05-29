@@ -25,12 +25,12 @@ export default function HootsuiteGraphicPage() {
 
         <CaseStudyNav navItems={NAV_ITEMS} />
 
-        <div className="flex w-[50rem] py-[150px] flex-col items-center shrink-0">
+        <div className="flex w-full max-w-[50rem] py-16 md:py-[150px] flex-col items-center px-4 sm:px-6 md:px-0">
 
           {/* Title + cover image */}
           <div id="context" className="flex flex-col gap-[30px] py-[50px] w-full">
             <div className="flex flex-col gap-[20px]">
-              <h1 className="font-serif font-normal text-4xl text-neutral-900 leading-[1.3]">
+              <h1 className="font-serif font-normal text-2xl md:text-4xl text-neutral-900 leading-[1.3]">
                 Shaping Hootsuite&apos;s new branding with Deck of Truth redesigned
               </h1>
               <p className="font-sans text-base text-neutral-900">
@@ -45,7 +45,7 @@ export default function HootsuiteGraphicPage() {
           <section id="result" className="flex flex-col gap-[20px] py-[50px] w-full">
             <div className="flex flex-col gap-[10px]">
               <SectionLabel>Result</SectionLabel>
-              <p className="font-serif font-normal text-2xl text-neutral-900 leading-[1.3]">
+              <p className="font-serif font-normal text-xl md:text-2xl text-neutral-900 leading-[1.3]">
                 Typography and colour system carried into the 2026 brand.
               </p>
             </div>
@@ -60,7 +60,7 @@ export default function HootsuiteGraphicPage() {
           <section id="learning" className="flex flex-col gap-[20px] py-[50px] w-full">
             <div className="flex flex-col gap-[10px]">
               <SectionLabel>Learning</SectionLabel>
-              <p className="font-serif font-normal text-2xl text-neutral-900 leading-[1.3]">
+              <p className="font-serif font-normal text-xl md:text-2xl text-neutral-900 leading-[1.3]">
                 Designed with research-backed decision helps me work with confidence.
               </p>
             </div>
