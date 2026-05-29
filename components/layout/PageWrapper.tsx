@@ -1,10 +1,3 @@
 export default function PageWrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <div
-      className="page-wrapper"
-      style={{ minHeight: '100vh' }}
-    >
-      {children}
-    </div>
-  )
+  return <div className="relative z-[1] min-h-screen bg-stone-50">{children}</div>
 }

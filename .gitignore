@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# large media files (exceed GitHub's 100MB limit)
+public/images/Fun_Page_Assets/Frontend.mov
+public/images/Fun_Page_Assets/Game 2.mov

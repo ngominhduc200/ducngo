@@ -1,10 +1,12 @@
+import PageHero from '@/components/sections/PageHero'
+
 export default function Hero() {
   return (
-    <h1 className="font-besley font-extrabold text-display text-ink-primary text-center w-full">
+    <PageHero tagline="Currently designing at Hootsuite and the Peak SFU">
       I&apos;m Duc, a product designer who maps the{' '}
-      <em className="italic text-accent-coral">complexity</em>{' '}
+      <em className="italic text-orange-500">complexity</em>{' '}
       until it{' '}
-      <em className="italic text-accent-green">clicks.</em>
-    </h1>
+      <em className="italic text-emerald-500">clicks.</em>
+    </PageHero>
   )
 }

@@ -1,40 +1,34 @@
 import type { Metadata } from 'next'
-import { Besley, Mako } from 'next/font/google'
+import { Instrument_Serif, Public_Sans } from 'next/font/google'
 import './globals.css'
-import Footer from '@/components/layout/Footer'
-import PageWrapper from '@/components/layout/PageWrapper'
 import HtmlBg from '@/components/layout/HtmlBg'
+import ScrollToTop from '@/components/layout/ScrollToTop'
+import Cursor from '@/components/layout/Cursor'
 
-const besley = Besley({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  style: ['normal', 'italic'],
-  variable: '--font-besley-loaded',
-  display: 'swap',
-})
-
-const mako = Mako({
+const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
   weight: ['400'],
-  style: ['normal'],
-  variable: '--font-mako-loaded',
+  style: ['normal', 'italic'],
+  variable: '--font-instrument-serif-loaded',
   display: 'swap',
 })
 
-export const metadata: Metadata = {
-  title: 'Duc Ngo — Product Designer',
-  description: 'Product designer mapping complexity until it clicks.',
-}
+const publicSans = Public_Sans({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  style: ['normal', 'italic'],
+  variable: '--font-public-sans-loaded',
+  display: 'swap',
+})
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${besley.variable} ${mako.variable}`}>
-      <body>
+    <html lang="en" className={`${instrumentSerif.variable} ${publicSans.variable} scroll-smooth`}>
+      <body className="bg-stone-50 text-neutral-900 font-sans font-light">
         <HtmlBg />
-        <Footer />
-        <PageWrapper>
-          {children}
-        </PageWrapper>
+        <Cursor />
+        <ScrollToTop />
+        {children}
       </body>
     </html>
   )

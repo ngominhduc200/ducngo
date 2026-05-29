@@ -10,8 +10,8 @@ const NAV_LINKS = [
 const btnClass = [
   'inline-flex items-center justify-center',
   'w-[124px] px-[10px] py-1',
-  'font-mako text-btn text-ink-inverse uppercase no-underline',
-  'bg-accent-primary border border-ink-primary rounded-card',
+  'font-sans text-sm text-white uppercase no-underline',
+  'bg-orange-600 hover:bg-blue-800 active:bg-blue-800 border border-neutral-900 rounded transition-colors',
 ].join(' ')
 
 export default function NavButtons() {

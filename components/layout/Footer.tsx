@@ -1,39 +1,42 @@
+'use client'
+
 import Link from 'next/link'
+import { useRouter, usePathname } from 'next/navigation'
 
 export default function Footer() {
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const handleWorkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    if (pathname === '/') {
+      document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      router.push('/#work')
+    }
+  }
+
   return (
-    <footer className="fixed bottom-0 left-0 right-0 z-0 bg-footer-bg overflow-hidden flex flex-col">
-      <p
-        className="font-besley italic font-normal leading-[0.72] text-ink-inverse whitespace-nowrap px-6 pb-10"
-        style={{
-          fontSize: 'clamp(24px, 5.5vw, 76px)',
-          paddingTop: 'clamp(32px, 8vw, 96px)',
-        }}
-      >
-        Graphically designed and vide-coded by Duc
-      </p>
+    <footer id="site-footer" className="sticky bottom-0 w-full z-0 bg-[#002089] min-h-screen flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center gap-[89px] w-full px-6 antialiased">
 
-      <div className="flex px-6 pb-16">
-        <div className="flex flex-col gap-2 shrink-0 mr-24">
-          <span className="font-mako text-body text-ink-inverse uppercase">Explore/</span>
-          {[{ label: 'Work', href: '/#work' }, { label: 'Fun', href: '/fun' }, { label: 'About', href: '/about' }].map(l => (
-            <Link key={l.label} href={l.href} className="font-mako text-body text-ink-inverse no-underline">
-              {l.label}
-            </Link>
-          ))}
+        <p className="font-serif font-normal text-4xl text-center text-white max-w-[365px]">
+          Designed and developed by Duc
+        </p>
+
+        <div className="flex flex-col items-center gap-[7px] font-sans text-sm text-white text-center">
+          <span className="uppercase">Explore/</span>
+          <Link href="/#work" onClick={handleWorkClick} className="no-underline hover:text-orange-500 active:text-orange-500 text-white">work</Link>
+          <Link href="/fun" className="no-underline hover:text-orange-500 active:text-orange-500 text-white">fun</Link>
+          <Link href="/about" className="no-underline hover:text-orange-500 active:text-orange-500 text-white">about</Link>
         </div>
 
-        <div className="flex flex-col gap-2 flex-1">
-          <span className="font-mako text-body text-ink-inverse uppercase">Let&apos;s Chat/</span>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-            className="font-mako text-body text-ink-inverse no-underline">
-            Linkedin
-          </a>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer"
-            className="font-mako text-body text-ink-inverse no-underline">
-            Resume
-          </a>
+        <div className="flex flex-col items-center gap-[7px] font-sans text-sm text-white text-center">
+          <span className="uppercase">Let&apos;s Chat/</span>
+          <a href="https://linkedin.com/in/ngominhduc200" target="_blank" rel="noopener noreferrer" className="no-underline hover:text-orange-500 active:text-orange-500 text-white">Linkedin</a>
+          <a href="mailto:ngominhduc200@gmail.com" className="no-underline hover:text-orange-500 active:text-orange-500 text-white">ngominhduc200@gmail.com</a>
         </div>
+
       </div>
     </footer>
   )

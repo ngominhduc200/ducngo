@@ -1,52 +1,44 @@
 import Link from 'next/link'
-import Image from 'next/image'
 
 interface ProjectCardProps {
+  id?: string
+  className?: string
   title: string
   meta: string
   href: string
   image?: string
   imageAlt?: string
+  video?: string
+  compact?: boolean
+  dark?: boolean
 }
 
-export default function ProjectCard({ title, meta, href, image, imageAlt = '' }: ProjectCardProps) {
+export default function ProjectCard({ id, className, title, meta, href, image, imageAlt = '', video, compact = false, dark = false }: ProjectCardProps) {
   return (
-    <Link href={href} className="no-underline block">
-      <div style={{
-        display: 'flex',
-        width: '100%',
-        padding: '24px',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        gap: '24px',
-        backgroundColor: 'var(--color-ink-primary)',
-        borderRadius: 'var(--radius-card)',
-        cursor: 'pointer',
-      }}>
-        <div style={{
-          width: '100%',
-          height: '400px',
-          backgroundColor: 'var(--color-accent-olive)',
-          overflow: 'hidden',
-          position: 'relative',
-        }}>
-          {image && (
-            <div className="absolute inset-8">
-              <div className="relative w-full h-full rounded-image overflow-hidden">
-                <Image src={image} alt={imageAlt} fill className="object-cover object-top" />
-              </div>
-            </div>
-          )}
+    <Link id={id} href={href} className={`block no-underline w-full${className ? ` ${className}` : ''}`}>
+      <div className={`flex flex-col w-full ${compact ? 'items-start gap-3' : 'items-center gap-6'}`}>
+
+        <div className={`w-full overflow-hidden rounded-none ${compact ? 'aspect-[3/4]' : 'aspect-[1440/847]'}`}>
+          {video ? (
+            <video
+              src={video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          ) : image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={image} alt={imageAlt} className="w-full h-full object-cover" />
+          ) : null}
         </div>
 
-        <div className="flex flex-col gap-[11px]">
-          <p className="font-besley font-medium text-heading text-ink-inverse">
-            {title}
-          </p>
-          <p className="font-mako text-body text-ink-inverse uppercase">
-            {meta}
-          </p>
+        <div className={`flex flex-col w-full ${compact ? 'items-start text-left gap-1' : 'items-center text-center gap-[10px]'}`}>
+          <p className={compact ? `font-serif font-normal text-3xl ${dark ? 'text-white' : 'text-neutral-900'}` : 'font-serif font-normal text-3xl text-neutral-900'}>{title}</p>
+          <p className={`font-sans text-base ${dark ? 'text-neutral-500' : 'text-neutral-400'}`}>{meta}</p>
         </div>
+
       </div>
     </Link>
   )
