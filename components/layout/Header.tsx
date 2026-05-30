@@ -10,8 +10,11 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY
+      const atBottom = currentY + window.innerHeight >= document.documentElement.scrollHeight - 50
       if (currentY <= 0) {
         setVisible(true)
+      } else if (atBottom) {
+        setVisible(false)
       } else if (currentY < prevScrollY.current) {
         setVisible(true)
       } else {
