@@ -115,7 +115,7 @@ export default function ProjectGrid() {
           setActiveId(ids.length > 0 ? ids[ids.length - 1] : null)
         }
       },
-      { rootMargin: '-40% 0px -10% 0px', threshold: 0 }
+      { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
     )
     ARCHIVE.forEach(({ id }) => {
       const el = document.getElementById(id)
