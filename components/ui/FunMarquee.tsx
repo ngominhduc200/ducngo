@@ -96,11 +96,11 @@ export default function FunMarquee({
               // Stagger: leftmost item fades first, rightmost last
               let relX = x - display
               if (relX < 0) relX += h
-              const stagger = (Math.min(relX, viewWidth) / viewWidth * 0.5).toFixed(2)
-              overlay.style.transition = `opacity 0.7s ease-out ${stagger}s`
+              const stagger = (Math.min(relX, viewWidth) / viewWidth * 0.25).toFixed(2)
+              overlay.style.transition = `opacity 0.3s ease-out ${stagger}s`
               overlay.style.opacity = '0'
             } else {
-              overlay.style.transition = 'opacity 0.3s ease-in'
+              overlay.style.transition = 'opacity 0.15s ease-in'
               overlay.style.opacity = '1'
             }
           }
@@ -169,7 +169,7 @@ export default function FunMarquee({
             )}
             <div
               ref={el => { if (el) overlaysRef.current[i] = el }}
-              className="absolute inset-0 pointer-events-none backdrop-blur-2xl"
+              className="absolute inset-0 pointer-events-none backdrop-blur-md"
               style={{ opacity: 1 }}
             />
           </div>
