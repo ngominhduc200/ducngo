@@ -139,10 +139,10 @@ export default function FunMarquee({
               // eslint-disable-next-line @next/next/no-img-element
               <img src={item.src} alt="" loading="lazy" className="h-full w-auto block" />
             )}
-            {/* Overlay: visible while scrolling, fades out when stopped */}
+            {/* Overlay: blurs media while scrolling, fades out when stopped */}
             <div
               ref={el => { if (el) overlaysRef.current[i] = el }}
-              className="absolute inset-0 bg-stone-50 pointer-events-none"
+              className="absolute inset-0 pointer-events-none backdrop-blur-2xl"
               style={{ opacity: 1, transition: 'opacity 0.7s ease-out 0.1s' }}
             />
           </div>
