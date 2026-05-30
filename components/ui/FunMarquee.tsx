@@ -8,7 +8,7 @@ const MAX_TILT   = 10
 const ENTRY_GAP  = 500
 const TARGET_GAP = 100
 const GAP_EASE   = 0.03
-const ENTRY_VEL  = 10
+const ENTRY_VEL  = 20
 
 const HEIGHTS = [
   '43vh', '27vh', '39vh', '33vh', '49vh',
