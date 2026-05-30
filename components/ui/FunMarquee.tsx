@@ -2,9 +2,10 @@
 
 import { useRef, useEffect } from 'react'
 
-const EASE   = 0.085  // how fast current catches up to target (lower = smoother)
-const DECAY  = 0.94   // how fast velocity fades per frame
-const MAX_TILT = 10
+const EASE      = 0.085
+const DECAY     = 0.94
+const MAX_TILT  = 10
+const SHOW_THRESHOLD = 2  // velocity below this = "stopped"
 
 const HEIGHTS = [
   '43vh', '27vh', '39vh', '33vh', '49vh',
@@ -16,9 +17,11 @@ export default function FunMarquee({
 }: {
   items: { src: string; type: 'image' | 'video' }[]
 }) {
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const trackRef   = useRef<HTMLDivElement>(null)
-  const itemsRef   = useRef<HTMLDivElement[]>([])
+  const wrapperRef  = useRef<HTMLDivElement>(null)
+  const trackRef    = useRef<HTMLDivElement>(null)
+  const itemsRef    = useRef<HTMLDivElement[]>([])
+  const overlaysRef = useRef<HTMLDivElement[]>([])
+  const isScrolling = useRef(true)
 
   useEffect(() => {
     const wrapper = wrapperRef.current
@@ -31,7 +34,6 @@ export default function FunMarquee({
     ro.observe(track)
     updateHalf()
 
-    // Cache item positions once layout is stable
     const itemPositions: { x: number; w: number }[] = []
     const cacheTimer = setTimeout(() => {
       itemsRef.current.forEach((el, i) => {
@@ -41,10 +43,16 @@ export default function FunMarquee({
 
     const viewWidth = wrapper.offsetWidth
 
-    // Lerp-based scroll state
-    let velocity = 500   // entrance kick
-    let target   = 0     // unbounded accumulator
-    let current  = 0     // unbounded, lerps toward target
+    let velocity = 500
+    let target   = 0
+    let current  = 0
+
+    const setOverlays = (show: boolean) => {
+      isScrolling.current = show
+      overlaysRef.current.forEach(el => {
+        if (el) el.style.opacity = show ? '1' : '0'
+      })
+    }
 
     let raf = 0
     const tick = () => {
@@ -61,8 +69,12 @@ export default function FunMarquee({
         if (el) el.style.transform = `perspective(600px) rotateY(${tilt}deg)`
       })
 
-      // Play/pause videos based on visibility
-      if (itemPositions.length > 0) {
+      // Toggle overlay visibility when scroll state changes
+      const shouldShow = Math.abs(velocity) > SHOW_THRESHOLD || Math.abs(target - current) > SHOW_THRESHOLD
+      if (shouldShow !== isScrolling.current) setOverlays(shouldShow)
+
+      // Play/pause videos based on visibility (only when not scrolling)
+      if (!shouldShow && itemPositions.length > 0) {
         itemsRef.current.forEach((itemEl, i) => {
           const video = itemEl?.querySelector('video') as HTMLVideoElement | null
           if (!video) return
@@ -111,7 +123,7 @@ export default function FunMarquee({
           <div
             key={i}
             ref={el => { if (el) itemsRef.current[i] = el }}
-            className="flex-shrink-0"
+            className="relative flex-shrink-0"
             style={{ height: HEIGHTS[(i % items.length) % HEIGHTS.length] }}
           >
             {item.type === 'video' ? (
@@ -127,6 +139,12 @@ export default function FunMarquee({
               // eslint-disable-next-line @next/next/no-img-element
               <img src={item.src} alt="" loading="lazy" className="h-full w-auto block" />
             )}
+            {/* Overlay: visible while scrolling, fades out when stopped */}
+            <div
+              ref={el => { if (el) overlaysRef.current[i] = el }}
+              className="absolute inset-0 bg-stone-50 pointer-events-none"
+              style={{ opacity: 1, transition: 'opacity 0.7s ease-out 0.1s' }}
+            />
           </div>
         ))}
       </div>
