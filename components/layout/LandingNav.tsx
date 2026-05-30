@@ -47,7 +47,7 @@ export default function LandingNav() {
     checkTop()
 
     const checkFooter = () => {
-      const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 200
+      const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - window.innerHeight * 0.8
       setAtFooter(atBottom)
     }
     window.addEventListener('scroll', checkFooter, { passive: true })
