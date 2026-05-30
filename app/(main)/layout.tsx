@@ -6,7 +6,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   return (
     <>
       <Header />
-      <div id="main-wrapper" className="relative z-[1] min-h-screen bg-stone-50">
+      <div id="main-wrapper" className="relative z-[1] min-h-screen bg-stone-50 isolate">
         <PageTransition>
           {children}
         </PageTransition>
