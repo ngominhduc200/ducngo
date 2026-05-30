@@ -81,7 +81,7 @@ export default function CaseStudyNav({ navItems = DEFAULT_navItems }: {
     }
   }, [])
 
-  const textColor = isDark ? 'text-white' : 'text-neutral-900'
+  const textColor = isDark ? 'text-white' : 'text-neutral-400'
 
   if (!mounted) return null
 

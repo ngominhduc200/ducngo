@@ -1,4 +1,8 @@
 import CaseStudyNav from '@/components/layout/CaseStudyNav'
+import Divider from '@/components/ui/Divider'
+import SectionLabel from '@/components/ui/SectionLabel'
+import CaseStudyHero from '@/components/sections/CaseStudyHero'
+import CaseStudySection from '@/components/sections/CaseStudySection'
 
 const NAV_ITEMS = [
   { label: 'context', id: 'context' },
@@ -7,16 +11,7 @@ const NAV_ITEMS = [
   { label: 'showcase', id: 'showcase' },
 ]
 
-const a = (name: string) =>
-  `/images/Hootsuite Deck Assets/${encodeURIComponent(name)}`
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return <p className="font-sans text-base text-neutral-900 uppercase">{children}</p>
-}
-
-function Divider() {
-  return <hr className="border-t border-neutral-900 w-full opacity-10" />
-}
+const a = (name: string) => `/images/hootsuite-deck/${name}`
 
 export default function HootsuiteGraphicPage() {
   return (
@@ -25,25 +20,18 @@ export default function HootsuiteGraphicPage() {
 
         <CaseStudyNav navItems={NAV_ITEMS} />
 
-        <div className="flex w-full max-w-[50rem] py-16 md:py-[150px] flex-col items-center px-4 sm:px-6 md:px-0">
+        <div className="flex w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] py-16 md:py-[150px] flex-col items-center px-4 sm:px-6 md:px-0">
 
-          {/* Title + cover image */}
-          <div id="context" className="flex flex-col gap-[30px] py-[50px] w-full">
-            <div className="flex flex-col gap-[20px]">
-              <h1 className="font-serif font-normal text-2xl md:text-4xl text-neutral-900 leading-[1.3]">
-                Shaping Hootsuite&apos;s new branding with Deck of Truth redesigned
-              </h1>
-              <p className="font-sans text-base text-neutral-900">
-                In September 2025, I spent one month with the brand marketing team auditing the current branding, and proposing a new direction to help shift Hootsuite&apos;s brand from social to enterprise. My work was first introduced as a presentation slide deck template, reflecting updated typography, colour, and layout composition that looks modern and enterprise-ready, aligned with the 2026 direction. This deck template was adopted internally across all departments.
-              </p>
-            </div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={a('DOT preview 2.png')} alt="Hootsuite Deck of Truth cover" className="w-full h-auto" />
-          </div>
+          <CaseStudyHero
+            id="context"
+            title="Shaping Hootsuite's new branding with Deck of Truth redesigned"
+            description="In September 2025, I spent one month with the brand marketing team auditing the current branding, and proposing a new direction to help shift Hootsuite's brand from social to enterprise. My work was first introduced as a presentation slide deck template, reflecting updated typography, colour, and layout composition that looks modern and enterprise-ready, aligned with the 2026 direction. This deck template was adopted internally across all departments."
+            coverSrc={a('preview-2.png')}
+            coverAlt="Hootsuite Deck of Truth cover"
+          />
 
-          {/* Result */}
-          <section id="result" className="flex flex-col gap-[20px] py-[50px] w-full">
-            <div className="flex flex-col gap-[10px]">
+          <CaseStudySection id="result">
+            <div className="flex flex-col gap-3">
               <SectionLabel>Result</SectionLabel>
               <p className="font-serif font-normal text-xl md:text-2xl text-neutral-900 leading-[1.3]">
                 Typography and colour system carried into the 2026 brand.
@@ -52,13 +40,12 @@ export default function HootsuiteGraphicPage() {
             <p className="font-sans text-base text-neutral-900">
               A lot of my work carried into 2026 such as the typography treatment and gradient colour system became part of the live brand, used to complement content in the foreground.
             </p>
-          </section>
+          </CaseStudySection>
 
           <Divider />
 
-          {/* Learning */}
-          <section id="learning" className="flex flex-col gap-[20px] py-[50px] w-full">
-            <div className="flex flex-col gap-[10px]">
+          <CaseStudySection id="learning">
+            <div className="flex flex-col gap-3">
               <SectionLabel>Learning</SectionLabel>
               <p className="font-serif font-normal text-xl md:text-2xl text-neutral-900 leading-[1.3]">
                 Designed with research-backed decision helps me work with confidence.
@@ -73,13 +60,13 @@ export default function HootsuiteGraphicPage() {
                 href="https://www.figma.com/design/hut5yExXNg4Vbr2Qc1XIw0/Portfolio?node-id=422-196"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="italic text-orange-500 hover:opacity-70"
+                className="italic text-orange-500 hover:text-sky-500 transition-colors"
               >
                 presentation
               </a>
               {' '}for full proposal!
             </p>
-          </section>
+          </CaseStudySection>
 
         </div>
       </main>
@@ -87,21 +74,22 @@ export default function HootsuiteGraphicPage() {
       {/* Full-viewport-width media */}
       <div id="showcase" className="flex flex-col w-full overflow-hidden bg-black" data-dark-bg>
         <video
-          src={a('DOT preview.mov')}
+          src={a('preview.mp4')}
           autoPlay
           loop
           muted
           playsInline
+          preload="none"
           className="w-full block"
         />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={a('DOT preview 3.png')} alt="Hootsuite Deck of Truth preview 3" className="w-full block" />
+        <img src={a('preview-3.png')} alt="Hootsuite Deck of Truth preview 3" loading="lazy" className="w-full block" />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={a('DOT preview 4.png')} alt="Hootsuite Deck of Truth preview 4" className="w-full block" />
+        <img src={a('preview-4.png')} alt="Hootsuite Deck of Truth preview 4" loading="lazy" className="w-full block" />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={a('DOT preview 5.png')} alt="Hootsuite Deck of Truth preview 5" className="w-full block" />
+        <img src={a('preview-5.png')} alt="Hootsuite Deck of Truth preview 5" loading="lazy" className="w-full block" />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={a('DOT preview 6.png')} alt="Hootsuite Deck of Truth preview 6" className="w-full block" />
+        <img src={a('preview-6.png')} alt="Hootsuite Deck of Truth preview 6" loading="lazy" className="w-full block" />
       </div>
     </>
   )

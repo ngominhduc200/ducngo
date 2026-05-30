@@ -89,6 +89,7 @@ export default function AutoPlayVideo({ src }: { src: string }) {
         muted
         loop
         playsInline
+        preload="none"
         className="w-full block"
       />
       {/* Controls overlay — bottom of video */}

@@ -5,21 +5,6 @@ const CARD_RATIO = 0.85
 const GAP = 16
 const DRAG_THRESHOLD = 50
 
-function ChevronLeft() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-      <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
-function ChevronRight() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-      <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
 
 export default function Carousel({ images }: {
   images: { src: string; alt: string }[]
@@ -60,62 +45,38 @@ export default function Carousel({ images }: {
   return (
     <div className="flex flex-col gap-4 w-full">
 
-      {/* Carousel — arrows live here so they're not clipped by overflow:hidden */}
-      <div className="relative">
-
-        {/* Viewport */}
+      {/* Viewport */}
+      <div
+        ref={containerRef}
+        className="overflow-hidden w-full cursor-grab active:cursor-grabbing"
+        onMouseDown={(e) => { dragStartX.current = e.clientX }}
+        onMouseUp={(e) => settle(e.clientX)}
+        onMouseLeave={() => { dragStartX.current = null }}
+        onTouchStart={(e) => { dragStartX.current = e.touches[0].clientX }}
+        onTouchEnd={(e) => settle(e.changedTouches[0].clientX)}
+      >
+        {/* Track */}
         <div
-          ref={containerRef}
-          className="overflow-hidden w-full cursor-grab active:cursor-grabbing"
-          onMouseDown={(e) => { dragStartX.current = e.clientX }}
-          onMouseUp={(e) => settle(e.clientX)}
-          onMouseLeave={() => { dragStartX.current = null }}
-          onTouchStart={(e) => { dragStartX.current = e.touches[0].clientX }}
-          onTouchEnd={(e) => settle(e.changedTouches[0].clientX)}
+          className={`flex select-none ${ready ? 'transition-transform duration-300 ease-in-out' : ''}`}
+          style={{ gap: GAP, transform: `translateX(${translateX}px)` }}
         >
-          {/* Track */}
-          <div
-            className={`flex select-none ${ready ? 'transition-transform duration-300 ease-in-out' : ''}`}
-            style={{ gap: GAP, transform: `translateX(${translateX}px)` }}
-          >
-            {images.map(({ src, alt }, i) => (
-              <div
-                key={i}
-                className="shrink-0 overflow-hidden"
-                style={{ width: cardWidth > 0 ? cardWidth : `${CARD_RATIO * 100}%` }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt={alt} className="w-full h-auto block pointer-events-none" draggable={false} />
-              </div>
-            ))}
-          </div>
+          {images.map(({ src, alt }, i) => (
+            <div
+              key={i}
+              className="shrink-0 overflow-hidden"
+              style={{ width: cardWidth > 0 ? cardWidth : `${CARD_RATIO * 100}%` }}
+            >
+              {Math.abs(i - index) <= 1 && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={src} alt={alt} loading={i === 0 ? 'eager' : 'lazy'} className="w-full h-auto block pointer-events-none" draggable={false} />
+              )}
+            </div>
+          ))}
         </div>
-
-        {/* Left arrow */}
-        {index > 0 && (
-          <button
-            onClick={() => goTo(index - 1)}
-            aria-label="Previous"
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-white/90 border border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white transition-colors shadow-sm"
-          >
-            <ChevronLeft />
-          </button>
-        )}
-
-        {/* Right arrow */}
-        {index < images.length - 1 && (
-          <button
-            onClick={() => goTo(index + 1)}
-            aria-label="Next"
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-white/90 border border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white transition-colors shadow-sm"
-          >
-            <ChevronRight />
-          </button>
-        )}
       </div>
 
-      {/* Dot indicators */}
-      <div className="flex justify-center gap-2">
+      {/* Dots */}
+      <div className="flex items-center justify-center gap-2">
         {images.map((_, i) => (
           <button
             key={i}
@@ -123,9 +84,7 @@ export default function Carousel({ images }: {
             aria-label={`Go to slide ${i + 1}`}
             className={[
               'w-2 h-2 rounded-full transition-colors',
-              i === index
-                ? 'bg-neutral-900'
-                : 'border border-neutral-900 opacity-40',
+              i === index ? 'bg-orange-500' : 'bg-zinc-200',
             ].join(' ')}
           />
         ))}

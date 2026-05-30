@@ -8,7 +8,7 @@ export default function AboutPage() {
         <em className="italic" style={{ color: '#0ea5e9' }}>Duc.</em>
       </PageHero>
 
-      <div className="flex flex-col gap-[60px] md:gap-[100px] w-full max-w-[56.25rem] px-6 mt-16 md:mt-[150px] pb-16 md:pb-[165px]">
+      <div className="flex flex-col gap-[60px] md:gap-[100px] w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] px-6 mt-16 md:mt-[150px] pb-16 md:pb-[165px]">
 
         {/* Bio + credentials */}
         <div className="flex flex-col gap-6 font-sans text-base text-neutral-900">
@@ -24,17 +24,17 @@ export default function AboutPage() {
           <p className="leading-[1.3]">
             You can find me on{' '}
             <a
-              href="https://linkedin.com/in/ngominhduc200"
+              href="https://www.linkedin.com/in/duc-n-0346a4203"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-orange-500 active:text-orange-500"
+              className="italic text-orange-500 hover:text-sky-500 transition-colors"
             >
               LinkedIn
             </a>
             {' '}or say hi at{' '}
             <a
               href="mailto:ngominhduc200@gmail.com"
-              className="underline hover:text-orange-500 active:text-orange-500"
+              className="italic text-orange-500 hover:text-sky-500 transition-colors"
             >
               ngominhduc200@gmail.com
             </a>
@@ -87,21 +87,34 @@ export default function AboutPage() {
         </div>
 
         {/* Photo grid */}
-        <div className="flex flex-col gap-6 w-full">
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-            <div className="flex-1 overflow-hidden" style={{ height: '280px' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/Example.png" alt="" className="w-full h-full object-cover block" />
-            </div>
-            <div className="flex-1 overflow-hidden" style={{ height: '280px' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/Example.png" alt="" className="w-full h-full object-cover block" />
-            </div>
+        <div className="flex flex-col gap-4 w-full">
+
+          {/* Row 1: 4 vertical images at 3:4 */}
+          <div className="grid grid-cols-4 gap-4">
+            {['Vertical%201.jpg', 'Vertical%202.jpg', 'Vertical%203.jpg', 'Vertical%204.jpg'].map((img, i) => (
+              <div key={i} className="aspect-[3/4] overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/images/about/${img}`} alt="" loading="lazy" className="w-full h-full object-cover block" />
+              </div>
+            ))}
           </div>
-          <div className="overflow-hidden w-full" style={{ height: '280px' }}>
+
+          {/* Row 2: horizontal image at 4:3 */}
+          <div className="aspect-[4/3] overflow-hidden w-full">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/Example.png" alt="" className="w-full h-full object-cover block" />
+            <img src="/images/about/Horizontal%201.jpg" alt="" loading="lazy" className="w-full h-full object-cover block" />
           </div>
+
+          {/* Row 3: 2 images at 3:4 */}
+          <div className="grid grid-cols-2 gap-4">
+            {['IMG_0595.jpg', 'IMG_1226.JPG'].map((img, i) => (
+              <div key={i} className="aspect-[3/4] overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/images/about/${img}`} alt="" loading="lazy" className="w-full h-full object-cover block" />
+              </div>
+            ))}
+          </div>
+
         </div>
 
       </div>

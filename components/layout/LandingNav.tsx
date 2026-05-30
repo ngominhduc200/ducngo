@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
 const PROJECTS = [
-  { label: 'Peak Create', id: 'project-peak-create' },
+  { label: 'Peak Create Request System', id: 'project-peak-create' },
   { label: 'Airbnb Collaborative Planning', id: 'project-airbnb' },
-  { label: 'Hootsuite Composer', id: 'project-hootsuite' },
+  { label: 'Hootsuite Composer Widget', id: 'project-hootsuite' },
   { label: 'Hootsuite Deck of Truth', id: 'project-hootsuite-deck' },
   { label: 'Archive', id: 'archive' },
 ]
@@ -75,7 +75,7 @@ export default function LandingNav() {
       >
         {/* Counter */}
         <div className="relative h-5 flex items-center">
-          <span className={`font-sans text-sm select-none ${activeIdx !== null ? 'text-orange-500' : 'text-neutral-900'}`}>
+          <span className={`font-sans text-sm select-none ${activeIdx !== null ? 'text-orange-500' : 'text-neutral-400'}`}>
             {activeIdx !== null ? activeIdx + 1 : 0}/{PROJECTS.length}
           </span>
         </div>
@@ -94,7 +94,7 @@ export default function LandingNav() {
               <a
                 key={id}
                 href={`#${id}`}
-                className={`${baseClass} ${activeIdx === idx ? 'text-orange-500' : 'text-neutral-900'}`}
+                className={`${baseClass} ${activeIdx === idx ? 'text-orange-500' : 'text-neutral-400'}`}
               >
                 {label}
               </a>

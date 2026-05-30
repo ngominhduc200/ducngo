@@ -10,10 +10,20 @@ const NAV_ITEMS = [
 
 const PROJECTS = [
   {
+    id: 'discogs-shop',
+    title: 'Academic Discogs Shop',
+    category: 'Web Design · Front-End Development',
+    year: '2022',
+    description:
+      'Built a responsive e-commerce website using HTML and CSS, including product listing features and client information pages, deployed on GitHub Pages.',
+    tools: ['HTML', 'CSS'],
+    href: 'https://ducngo.framer.website/',
+  },
+  {
     id: 'the-peak',
-    title: "The Peak SFU's Graphic Collection",
+    title: "The Peak SFU",
     category: 'Graphic Design',
-    year: '2022–2024',
+    year: '2022-2024',
     description:
       "Designed magazine spreads, covers, and section layouts for SFU's student newspaper. Transformed written content and illustrations into engaging visual compositions using layout design, typography selection, and colour palette development.",
     tools: ['Adobe Illustrator', 'Adobe Photoshop', 'Adobe InDesign'],
@@ -31,9 +41,9 @@ const PROJECTS = [
   },
   {
     id: 'douglas-royals',
-    title: "Douglas College Royals' Graphic Collection",
+    title: "Douglas College Royals",
     category: 'Graphic Design',
-    year: '2022–2023',
+    year: '2022-2023',
     description:
       "Part-time role creating visual assets for Douglas College's athletic department — promotional posters, athlete spotlights, event schedules, and digital and physical marketing materials.",
     tools: ['Adobe Illustrator', 'Adobe Photoshop', 'Adobe InDesign', 'Canva', 'Figma'],
@@ -49,20 +59,10 @@ const PROJECTS = [
     tools: ['Procreate', 'Adobe Illustrator', 'Figma'],
     href: 'https://ducngo.framer.website/4c',
   },
-  {
-    id: 'discogs-shop',
-    title: 'Academic Discogs Shop',
-    category: 'Web Design · Front-End Development',
-    year: '2022',
-    description:
-      'Built a responsive e-commerce website using HTML and CSS, including product listing features and client information pages, deployed on GitHub Pages.',
-    tools: ['HTML', 'CSS'],
-    href: 'https://ducngo.framer.website/',
-  },
 ]
 
 function Divider() {
-  return <hr className="border-t border-neutral-900 w-full opacity-10" />
+  return <hr className="border-t border-zinc-200 w-full" />
 }
 
 export default function ArchivePage() {
@@ -70,7 +70,7 @@ export default function ArchivePage() {
     <main className="flex w-full justify-center items-start">
       <CaseStudyNav navItems={NAV_ITEMS} />
 
-      <div className="flex w-full max-w-[50rem] py-16 md:py-[150px] flex-col items-start px-4 sm:px-6 md:px-0 gap-0">
+      <div className="flex w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] py-16 md:py-[150px] flex-col items-start px-4 sm:px-6 md:px-0 gap-0">
 
         {/* Header */}
         <div className="flex flex-col gap-[20px] pb-[80px] w-full">

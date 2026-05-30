@@ -43,3 +43,8 @@ next-env.d.ts
 # large media files (exceed GitHub's 100MB limit)
 public/images/Fun_Page_Assets/Frontend.mov
 public/images/Fun_Page_Assets/Game 2.mov
+public/images/fun/game-2.mov
+public/images/fun/game-2.mp4
+public/images/archive/discogs-shop/preview.mov
+public/images/archive/douglas-royals/Leah Serlin_canvas 2.pdf
+public/images/archive/douglas-royals/Maggie Maskiewich_canvas 2.pdf
