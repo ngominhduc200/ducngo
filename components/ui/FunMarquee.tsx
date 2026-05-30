@@ -105,9 +105,14 @@ export default function FunMarquee({
             }
           }
 
-          // Video follows viewport
           const video = itemEl.querySelector('video') as HTMLVideoElement | null
           if (video) {
+            // Upgrade preload when item is near viewport
+            if (video.preload === 'none') {
+              const rawX = p.x % h
+              const dist = Math.min(Math.abs(rawX - display), Math.abs(rawX - display + h))
+              if (dist < viewWidth * 2) video.preload = 'metadata'
+            }
             if (inView  && video.paused)  video.play().catch(() => {})
             if (!inView && !video.paused) video.pause()
           }
@@ -160,7 +165,7 @@ export default function FunMarquee({
                 loop
                 muted
                 playsInline
-                preload="metadata"
+                preload="none"
                 className="h-full w-auto block"
               />
             ) : (
