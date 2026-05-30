@@ -38,7 +38,7 @@ export default function FunMarquee({
     const ENTRY_DURATION = 1000
     const ENTRY_FRICTION = 0.97
 
-    let raf: number
+    let raf = 0
     const tick = () => {
       const friction = Date.now() - entryStart < ENTRY_DURATION ? ENTRY_FRICTION : FRICTION
       velRef.current *= friction
@@ -55,6 +55,8 @@ export default function FunMarquee({
 
       if (Math.abs(velRef.current) > 0.05) {
         raf = requestAnimationFrame(tick)
+      } else {
+        raf = 0
       }
     }
     raf = requestAnimationFrame(tick)
