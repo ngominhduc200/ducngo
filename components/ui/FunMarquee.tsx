@@ -2,10 +2,14 @@
 
 import { useRef, useEffect } from 'react'
 
-const EASE      = 0.085
-const DECAY     = 0.94
-const MAX_TILT  = 10
-const SHOW_THRESHOLD = 2  // velocity below this = "stopped"
+const EASE           = 0.085
+const DECAY          = 0.94
+const MAX_TILT       = 10
+const SHOW_THRESHOLD = 2
+const ENTRY_GAP      = 500   // starting gap (px)
+const TARGET_GAP     = 100   // final gap (px)
+const GAP_EASE       = 0.03  // how fast gap closes
+const ENTRY_VEL      = 10    // slow entrance speed
 
 const HEIGHTS = [
   '43vh', '27vh', '39vh', '33vh', '49vh',
@@ -34,18 +38,14 @@ export default function FunMarquee({
     ro.observe(track)
     updateHalf()
 
+    const viewWidth      = wrapper.offsetWidth
     const itemPositions: { x: number; w: number }[] = []
-    const cacheTimer = setTimeout(() => {
-      itemsRef.current.forEach((el, i) => {
-        if (el) itemPositions[i] = { x: el.offsetLeft, w: el.offsetWidth }
-      })
-    }, 150)
 
-    const viewWidth = wrapper.offsetWidth
-
-    let velocity = 500
-    let target   = 0
-    let current  = 0
+    let velocity   = ENTRY_VEL
+    let target     = 0
+    let current    = 0
+    let currentGap = ENTRY_GAP
+    let entering   = true
 
     const setOverlays = (show: boolean) => {
       isScrolling.current = show
@@ -56,6 +56,23 @@ export default function FunMarquee({
 
     let raf = 0
     const tick = () => {
+      // ── Entrance: animate gap from large → target ──────────────────
+      if (entering) {
+        currentGap += (TARGET_GAP - currentGap) * GAP_EASE
+        track.style.gap = `${currentGap}px`
+
+        if (Math.abs(currentGap - TARGET_GAP) < 1) {
+          currentGap = TARGET_GAP
+          track.style.gap = `${TARGET_GAP}px`
+          entering = false
+          // Cache positions now that layout is stable
+          itemsRef.current.forEach((el, i) => {
+            if (el) itemPositions[i] = { x: el.offsetLeft, w: el.offsetWidth }
+          })
+        }
+      }
+
+      // ── Physics ─────────────────────────────────────────────────────
       target  += velocity
       velocity *= DECAY
       current += (target - current) * EASE
@@ -69,27 +86,28 @@ export default function FunMarquee({
         if (el) el.style.transform = `perspective(600px) rotateY(${tilt}deg)`
       })
 
-      // Toggle overlay visibility when scroll state changes
-      const shouldShow = Math.abs(velocity) > SHOW_THRESHOLD || Math.abs(target - current) > SHOW_THRESHOLD
-      if (shouldShow !== isScrolling.current) setOverlays(shouldShow)
+      // ── Overlay + video visibility (only after entrance) ────────────
+      if (!entering) {
+        const shouldShow = Math.abs(velocity) > SHOW_THRESHOLD || Math.abs(target - current) > SHOW_THRESHOLD
+        if (shouldShow !== isScrolling.current) setOverlays(shouldShow)
 
-      // Play/pause videos based on visibility (only when not scrolling)
-      if (!shouldShow && itemPositions.length > 0) {
-        itemsRef.current.forEach((itemEl, i) => {
-          const video = itemEl?.querySelector('video') as HTMLVideoElement | null
-          if (!video) return
-          const p = itemPositions[i]
-          if (!p) return
-          const x = p.x % h
-          const inView =
-            (x + p.w > display && x < display + viewWidth) ||
-            (x + p.w + h > display && x + h < display + viewWidth)
-          if (inView  && video.paused)  video.play().catch(() => {})
-          if (!inView && !video.paused) video.pause()
-        })
+        if (!shouldShow && itemPositions.length > 0) {
+          itemsRef.current.forEach((itemEl, i) => {
+            const video = itemEl?.querySelector('video') as HTMLVideoElement | null
+            if (!video) return
+            const p = itemPositions[i]
+            if (!p) return
+            const x = p.x % h
+            const inView =
+              (x + p.w > display && x < display + viewWidth) ||
+              (x + p.w + h > display && x + h < display + viewWidth)
+            if (inView  && video.paused)  video.play().catch(() => {})
+            if (!inView && !video.paused) video.pause()
+          })
+        }
       }
 
-      if (Math.abs(velocity) > 0.1 || Math.abs(target - current) > 0.1) {
+      if (entering || Math.abs(velocity) > 0.1 || Math.abs(target - current) > 0.1) {
         raf = requestAnimationFrame(tick)
       } else {
         raf = 0
@@ -108,7 +126,6 @@ export default function FunMarquee({
 
     return () => {
       cancelAnimationFrame(raf)
-      clearTimeout(cacheTimer)
       ro.disconnect()
       wrapper.removeEventListener('wheel', onWheel)
     }
@@ -118,7 +135,11 @@ export default function FunMarquee({
 
   return (
     <div ref={wrapperRef} className="w-full overflow-hidden">
-      <div ref={trackRef} className="flex gap-[100px] items-center" style={{ width: 'max-content' }}>
+      <div
+        ref={trackRef}
+        className="flex items-center"
+        style={{ width: 'max-content', gap: `${ENTRY_GAP}px` }}
+      >
         {doubled.map((item, i) => (
           <div
             key={i}
@@ -139,7 +160,6 @@ export default function FunMarquee({
               // eslint-disable-next-line @next/next/no-img-element
               <img src={item.src} alt="" loading="lazy" className="h-full w-auto block" />
             )}
-            {/* Overlay: blurs media while scrolling, fades out when stopped */}
             <div
               ref={el => { if (el) overlaysRef.current[i] = el }}
               className="absolute inset-0 pointer-events-none backdrop-blur-2xl"
