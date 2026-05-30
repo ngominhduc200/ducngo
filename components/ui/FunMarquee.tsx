@@ -169,7 +169,7 @@ export default function FunMarquee({
             )}
             <div
               ref={el => { if (el) overlaysRef.current[i] = el }}
-              className="absolute inset-0 pointer-events-none backdrop-blur-md"
+              className="absolute inset-0 pointer-events-none backdrop-blur-sm"
               style={{ opacity: 1 }}
             />
           </div>
