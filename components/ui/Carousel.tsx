@@ -64,11 +64,11 @@ export default function Carousel({ images }: {
             <div
               key={i}
               className="shrink-0 overflow-hidden"
-              style={{ width: cardWidth > 0 ? cardWidth : `${CARD_RATIO * 100}%`, height: '50vh' }}
+              style={{ width: cardWidth > 0 ? cardWidth : `${CARD_RATIO * 100}%`, maxHeight: '50vh' }}
             >
               {Math.abs(i - index) <= 1 && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={src} alt={alt} loading={i === 0 ? 'eager' : 'lazy'} className="w-full h-full object-cover pointer-events-none" style={{ objectPosition: 'center 67%' }} draggable={false} />
+                <img src={src} alt={alt} loading={i === 0 ? 'eager' : 'lazy'} className="w-full h-auto block pointer-events-none" draggable={false} />
               )}
             </div>
           ))}
