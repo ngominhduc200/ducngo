@@ -2,14 +2,13 @@
 
 import { useRef, useEffect } from 'react'
 
-const EASE           = 0.085
-const DECAY          = 0.94
-const MAX_TILT       = 10
-const SHOW_THRESHOLD = 2
-const ENTRY_GAP      = 500   // starting gap (px)
-const TARGET_GAP     = 100   // final gap (px)
-const GAP_EASE       = 0.03  // how fast gap closes
-const ENTRY_VEL      = 10    // slow entrance speed
+const EASE       = 0.085
+const DECAY      = 0.94
+const MAX_TILT   = 10
+const ENTRY_GAP  = 500
+const TARGET_GAP = 100
+const GAP_EASE   = 0.03
+const ENTRY_VEL  = 10
 
 const HEIGHTS = [
   '43vh', '27vh', '39vh', '33vh', '49vh',
@@ -25,7 +24,7 @@ export default function FunMarquee({
   const trackRef    = useRef<HTMLDivElement>(null)
   const itemsRef    = useRef<HTMLDivElement[]>([])
   const overlaysRef = useRef<HTMLDivElement[]>([])
-  const isScrolling = useRef(true)
+  const inViewRef   = useRef<boolean[]>([])  // per-item viewport state
 
   useEffect(() => {
     const wrapper = wrapperRef.current
@@ -47,25 +46,16 @@ export default function FunMarquee({
     let currentGap = ENTRY_GAP
     let entering   = true
 
-    const setOverlays = (show: boolean) => {
-      isScrolling.current = show
-      overlaysRef.current.forEach(el => {
-        if (el) el.style.opacity = show ? '1' : '0'
-      })
-    }
-
     let raf = 0
     const tick = () => {
-      // ── Entrance: animate gap from large → target ──────────────────
+      // ── Entrance: gap compresses from large → target ────────────────
       if (entering) {
         currentGap += (TARGET_GAP - currentGap) * GAP_EASE
         track.style.gap = `${currentGap}px`
-
         if (Math.abs(currentGap - TARGET_GAP) < 1) {
           currentGap = TARGET_GAP
           track.style.gap = `${TARGET_GAP}px`
           entering = false
-          // Cache positions now that layout is stable
           itemsRef.current.forEach((el, i) => {
             if (el) itemPositions[i] = { x: el.offsetLeft, w: el.offsetWidth }
           })
@@ -86,25 +76,32 @@ export default function FunMarquee({
         if (el) el.style.transform = `perspective(600px) rotateY(${tilt}deg)`
       })
 
-      // ── Overlay + video visibility (only after entrance) ────────────
-      if (!entering) {
-        const shouldShow = Math.abs(velocity) > SHOW_THRESHOLD || Math.abs(target - current) > SHOW_THRESHOLD
-        if (shouldShow !== isScrolling.current) setOverlays(shouldShow)
+      // ── Per-item overlay + video (after entrance only) ──────────────
+      if (!entering && itemPositions.length > 0) {
+        itemsRef.current.forEach((itemEl, i) => {
+          const overlay = overlaysRef.current[i]
+          if (!itemEl || !overlay) return
+          const p = itemPositions[i]
+          if (!p) return
 
-        if (!shouldShow && itemPositions.length > 0) {
-          itemsRef.current.forEach((itemEl, i) => {
-            const video = itemEl?.querySelector('video') as HTMLVideoElement | null
-            if (!video) return
-            const p = itemPositions[i]
-            if (!p) return
-            const x = p.x % h
-            const inView =
-              (x + p.w > display && x < display + viewWidth) ||
-              (x + p.w + h > display && x + h < display + viewWidth)
+          const x = p.x % h
+          const inView =
+            (x + p.w > display && x < display + viewWidth) ||
+            (x + p.w + h > display && x + h < display + viewWidth)
+
+          // Only update when state changes
+          if (inView !== inViewRef.current[i]) {
+            inViewRef.current[i] = inView
+            overlay.style.opacity = inView ? '0' : '1'
+          }
+
+          // Video follows viewport
+          const video = itemEl.querySelector('video') as HTMLVideoElement | null
+          if (video) {
             if (inView  && video.paused)  video.play().catch(() => {})
             if (!inView && !video.paused) video.pause()
-          })
-        }
+          }
+        })
       }
 
       if (entering || Math.abs(velocity) > 0.1 || Math.abs(target - current) > 0.1) {
