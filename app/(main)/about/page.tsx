@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import PageHero from '@/components/sections/PageHero'
 
 export default function AboutPage() {
@@ -93,24 +94,21 @@ export default function AboutPage() {
           <div className="grid grid-cols-4 gap-4">
             {['Vertical%201.jpg', 'Vertical%202.jpg', 'Vertical%203.jpg', 'Vertical%204.jpg'].map((img, i) => (
               <div key={i} className="aspect-[3/4] overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`/images/about/${img}`} alt="" loading="lazy" className="w-full h-full object-cover block" />
+                <Image src={`/images/about/${img}`} alt="" width={0} height={0} sizes="25vw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
             ))}
           </div>
 
           {/* Row 2: horizontal image at 4:3 */}
           <div className="aspect-[4/3] overflow-hidden w-full">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/about/Horizontal%201.jpg" alt="" loading="lazy" className="w-full h-full object-cover block" />
+            <Image src="/images/about/Horizontal%201.jpg" alt="" width={0} height={0} sizes="100vw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
 
           {/* Row 3: 2 images at 3:4 */}
           <div className="grid grid-cols-2 gap-4">
             {['IMG_0595.jpg', 'IMG_1226.JPG'].map((img, i) => (
               <div key={i} className="aspect-[3/4] overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={`/images/about/${img}`} alt="" loading="lazy" className="w-full h-full object-cover block" />
+                <Image src={`/images/about/${img}`} alt="" width={0} height={0} sizes="50vw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
             ))}
           </div>

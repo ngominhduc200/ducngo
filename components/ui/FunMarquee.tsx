@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useEffect } from 'react'
+import Image from 'next/image'
 
 const EASE       = 0.085
 const DECAY      = 0.94
@@ -145,8 +146,15 @@ export default function FunMarquee({
                 className="h-full w-auto block"
               />
             ) : (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={item.src} alt="" loading="lazy" className="h-full w-auto block" />
+              <Image
+                src={item.src}
+                alt=""
+                width={0}
+                height={0}
+                sizes="50vw"
+                style={{ height: '100%', width: 'auto' }}
+                className="block"
+              />
             )}
           </div>
         ))}
