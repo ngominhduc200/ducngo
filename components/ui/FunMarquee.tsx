@@ -54,9 +54,12 @@ export default function FunMarquee({
         posRef.current = ((posRef.current % halfRef.current) + halfRef.current) % halfRef.current
       }
 
+      track.style.transform = `translateX(${-posRef.current}px)`
+
       const tilt = Math.max(-MAX_TILT, Math.min(MAX_TILT, velRef.current * 0.1))
-      // One transform on the track instead of 78 individual transforms
-      track.style.transform = `translateX(${-posRef.current}px) perspective(600px) rotateY(${tilt}deg)`
+      itemsRef.current.forEach(el => {
+        if (el) el.style.transform = `perspective(600px) rotateY(${tilt}deg)`
+      })
 
       // Play/pause videos based on whether they're in the visible window
       if (itemPositions.length > 0) {
