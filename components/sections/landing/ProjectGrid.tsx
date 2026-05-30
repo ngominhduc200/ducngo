@@ -86,6 +86,9 @@ export default function ProjectGrid() {
   // Reset frame index when active project changes
   useEffect(() => { setFrameIndex(0) }, [activeId])
 
+  // Untrigger active project when footer is revealed
+  useEffect(() => { if (atFooter) setActiveId(null) }, [atFooter])
+
   const activeImage = ARCHIVE.find(p => p.id === activeId)?.images[frameIndex] ?? null
 
   // Cycle images every 0.5s
