@@ -14,7 +14,7 @@ const ARCHIVE = [
     description:
       'Built a responsive e-commerce website using HTML and CSS, including product listing features and client information pages, deployed on GitHub Pages.',
     images: [
-      '/images/archive/discogs-shop/preview.mov',
+      '/images/archive/discogs-shop/preview.mp4',
     ],
   },
   {
