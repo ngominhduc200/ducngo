@@ -92,7 +92,17 @@ export default function FunMarquee({
           // Only update when state changes
           if (inView !== inViewRef.current[i]) {
             inViewRef.current[i] = inView
-            overlay.style.opacity = inView ? '0' : '1'
+            if (inView) {
+              // Stagger: leftmost item fades first, rightmost last
+              let relX = x - display
+              if (relX < 0) relX += h
+              const stagger = (Math.min(relX, viewWidth) / viewWidth * 0.5).toFixed(2)
+              overlay.style.transition = `opacity 0.7s ease-out ${stagger}s`
+              overlay.style.opacity = '0'
+            } else {
+              overlay.style.transition = 'opacity 0.3s ease-in'
+              overlay.style.opacity = '1'
+            }
           }
 
           // Video follows viewport
@@ -160,7 +170,7 @@ export default function FunMarquee({
             <div
               ref={el => { if (el) overlaysRef.current[i] = el }}
               className="absolute inset-0 pointer-events-none backdrop-blur-2xl"
-              style={{ opacity: 1, transition: 'opacity 0.7s ease-out 0.1s' }}
+              style={{ opacity: 1 }}
             />
           </div>
         ))}
