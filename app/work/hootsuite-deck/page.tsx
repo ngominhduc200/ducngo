@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import CaseStudyNav from '@/components/layout/CaseStudyNav'
 import Divider from '@/components/ui/Divider'
 import SectionLabel from '@/components/ui/SectionLabel'
@@ -82,14 +83,10 @@ export default function HootsuiteGraphicPage() {
           preload="none"
           className="w-full block"
         />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={a('preview-3.png')} alt="Hootsuite Deck of Truth preview 3" loading="lazy" className="w-full block" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={a('preview-4.png')} alt="Hootsuite Deck of Truth preview 4" loading="lazy" className="w-full block" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={a('preview-5.png')} alt="Hootsuite Deck of Truth preview 5" loading="lazy" className="w-full block" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={a('preview-6.png')} alt="Hootsuite Deck of Truth preview 6" loading="lazy" className="w-full block" />
+        <Image src={a('preview-3.png')} alt="Hootsuite Deck of Truth preview 3" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        <Image src={a('preview-4.png')} alt="Hootsuite Deck of Truth preview 4" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        <Image src={a('preview-5.png')} alt="Hootsuite Deck of Truth preview 5" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        <Image src={a('preview-6.png')} alt="Hootsuite Deck of Truth preview 6" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
       </div>
     </>
   )

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
+import Image from 'next/image'
 import ProjectCard from '@/components/ui/ProjectCard'
 import PreloadAssets from '@/components/ui/PreloadAssets'
 
@@ -174,8 +175,7 @@ export default function ProjectGrid() {
               className="max-w-full h-auto block"
             />
           ) : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={activeImage} alt="" className="max-w-full h-auto block" />
+            <Image src={activeImage} alt="" width={0} height={0} sizes="100vw" style={{ maxWidth: '100%', height: 'auto', display: 'block' }} />
           )}
         </div>,
         document.body

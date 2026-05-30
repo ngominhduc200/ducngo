@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 interface FunCardProps {
   src: string
   type: 'image' | 'video'
@@ -17,8 +19,7 @@ export default function FunCard({ src, type }: FunCardProps) {
           className="w-full h-auto block"
         />
       ) : (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={src} alt="" loading="lazy" className="w-full h-auto block" />
+        <Image src={src} alt="" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
       )}
     </div>
   )

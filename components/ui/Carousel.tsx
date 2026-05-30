@@ -1,5 +1,6 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
+import Image from 'next/image'
 
 const CARD_RATIO = 0.85
 const GAP = 16
@@ -67,8 +68,7 @@ export default function Carousel({ images }: {
               style={{ width: cardWidth > 0 ? cardWidth : `${CARD_RATIO * 100}%`, maxHeight: '50vh' }}
             >
               {Math.abs(i - index) <= 1 && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={src} alt={alt} loading={i === 0 ? 'eager' : 'lazy'} className="w-full h-auto block pointer-events-none" draggable={false} />
+                <Image src={src} alt={alt} width={0} height={0} sizes="85vw" priority={i === 0} style={{ width: '100%', height: 'auto', display: 'block', pointerEvents: 'none' }} draggable={false} />
               )}
             </div>
           ))}

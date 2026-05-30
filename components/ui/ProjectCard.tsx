@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 interface ProjectCardProps {
   id?: string
@@ -19,7 +20,7 @@ export default function ProjectCard({ id, className, title, meta, href, image, i
     <Link id={id} href={href} className={`block no-underline w-full${className ? ` ${className}` : ''}`} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
       <div className={`flex flex-col w-full ${compact ? 'items-start gap-3' : 'items-center gap-6'}`}>
 
-        <div className={`w-full overflow-hidden rounded-none ${compact ? 'aspect-[3/4]' : 'aspect-[1440/847]'}`}>
+        <div className={`relative w-full overflow-hidden rounded-none ${compact ? 'aspect-[3/4]' : 'aspect-[1440/847]'}`}>
           {video ? (
             <video
               src={video}
@@ -30,8 +31,7 @@ export default function ProjectCard({ id, className, title, meta, href, image, i
               className="w-full h-full object-cover"
             />
           ) : image ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={image} alt={imageAlt} className="w-full h-full object-cover" />
+            <Image src={image} alt={imageAlt} fill style={{ objectFit: 'cover' }} />
           ) : null}
         </div>
 

@@ -1,5 +1,6 @@
 'use client'
 import { useRef, useCallback } from 'react'
+import Image from 'next/image'
 
 export default function BeforeAfterSlider({
   before,
@@ -44,8 +45,7 @@ export default function BeforeAfterSlider({
       onMouseLeave={reset}
     >
       {/* After — base layer, sets natural height */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={after} alt={afterAlt} className="w-full h-auto block" draggable={false} />
+      <Image src={after} alt={afterAlt} width={0} height={0} sizes="(max-width: 768px) 100vw, 800px" style={{ width: '100%', height: 'auto', display: 'block' }} draggable={false} />
 
       {/* Before — absolutely overlays, clipped to left of handle */}
       <div
@@ -53,8 +53,7 @@ export default function BeforeAfterSlider({
         className="absolute inset-0 overflow-hidden"
         style={{ clipPath: 'inset(0 50% 0 0)' }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={before} alt={beforeAlt} className="absolute inset-0 w-full h-full object-cover" draggable={false} />
+        <Image src={before} alt={beforeAlt} fill style={{ objectFit: 'cover' }} draggable={false} />
       </div>
 
       {/* Divider */}
