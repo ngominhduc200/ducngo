@@ -48,13 +48,14 @@ export default function FunMarquee({
       }
       track.style.transform = `translateX(${-posRef.current}px)`
 
-      // Apply 3D rotateY tilt directly to each item
       const tilt = Math.max(-MAX_TILT, Math.min(MAX_TILT, velRef.current * 0.1))
       itemsRef.current.forEach(el => {
         if (el) el.style.transform = `perspective(600px) rotateY(${tilt}deg)`
       })
 
-      raf = requestAnimationFrame(tick)
+      if (Math.abs(velRef.current) > 0.05) {
+        raf = requestAnimationFrame(tick)
+      }
     }
     raf = requestAnimationFrame(tick)
 
@@ -62,6 +63,7 @@ export default function FunMarquee({
       e.preventDefault()
       const delta = Math.abs(e.deltaX) >= Math.abs(e.deltaY) ? e.deltaX : e.deltaY
       velRef.current += delta * 0.5
+      if (!raf) raf = requestAnimationFrame(tick)
     }
 
     wrapper.addEventListener('wheel', onWheel, { passive: false })
@@ -94,11 +96,12 @@ export default function FunMarquee({
                   loop
                   muted
                   playsInline
+                  preload="none"
                   className="h-full w-auto block"
                 />
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={item.src} alt="" className="h-full w-auto block" />
+                <img src={item.src} alt="" loading="lazy" className="h-full w-auto block" />
               )}
             </div>
           )

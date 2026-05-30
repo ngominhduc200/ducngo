@@ -13,11 +13,12 @@ export default function FunCard({ src, type }: FunCardProps) {
           loop
           muted
           playsInline
+          preload="none"
           className="w-full h-auto block"
         />
       ) : (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={src} alt="" className="w-full h-auto block" />
+        <img src={src} alt="" loading="lazy" className="w-full h-auto block" />
       )}
     </div>
   )
