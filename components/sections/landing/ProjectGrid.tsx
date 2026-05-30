@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import ProjectCard from '@/components/ui/ProjectCard'
-import PreloadAssets from '@/components/ui/PreloadAssets'
 
 const ARCHIVE = [
   {
@@ -115,11 +114,9 @@ export default function ProjectGrid() {
     return () => observer.disconnect()
   }, [])
 
-  const allArchiveImages = ARCHIVE.flatMap(p => p.images)
 
   return (
     <>
-      <PreloadAssets urls={allArchiveImages} />
       <section id="work" aria-label="Work" className="flex flex-col items-center w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] px-6">
         <ProjectCard
           id="project-peak-create"
@@ -175,7 +172,7 @@ export default function ProjectGrid() {
               className="max-w-full h-auto block"
             />
           ) : (
-            <Image src={activeImage} alt="" width={0} height={0} sizes="100vw" style={{ maxWidth: '100%', height: 'auto', display: 'block' }} />
+            <Image src={activeImage} alt="" width={0} height={0} sizes="20vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
           )}
         </div>,
         document.body
