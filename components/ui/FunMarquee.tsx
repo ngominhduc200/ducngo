@@ -20,11 +20,9 @@ export default function FunMarquee({
 }: {
   items: { src: string; type: 'image' | 'video' }[]
 }) {
-  const wrapperRef  = useRef<HTMLDivElement>(null)
-  const trackRef    = useRef<HTMLDivElement>(null)
-  const itemsRef    = useRef<HTMLDivElement[]>([])
-  const overlaysRef = useRef<HTMLDivElement[]>([])
-  const inViewRef   = useRef<boolean[]>([])  // per-item viewport state
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const trackRef   = useRef<HTMLDivElement>(null)
+  const itemsRef   = useRef<HTMLDivElement[]>([])
 
   useEffect(() => {
     const wrapper = wrapperRef.current
@@ -76,46 +74,24 @@ export default function FunMarquee({
         if (el) el.style.transform = `perspective(600px) rotateY(${tilt}deg)`
       })
 
-      // ── Per-item overlay + video (after entrance only) ──────────────
+      // ── Video visibility (after entrance) ───────────────────────────
       if (!entering && itemPositions.length > 0) {
         itemsRef.current.forEach((itemEl, i) => {
-          const overlay = overlaysRef.current[i]
-          if (!itemEl || !overlay) return
+          const video = itemEl?.querySelector('video') as HTMLVideoElement | null
+          if (!video) return
           const p = itemPositions[i]
           if (!p) return
-
           const x = p.x % h
+          // Upgrade preload when near viewport
+          if (video.preload === 'none') {
+            const dist = Math.min(Math.abs(x - display), Math.abs(x - display + h))
+            if (dist < viewWidth * 2) video.preload = 'metadata'
+          }
           const inView =
             (x + p.w > display && x < display + viewWidth) ||
             (x + p.w + h > display && x + h < display + viewWidth)
-
-          // Only update when state changes
-          if (inView !== inViewRef.current[i]) {
-            inViewRef.current[i] = inView
-            if (inView) {
-              // Stagger: leftmost item fades first, rightmost last
-              let relX = x - display
-              if (relX < 0) relX += h
-              const stagger = (Math.min(relX, viewWidth) / viewWidth * 0.15).toFixed(2)
-              overlay.style.transition = `opacity 0.15s ease-out ${stagger}s`
-              overlay.style.opacity = '0'
-            } else {
-              overlay.style.transition = 'opacity 0.1s ease-in'
-              overlay.style.opacity = '1'
-            }
-          }
-
-          const video = itemEl.querySelector('video') as HTMLVideoElement | null
-          if (video) {
-            // Upgrade preload when item is near viewport
-            if (video.preload === 'none') {
-              const rawX = p.x % h
-              const dist = Math.min(Math.abs(rawX - display), Math.abs(rawX - display + h))
-              if (dist < viewWidth * 2) video.preload = 'metadata'
-            }
-            if (inView  && video.paused)  video.play().catch(() => {})
-            if (!inView && !video.paused) video.pause()
-          }
+          if (inView  && video.paused)  video.play().catch(() => {})
+          if (!inView && !video.paused) video.pause()
         })
       }
 
@@ -156,7 +132,7 @@ export default function FunMarquee({
           <div
             key={i}
             ref={el => { if (el) itemsRef.current[i] = el }}
-            className="relative flex-shrink-0"
+            className="flex-shrink-0"
             style={{ height: HEIGHTS[(i % items.length) % HEIGHTS.length] }}
           >
             {item.type === 'video' ? (
@@ -172,11 +148,6 @@ export default function FunMarquee({
               // eslint-disable-next-line @next/next/no-img-element
               <img src={item.src} alt="" loading="lazy" className="h-full w-auto block" />
             )}
-            <div
-              ref={el => { if (el) overlaysRef.current[i] = el }}
-              className="absolute inset-0 pointer-events-none backdrop-blur-[2px]"
-              style={{ opacity: 1 }}
-            />
           </div>
         ))}
       </div>
