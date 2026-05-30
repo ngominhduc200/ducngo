@@ -68,26 +68,18 @@ export default function ProjectGrid() {
   const [activeId, setActiveId] = useState<string | null>(null)
   const [frameIndex, setFrameIndex] = useState(0)
   const [mounted, setMounted] = useState(false)
-  const [atFooter, setAtFooter] = useState(false)
   const isHoveringRef = useRef(false)
   const intersectingRef = useRef<Set<string>>(new Set())
 
   useEffect(() => { setMounted(true) }, [])
 
-  useEffect(() => {
-    const checkFooter = () => {
-      setAtFooter(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - window.innerHeight * 0.8)
-    }
-    window.addEventListener('scroll', checkFooter, { passive: true })
-    checkFooter()
-    return () => window.removeEventListener('scroll', checkFooter)
-  }, [])
-
   // Reset frame index when active project changes
   useEffect(() => { setFrameIndex(0) }, [activeId])
 
-  // Untrigger active project when footer is revealed
-  useEffect(() => { if (atFooter) setActiveId(null) }, [atFooter])
+  // Broadcast activeId so other components (LandingNav) can sync
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('archive-active', { detail: { id: activeId } }))
+  }, [activeId])
 
   const activeImage = ARCHIVE.find(p => p.id === activeId)?.images[frameIndex] ?? null
 
@@ -169,7 +161,7 @@ export default function ProjectGrid() {
       </section>
 
       {/* Fixed media panel */}
-      {mounted && activeImage && !atFooter && createPortal(
+      {mounted && activeImage && createPortal(
         <div
           className="fixed right-8 top-1/2 -translate-y-1/2 pointer-events-none z-50 flex justify-center"
           style={{ width: '20vw' }}

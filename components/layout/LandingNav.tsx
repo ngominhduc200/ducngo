@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
 const PROJECTS = [
@@ -42,21 +42,26 @@ export default function LandingNav() {
 
     setMounted(true)
 
-    const checkTop = () => setAtTop(window.scrollY < 50)
+    const checkTop = () => {
+      const isTop = window.scrollY < 50
+      setAtTop(isTop)
+      if (isTop) setAtFooter(false)
+    }
     window.addEventListener('scroll', checkTop, { passive: true })
     checkTop()
 
-    const checkFooter = () => {
-      const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - window.innerHeight * 0.8
-      setAtFooter(atBottom)
+    const seenArchive = { current: false }
+    const handleArchiveActive = (e: Event) => {
+      const id = (e as CustomEvent).detail.id
+      if (id !== null) seenArchive.current = true
+      setAtFooter(seenArchive.current && id === null)
     }
-    window.addEventListener('scroll', checkFooter, { passive: true })
-    checkFooter()
+    window.addEventListener('archive-active', handleArchiveActive)
 
     return () => {
       observer.disconnect()
       window.removeEventListener('scroll', checkTop)
-      window.removeEventListener('scroll', checkFooter)
+      window.removeEventListener('archive-active', handleArchiveActive)
     }
   }, [])
 
