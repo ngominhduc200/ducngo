@@ -47,8 +47,8 @@ export default function BeforeAfterSlider({
       onMouseLeave={reset}
       onPointerDown={(e) => { if (e.pointerType !== 'touch') return; isDragging.current = true; containerRef.current?.setPointerCapture(e.pointerId); move(e.clientX) }}
       onPointerMove={(e) => { if (e.pointerType !== 'touch' || !isDragging.current) return; move(e.clientX) }}
-      onPointerUp={(e) => { if (e.pointerType === 'touch') isDragging.current = false }}
-      onPointerCancel={(e) => { if (e.pointerType === 'touch') isDragging.current = false }}
+      onPointerUp={(e) => { if (e.pointerType === 'touch') { isDragging.current = false; reset() } }}
+      onPointerCancel={(e) => { if (e.pointerType === 'touch') { isDragging.current = false; reset() } }}
     >
       {/* After — base layer, sets natural height */}
       <Image src={after} alt={afterAlt} width={0} height={0} sizes="(max-width: 768px) 100vw, 800px" style={{ width: '100%', height: 'auto', display: 'block' }} draggable={false} />
