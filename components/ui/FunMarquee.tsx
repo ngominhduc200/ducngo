@@ -40,7 +40,7 @@ export default function FunMarquee({
       })
     }, 150)
 
-    let velocity = 150
+    let velocity = 60
     let target   = 0
     let current  = 0
 
