@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react'
 import Image from 'next/image'
 
-const EASE     = 0.15
+const EASE     = 0.5
 const DECAY    = 0.94
 const MAX_TILT = 10
 
