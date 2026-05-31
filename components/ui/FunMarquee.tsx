@@ -90,7 +90,7 @@ export default function FunMarquee({
     const onWheel = (e: WheelEvent) => {
       e.preventDefault()
       const delta = Math.abs(e.deltaX) >= Math.abs(e.deltaY) ? e.deltaX : e.deltaY
-      velocity += delta * 0.2
+      velocity += delta * 0.08
       if (!raf) raf = requestAnimationFrame(tick)
     }
 
