@@ -24,7 +24,7 @@ export default function Footer() {
           <p className="font-serif font-normal text-3xl md:text-4xl text-left md:text-center text-white w-full">
             Good design doesn&apos;t happen by accident.
           </p>
-          <p className="font-sans text-sm text-white text-left md:text-center">
+          <p className="font-sans font-normal text-sm text-white text-left md:text-center">
             Designed and developed by Duc
           </p>
         </div>
