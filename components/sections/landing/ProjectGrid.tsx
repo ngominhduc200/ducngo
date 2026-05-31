@@ -69,10 +69,11 @@ export default function ProjectGrid() {
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set())
   const [frameIndex, setFrameIndex] = useState(0)
   const [mounted, setMounted]       = useState(false)
-  const isHoveringRef  = useRef(false)
-  const scrollDirRef   = useRef<'down' | 'up'>('down')
-  const prevScrollYRef = useRef(0)
-  const prevActiveRef  = useRef<string | null>(null)
+  const isHoveringRef    = useRef(false)
+  const scrollDirRef     = useRef<'down' | 'up'>('down')
+  const prevScrollYRef   = useRef(0)
+  const prevActiveRef    = useRef<string | null>(null)
+  const scrollActiveRef  = useRef<string | null>(null)
 
   useEffect(() => { setMounted(true) }, [])
 
@@ -120,6 +121,7 @@ export default function ProjectGrid() {
       })
       if (bestDist > window.innerHeight * 0.35) best = null
 
+      scrollActiveRef.current = best
       if (best !== prevActiveRef.current) {
         prevActiveRef.current = best
         setActiveId(best)
@@ -238,8 +240,7 @@ export default function ProjectGrid() {
                 }}
                 onMouseLeave={() => {
                   isHoveringRef.current = false
-                  const ids = Array.from(intersectingRef.current)
-                  setActiveId(ids.length > 0 ? ids[ids.length - 1] : null)
+                  setActiveId(scrollActiveRef.current)
                 }}
                 onClick={() => setActiveId(project.id)}
               >
