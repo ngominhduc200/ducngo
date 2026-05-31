@@ -21,7 +21,7 @@ export default function HootsuiteGraphicPage() {
 
         <CaseStudyNav navItems={NAV_ITEMS} />
 
-        <div className="flex w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] py-16 md:py-[150px] flex-col items-center px-4 sm:px-6 md:px-0">
+        <div className="flex w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] pt-8 pb-16 md:py-[150px] flex-col items-center px-4 sm:px-6 md:px-0">
 
           <CaseStudyHero
             id="context"
