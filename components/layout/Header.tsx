@@ -44,7 +44,7 @@ export default function Header() {
         <Link href="/about" className="no-underline hover:text-orange-500 active:text-orange-500">about</Link>
       </nav>
 
-      <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="no-underline hover:text-orange-500 active:text-orange-500">
+      <a href="https://drive.google.com/file/d/17I24nDeEwg7q8yptVhdWdWsnCFsJbNuD/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="no-underline hover:text-orange-500 active:text-orange-500">
         resume
       </a>
     </header>

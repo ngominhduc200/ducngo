@@ -131,12 +131,16 @@ export default function ProjectGrid() {
       }
     }
 
-    // Reset only when archive section exits upward (user scrolled up past it)
     const archiveEl = document.getElementById('archive')
     const sectionObserver = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting && entry.boundingClientRect.top > window.innerHeight) {
-        setExpandedIds(new Set())
+      if (!entry.isIntersecting) {
+        setActiveId(null)
         prevActiveRef.current = null
+        scrollActiveRef.current = null
+        // Also reset expanded images when scrolled up past archive
+        if (entry.boundingClientRect.top > window.innerHeight) {
+          setExpandedIds(new Set())
+        }
       }
     }, { threshold: 0 })
     if (archiveEl) sectionObserver.observe(archiveEl)

@@ -4,7 +4,7 @@ const NAV_LINKS = [
   { label: 'Work',   href: '/#work' },
   { label: 'Fun',    href: '/fun' },
   { label: 'About',  href: '/about' },
-  { label: 'Resume', href: '/resume.pdf', external: true },
+  { label: 'Resume', href: 'https://drive.google.com/file/d/17I24nDeEwg7q8yptVhdWdWsnCFsJbNuD/view?usp=sharing', external: true },
 ]
 
 const btnClass = [
