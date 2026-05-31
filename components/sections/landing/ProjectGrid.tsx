@@ -65,11 +65,14 @@ const ARCHIVE = [
 ]
 
 export default function ProjectGrid() {
-  const [activeId, setActiveId] = useState<string | null>(null)
+  const [activeId, setActiveId]     = useState<string | null>(null)
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set())
   const [frameIndex, setFrameIndex] = useState(0)
-  const [mounted, setMounted] = useState(false)
-  const isHoveringRef = useRef(false)
-  const intersectingRef = useRef<Set<string>>(new Set())
+  const [mounted, setMounted]       = useState(false)
+  const isHoveringRef  = useRef(false)
+  const scrollDirRef   = useRef<'down' | 'up'>('down')
+  const prevScrollYRef = useRef(0)
+  const prevActiveRef  = useRef<string | null>(null)
 
   useEffect(() => { setMounted(true) }, [])
 
@@ -94,38 +97,63 @@ export default function ProjectGrid() {
     return () => clearInterval(interval)
   }, [activeId])
 
-  // Scroll-based activation
+  // Scroll-based activation — targets text div only, not the expanded image
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            intersectingRef.current.add(entry.target.id)
-          } else {
-            intersectingRef.current.delete(entry.target.id)
-          }
-        })
-        if (!isHoveringRef.current) {
-          const ids = Array.from(intersectingRef.current)
-          setActiveId(ids.length > 0 ? ids[ids.length - 1] : null)
+    const handleScroll = () => {
+      if (isHoveringRef.current) return
+
+      const currentY = window.scrollY
+      scrollDirRef.current = currentY >= prevScrollYRef.current ? 'down' : 'up'
+      prevScrollYRef.current = currentY
+
+      const target = window.innerHeight * 0.4
+      let best: string | null = null
+      let bestDist = Infinity
+      ARCHIVE.forEach(({ id }) => {
+        const el = document.querySelector<HTMLElement>(`[data-archive-text="${id}"]`)
+        if (!el) return
+        const rect = el.getBoundingClientRect()
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return
+        const center = rect.top + rect.height / 2
+        const dist = Math.abs(center - target)
+        if (dist < bestDist) { bestDist = dist; best = id }
+      })
+      if (bestDist > window.innerHeight * 0.35) best = null
+
+      if (best !== prevActiveRef.current) {
+        prevActiveRef.current = best
+        setActiveId(best)
+        if (best !== null && scrollDirRef.current === 'down') {
+          setExpandedIds(prev => new Set([...prev, best as string]))
         }
-      },
-      { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
-    )
-    ARCHIVE.forEach(({ id }) => {
-      const el = document.getElementById(id)
-      if (el) observer.observe(el)
-    })
-    return () => observer.disconnect()
+      }
+    }
+
+    // Reset only when archive section exits upward (user scrolled up past it)
+    const archiveEl = document.getElementById('archive')
+    const sectionObserver = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting && entry.boundingClientRect.top > window.innerHeight) {
+        setExpandedIds(new Set())
+        prevActiveRef.current = null
+      }
+    }, { threshold: 0 })
+    if (archiveEl) sectionObserver.observe(archiveEl)
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      sectionObserver.disconnect()
+    }
   }, [])
 
 
   return (
     <>
-      <section id="work" aria-label="Work" className="flex flex-col items-center w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] px-6">
+      <section id="work" aria-label="Work" className="flex flex-col items-center w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] px-6 mb-16 md:mb-0">
         <ProjectCard
           id="project-peak-create"
-          className="py-16 md:py-[150px]"
+          className="pt-20 pb-0 md:py-[150px]"
           title="Streamlining how The Peak's editorial team briefs, tracks, and pays illustrators with Peak Create"
           meta="Product Design · 2026"
           href="/work/peak-create"
@@ -133,7 +161,7 @@ export default function ProjectGrid() {
         />
         <ProjectCard
           id="project-airbnb"
-          className="py-16 md:py-[150px]"
+          className="pt-20 pb-0 md:py-[150px]"
           title="Collaborative trip planning"
           meta="Product Design · Concept 2026"
           href="/work/airbnb"
@@ -142,7 +170,7 @@ export default function ProjectGrid() {
         />
         <ProjectCard
           id="project-hootsuite"
-          className="py-16 md:py-[150px]"
+          className="pt-20 pb-0 md:py-[150px]"
           title="Increasing Feature Discovery for Hootsuite"
           meta="UX Design · Handed Off 2025"
           href="/work/hootsuite-composer"
@@ -151,7 +179,7 @@ export default function ProjectGrid() {
         />
         <ProjectCard
           id="project-hootsuite-deck"
-          className="py-16 md:py-[150px]"
+          className="pt-20 pb-0 md:py-[150px]"
           title="Shaping Hootsuite&apos;s new branding with Deck of Truth redesigned"
           meta="Graphic Design · 2025"
           href="/work/hootsuite-deck"
@@ -163,7 +191,7 @@ export default function ProjectGrid() {
       {/* Fixed media panel */}
       {mounted && activeImage && createPortal(
         <div
-          className="fixed right-8 top-1/2 -translate-y-1/2 pointer-events-none z-50 flex justify-center"
+          className="hidden md:flex fixed right-8 top-1/2 -translate-y-1/2 pointer-events-none z-50 justify-center"
           style={{ width: '20vw' }}
         >
           {/\.(mp4|mov|webm)$/i.test(activeImage) ? (
@@ -189,7 +217,7 @@ export default function ProjectGrid() {
         className="w-full flex flex-col items-center pb-16 md:pb-[150px] mb-[100px]"
       >
         <div className="w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] px-6">
-          <div className="flex flex-col gap-[10px] py-[50px]">
+          <div className="flex flex-col gap-[10px] pt-[50px] pb-[30px] md:py-[50px]">
             <h2 className="font-serif font-normal text-4xl text-neutral-900">Archive</h2>
             <p className="font-sans text-base text-neutral-400">Graphic design, front-end development, and co-op work from my earlier years.</p>
           </div>
@@ -213,8 +241,9 @@ export default function ProjectGrid() {
                   const ids = Array.from(intersectingRef.current)
                   setActiveId(ids.length > 0 ? ids[ids.length - 1] : null)
                 }}
+                onClick={() => setActiveId(project.id)}
               >
-                <div className="flex flex-col gap-[20px] py-[50px] w-full">
+                <div className="flex flex-col gap-[20px] py-[30px] md:py-[50px] w-full" data-archive-text={project.id}>
                   <div className="flex flex-col gap-[10px]">
                     <h3 className={`font-serif font-normal text-2xl leading-[1.3] transition-colors duration-300 ${isActive ? 'italic text-orange-500' : 'text-neutral-900'}`}>
                       {project.title}
@@ -222,6 +251,19 @@ export default function ProjectGrid() {
                     <p className="font-sans text-sm text-neutral-400">{project.category} · {project.year}</p>
                   </div>
                   <p className="font-sans text-base text-neutral-600">{project.description}</p>
+
+                  {/* Mobile inline image — expands when active */}
+                  <div
+                    className={`md:hidden overflow-hidden transition-[max-height] duration-700 ease-in-out ${expandedIds.has(project.id) ? 'max-h-[75vw]' : 'max-h-0'}`}
+                  >
+                    <div className="relative w-full aspect-[4/3]">
+                      {/\.(mp4|mov|webm)$/i.test(project.images[0]) ? (
+                        <video src={project.images[0]} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-contain" style={{ objectPosition: 'right top' }} />
+                      ) : (
+                        <Image src={project.images[0]} alt="" fill style={{ objectFit: 'contain', objectPosition: 'right top' }} />
+                      )}
+                    </div>
+                  </div>
                 </div>
                 {!isLast && <hr className="border-t border-zinc-200 w-full" />}
               </div>

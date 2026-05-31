@@ -5,9 +5,12 @@ import { useState, useEffect } from 'react'
 export default function Cursor() {
   const [pos, setPos] = useState({ x: -100, y: -100 })
   const [pressed, setPressed] = useState(false)
+  const [isMouse, setIsMouse] = useState(false)
 
   useEffect(() => {
-    // Inject a style tag to hide the native cursor everywhere
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    setIsMouse(true)
+
     const style = document.createElement('style')
     style.textContent = '*, *::before, *::after { cursor: none !important; }'
     document.head.appendChild(style)
@@ -27,6 +30,8 @@ export default function Cursor() {
       window.removeEventListener('mouseup', onUp)
     }
   }, [])
+
+  if (!isMouse) return null
 
   return (
     <div

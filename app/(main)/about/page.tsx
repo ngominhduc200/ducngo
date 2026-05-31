@@ -50,34 +50,24 @@ export default function AboutPage() {
             {/* Experience */}
             <div className="flex flex-1 flex-col gap-6 min-w-0">
               <p className="font-serif font-normal text-[28px] leading-[1.3] text-neutral-900">Experience</p>
-              <div className="flex gap-6 items-start w-full">
-                {/* Dates */}
-                <div className="flex flex-1 flex-col gap-6 min-w-0">
-                  <p className="leading-[1.3]">2026</p>
-                  <p className="leading-[1.3] whitespace-nowrap">2025-26</p>
-                  <p className="leading-[1.3] whitespace-nowrap">2024-25</p>
-                  <p className="leading-[1.3] whitespace-nowrap">2023-24</p>
-                </div>
-                {/* Companies */}
-                <div className="flex flex-1 flex-col gap-6 min-w-0">
-                  <p className="leading-[1.3] whitespace-nowrap">Hootsuite</p>
-                  <p className="leading-[1.3] whitespace-nowrap">The Peak SFU</p>
-                  <p className="leading-[1.3] whitespace-nowrap">Douglas College</p>
-                  <p className="leading-[1.3] whitespace-nowrap">Fraser Health</p>
-                </div>
+              <div className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-6">
+                <p className="leading-[1.3]">2026</p>
+                <p className="leading-[1.3]">Hootsuite</p>
+                <p className="leading-[1.3]">2025-26</p>
+                <p className="leading-[1.3]">The Peak SFU</p>
+                <p className="leading-[1.3]">2024-25</p>
+                <p className="leading-[1.3]">Douglas College</p>
+                <p className="leading-[1.3]">2023-24</p>
+                <p className="leading-[1.3]">Fraser Health</p>
               </div>
             </div>
 
             {/* Education */}
             <div className="flex flex-1 flex-col gap-6 min-w-0">
               <p className="font-serif font-normal text-[28px] leading-[1.3] text-neutral-900">Education</p>
-              <div className="flex gap-6 items-start w-full">
-                {/* Date */}
-                <div className="flex flex-1 flex-col min-w-0">
-                  <p className="leading-[1.3] whitespace-nowrap">2020-27</p>
-                </div>
-                {/* School */}
-                <div className="flex flex-1 flex-col min-w-0">
+              <div className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-6">
+                <p className="leading-[1.3]">2020-27</p>
+                <div className="flex flex-col gap-1">
                   <p className="leading-[1.3]">Simon Fraser University</p>
                   <p className="leading-[1.3]">BC. Interactive Arts and Technology</p>
                 </div>
@@ -91,7 +81,7 @@ export default function AboutPage() {
         <div className="flex flex-col gap-4 w-full">
 
           {/* Row 1: 4 vertical images at 3:4 */}
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {['Vertical%201.jpg', 'Vertical%202.jpg', 'Vertical%203.jpg', 'Vertical%204.jpg'].map((img, i) => (
               <div key={i} className="aspect-[3/4] overflow-hidden">
                 <Image src={`/images/about/${img}`} alt="" width={0} height={0} sizes="25vw" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />

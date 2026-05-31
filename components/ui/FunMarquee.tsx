@@ -116,6 +116,8 @@ export default function FunMarquee({
       lastDelta = 0
       velocity = 0
       wrapper.setPointerCapture(e.pointerId)
+      wrapper.style.transition = 'opacity 150ms ease'
+      wrapper.style.opacity = '0.85'
     }
 
     const onPointerMove = (e: PointerEvent) => {
@@ -129,7 +131,9 @@ export default function FunMarquee({
     const onPointerUp = () => {
       if (!isDragging) return
       isDragging = false
-      velocity = lastDelta * 5  // carry momentum after release
+      velocity = lastDelta * 5
+      wrapper.style.transition = 'opacity 300ms ease'
+      wrapper.style.opacity = '1'
     }
 
     wrapper.addEventListener('wheel', onWheel, { passive: false })
@@ -153,8 +157,8 @@ export default function FunMarquee({
   const doubled = [...items, ...items]
 
   return (
-    <div ref={wrapperRef} className="w-full overflow-hidden cursor-grab active:cursor-grabbing select-none">
-      <div ref={trackRef} className="flex gap-[100px] items-center" style={{ width: 'max-content' }}>
+    <div ref={wrapperRef} className="w-full overflow-hidden cursor-grab active:cursor-grabbing select-none touch-none">
+      <div ref={trackRef} className="flex gap-4 md:gap-[100px] items-center" style={{ width: 'max-content' }}>
         {doubled.map((item, i) => (
           <div
             key={i}

@@ -17,7 +17,7 @@ export default function SectionHeader({
   return (
     <div className="flex flex-col gap-3">
       <SectionLabel dark={dark}>{label}</SectionLabel>
-      <Tag className={`font-serif ${weightClass} text-xl md:text-3xl text-neutral-900`}>
+      <Tag className={`font-serif ${weightClass} text-2xl md:text-3xl text-neutral-900`}>
         {children}
       </Tag>
     </div>

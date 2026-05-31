@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function CaseStudyHero({
   id,
@@ -17,8 +18,13 @@ export default function CaseStudyHero({
 }) {
   return (
     <div id={id} className="flex flex-col gap-10 py-16 w-full">
+      <Link href="/" className="md:hidden text-neutral-400 hover:text-orange-500 active:text-orange-500 no-underline w-fit -mt-6" aria-label="Home">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="size-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+        </svg>
+      </Link>
       <div className="flex flex-col gap-8">
-        <h1 className="font-serif font-normal text-xl md:text-2xl lg:text-3xl xl:text-4xl text-neutral-900 leading-[1.3]">
+        <h1 className="font-serif font-normal text-3xl md:text-2xl lg:text-3xl xl:text-4xl text-neutral-900 leading-[1.3]">
           {title}
         </h1>
         <p className="font-sans text-base text-neutral-900">{description}</p>

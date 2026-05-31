@@ -35,7 +35,7 @@ export default function ProjectCard({ id, className, title, meta, href, image, i
           ) : null}
         </div>
 
-        <div className={`flex flex-col w-full ${compact ? 'items-start text-left gap-1' : 'items-center text-center gap-[10px]'}`}>
+        <div className={`flex flex-col w-full ${compact ? 'items-start text-left gap-1' : 'items-start text-left md:items-center md:text-center gap-[10px]'}`}>
           <p className={compact ? `font-serif font-normal text-3xl ${dark ? 'text-white' : 'text-neutral-900'}` : 'font-serif font-normal text-3xl text-neutral-900'}>{title}</p>
           <p className={`font-sans text-base ${dark ? 'text-neutral-500' : 'text-neutral-400'}`}>{meta}</p>
         </div>
