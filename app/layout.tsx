@@ -4,6 +4,7 @@ import './globals.css'
 import HtmlBg from '@/components/layout/HtmlBg'
 import ScrollToTop from '@/components/layout/ScrollToTop'
 import Cursor from '@/components/layout/Cursor'
+import SmoothScroll from '@/components/layout/SmoothScroll'
 
 const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${instrumentSerif.variable} ${publicSans.variable} scroll-smooth`}>
       <body className="bg-stone-50 text-neutral-900 font-sans font-light">
+        <SmoothScroll />
         <HtmlBg />
         <Cursor />
         <ScrollToTop />
