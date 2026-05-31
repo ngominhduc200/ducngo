@@ -94,20 +94,55 @@ export default function FunMarquee({
       if (!raf) raf = requestAnimationFrame(tick)
     }
 
+    // Drag / touch support
+    let lastPointerX = 0
+    let lastDelta = 0
+    let isDragging = false
+
+    const onPointerDown = (e: PointerEvent) => {
+      isDragging = true
+      lastPointerX = e.clientX
+      lastDelta = 0
+      velocity = 0
+      wrapper.setPointerCapture(e.pointerId)
+    }
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (!isDragging) return
+      lastDelta = lastPointerX - e.clientX
+      target += lastDelta
+      lastPointerX = e.clientX
+      if (!raf) raf = requestAnimationFrame(tick)
+    }
+
+    const onPointerUp = () => {
+      if (!isDragging) return
+      isDragging = false
+      velocity = lastDelta * 5  // carry momentum after release
+    }
+
     wrapper.addEventListener('wheel', onWheel, { passive: false })
+    wrapper.addEventListener('pointerdown', onPointerDown)
+    wrapper.addEventListener('pointermove', onPointerMove)
+    wrapper.addEventListener('pointerup', onPointerUp)
+    wrapper.addEventListener('pointercancel', onPointerUp)
 
     return () => {
       cancelAnimationFrame(raf)
       clearTimeout(cacheTimer)
       ro.disconnect()
       wrapper.removeEventListener('wheel', onWheel)
+      wrapper.removeEventListener('pointerdown', onPointerDown)
+      wrapper.removeEventListener('pointermove', onPointerMove)
+      wrapper.removeEventListener('pointerup', onPointerUp)
+      wrapper.removeEventListener('pointercancel', onPointerUp)
     }
   }, [])
 
   const doubled = [...items, ...items]
 
   return (
-    <div ref={wrapperRef} className="w-full overflow-hidden">
+    <div ref={wrapperRef} className="w-full overflow-hidden cursor-grab active:cursor-grabbing select-none">
       <div ref={trackRef} className="flex gap-[100px] items-center" style={{ width: 'max-content' }}>
         {doubled.map((item, i) => (
           <div
