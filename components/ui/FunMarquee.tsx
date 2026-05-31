@@ -4,7 +4,7 @@ import { useRef, useEffect } from 'react'
 import Image from 'next/image'
 
 const EASE     = 0.2
-const DECAY    = 0.94
+const DECAY    = 0.97
 const MAX_TILT = 10
 
 const HEIGHTS = [
