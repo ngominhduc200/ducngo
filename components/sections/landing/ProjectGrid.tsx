@@ -234,15 +234,17 @@ export default function ProjectGrid() {
                 key={project.id}
                 id={project.id}
                 className="cursor-default"
-                onMouseEnter={() => {
+                onPointerEnter={(e) => {
+                  if (e.pointerType !== 'mouse') return
                   isHoveringRef.current = true
                   setActiveId(project.id)
                 }}
-                onMouseLeave={() => {
+                onPointerLeave={(e) => {
+                  if (e.pointerType !== 'mouse') return
                   isHoveringRef.current = false
                   setActiveId(scrollActiveRef.current)
                 }}
-                onClick={() => setActiveId(project.id)}
+
               >
                 <div className="flex flex-col gap-[20px] py-[30px] md:py-[50px] w-full" data-archive-text={project.id}>
                   <div className="flex flex-col gap-[10px]">

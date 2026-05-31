@@ -110,18 +110,26 @@ export default function FunMarquee({
     let lastDelta = 0
     let isDragging = false
 
+    let hasMoved = false
+
     const onPointerDown = (e: PointerEvent) => {
       isDragging = true
+      hasMoved = false
       lastPointerX = e.clientX
       lastDelta = 0
       velocity = 0
       wrapper.setPointerCapture(e.pointerId)
-      wrapper.style.transition = 'opacity 150ms ease'
-      wrapper.style.opacity = '0.85'
     }
 
     const onPointerMove = (e: PointerEvent) => {
       if (!isDragging) return
+      if (!hasMoved) {
+        hasMoved = true
+        if (e.pointerType === 'mouse') {
+          wrapper.style.transition = 'opacity 150ms ease'
+          wrapper.style.opacity = '0.85'
+        }
+      }
       lastDelta = lastPointerX - e.clientX
       target += lastDelta
       lastPointerX = e.clientX
@@ -131,6 +139,7 @@ export default function FunMarquee({
     const onPointerUp = () => {
       if (!isDragging) return
       isDragging = false
+      hasMoved = false
       velocity = lastDelta * 5
       wrapper.style.transition = 'opacity 300ms ease'
       wrapper.style.opacity = '1'
