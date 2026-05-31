@@ -17,8 +17,8 @@ export default function Footer() {
   }
 
   return (
-    <footer id="site-footer" className="sticky bottom-0 w-full z-0 bg-[#002089] min-h-screen flex flex-col items-center justify-center" style={{ transform: 'translateZ(0)' }}>
-      <div className="flex flex-col items-start md:items-center gap-[89px] w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] px-6 antialiased">
+    <footer id="site-footer" className="sticky bottom-0 w-full z-0 bg-[#002089] min-h-[80vh] flex flex-col items-center justify-center" style={{ transform: 'translateZ(0)' }}>
+      <div className="flex flex-col items-start md:items-center gap-[60px] w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] px-6 antialiased">
 
         <div className="flex flex-col items-start md:items-center gap-[16px] w-full">
           <p className="font-serif font-normal text-3xl md:text-4xl text-left md:text-center text-white w-full">

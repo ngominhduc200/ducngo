@@ -47,6 +47,26 @@ export default function FunMarquee({
     let entranceFrame     = 0
     let entranceOffset    = viewWidth
 
+    const checkVideos = (display: number, h: number) => {
+      if (itemPositions.length === 0) return
+      itemsRef.current.forEach((itemEl, i) => {
+        const video = itemEl?.querySelector('video') as HTMLVideoElement | null
+        if (!video) return
+        const p = itemPositions[i]
+        if (!p) return
+        const x = p.x % h
+        if (video.preload === 'none') {
+          const dist = Math.min(Math.abs(x - display), Math.abs(x - display + h))
+          if (dist < viewWidth * 2) { video.preload = 'auto'; video.load() }
+        }
+        const inView =
+          (x + p.w > display && x < display + viewWidth) ||
+          (x + p.w + h > display && x + h < display + viewWidth)
+        if (inView  && video.paused)  video.play().catch(() => {})
+        if (!inView && !video.paused) video.pause()
+      })
+    }
+
     let raf = 0
     const tick = () => {
       target  += velocity
@@ -70,25 +90,7 @@ export default function FunMarquee({
         if (el) el.style.transform = `perspective(600px) rotateY(${tilt}deg)`
       })
 
-      // Video visibility
-      if (itemPositions.length > 0) {
-        itemsRef.current.forEach((itemEl, i) => {
-          const video = itemEl?.querySelector('video') as HTMLVideoElement | null
-          if (!video) return
-          const p = itemPositions[i]
-          if (!p) return
-          const x = p.x % h
-          if (video.preload === 'none') {
-            const dist = Math.min(Math.abs(x - display), Math.abs(x - display + h))
-            if (dist < viewWidth * 2) video.preload = 'metadata'
-          }
-          const inView =
-            (x + p.w > display && x < display + viewWidth) ||
-            (x + p.w + h > display && x + h < display + viewWidth)
-          if (inView  && video.paused)  video.play().catch(() => {})
-          if (!inView && !video.paused) video.pause()
-        })
-      }
+      checkVideos(display, h)
 
       if (Math.abs(velocity) > 0.1 || Math.abs(target - current) > 0.1 || entranceFrame < ENTRANCE_FRAMES) {
         raf = requestAnimationFrame(tick)
@@ -97,6 +99,22 @@ export default function FunMarquee({
       }
     }
     raf = requestAnimationFrame(tick)
+
+    // Re-check videos whenever the carousel section enters the page viewport
+    const pageObserver = new IntersectionObserver(([entry]) => {
+      const h = half || 1
+      const display = ((current % h) + h) % h
+      if (entry.isIntersecting) {
+        checkVideos(display, h)
+        if (!raf) raf = requestAnimationFrame(tick)
+      } else {
+        itemsRef.current.forEach(el => {
+          const v = el?.querySelector('video') as HTMLVideoElement | null
+          if (v && !v.paused) v.pause()
+        })
+      }
+    }, { threshold: 0 })
+    pageObserver.observe(wrapper)
 
     const onWheel = (e: WheelEvent) => {
       e.preventDefault()
@@ -155,6 +173,7 @@ export default function FunMarquee({
       cancelAnimationFrame(raf)
       clearTimeout(cacheTimer)
       ro.disconnect()
+      pageObserver.disconnect()
       wrapper.removeEventListener('wheel', onWheel)
       wrapper.removeEventListener('pointerdown', onPointerDown)
       wrapper.removeEventListener('pointermove', onPointerMove)

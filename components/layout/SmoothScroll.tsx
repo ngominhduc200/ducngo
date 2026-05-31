@@ -11,7 +11,7 @@ export default function SmoothScroll() {
     // Skip on fun page — it has its own custom wheel handling
     if (pathname === '/fun') return
 
-    const lenis = new Lenis({ lerp: 0.5 })
+    const lenis = new Lenis({ lerp: 0.3 })
 
     let raf: number
     const tick = (time: number) => {

@@ -11,6 +11,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
           {children}
         </PageTransition>
         <div id="footer-trigger" />
+        <div className="h-[20vh] bg-stone-50" />
       </div>
       <Footer />
     </>

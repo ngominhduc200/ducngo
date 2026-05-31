@@ -77,6 +77,22 @@ export default function AutoPlayVideo({ src }: { src: string }) {
     window.addEventListener('mouseup', onUp)
   }, [seekTo])
 
+  const handleTrackTouchDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'touch') return
+    dragging.current = true
+    ;(e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId)
+    seekTo(e.clientX)
+  }, [seekTo])
+
+  const handleTrackTouchMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'touch' || !dragging.current) return
+    seekTo(e.clientX)
+  }, [seekTo])
+
+  const handleTrackTouchUp = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === 'touch') dragging.current = false
+  }, [])
+
   return (
     <div
       className="relative w-full"
@@ -93,7 +109,7 @@ export default function AutoPlayVideo({ src }: { src: string }) {
         className="w-full block"
       />
       {/* Controls overlay — bottom of video */}
-      <div className={`absolute bottom-0 left-0 right-0 flex items-center gap-3 px-4 py-3 mix-blend-difference transition-opacity duration-200 ${hovered ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+      <div className={`absolute bottom-0 left-0 right-0 flex items-center gap-3 px-4 py-3 mix-blend-difference transition-opacity duration-200 opacity-100 ${hovered ? 'md:opacity-100' : 'md:opacity-0 md:pointer-events-none'}`}>
         {/* Play / Pause */}
         <button
           onClick={togglePlay}
@@ -116,7 +132,11 @@ export default function AutoPlayVideo({ src }: { src: string }) {
         <div
           ref={trackRef}
           onMouseDown={handleTrackMouseDown}
-          className="relative flex-1 h-0.5 bg-white/30 cursor-pointer"
+          onPointerDown={handleTrackTouchDown}
+          onPointerMove={handleTrackTouchMove}
+          onPointerUp={handleTrackTouchUp}
+          onPointerCancel={handleTrackTouchUp}
+          className="relative flex-1 h-0.5 bg-white/30 cursor-pointer touch-none"
           aria-label="Seek"
         >
           <div className="absolute top-0 left-0 h-full bg-orange-500" style={{ width: `${progress * 100}%` }} />

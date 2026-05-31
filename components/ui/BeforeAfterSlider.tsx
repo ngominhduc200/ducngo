@@ -37,12 +37,18 @@ export default function BeforeAfterSlider({
     if (afterLabelRef.current) afterLabelRef.current.style.opacity = '1'
   }, [])
 
+  const isDragging = useRef(false)
+
   return (
     <div
       ref={containerRef}
-      className="relative w-full overflow-hidden select-none cursor-col-resize shrink-0"
+      className="relative w-full overflow-hidden select-none cursor-col-resize shrink-0 touch-none"
       onMouseMove={(e) => move(e.clientX)}
       onMouseLeave={reset}
+      onPointerDown={(e) => { if (e.pointerType !== 'touch') return; isDragging.current = true; containerRef.current?.setPointerCapture(e.pointerId); move(e.clientX) }}
+      onPointerMove={(e) => { if (e.pointerType !== 'touch' || !isDragging.current) return; move(e.clientX) }}
+      onPointerUp={(e) => { if (e.pointerType === 'touch') isDragging.current = false }}
+      onPointerCancel={(e) => { if (e.pointerType === 'touch') isDragging.current = false }}
     >
       {/* After — base layer, sets natural height */}
       <Image src={after} alt={afterAlt} width={0} height={0} sizes="(max-width: 768px) 100vw, 800px" style={{ width: '100%', height: 'auto', display: 'block' }} draggable={false} />
