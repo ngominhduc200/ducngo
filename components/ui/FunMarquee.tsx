@@ -40,21 +40,32 @@ export default function FunMarquee({
       })
     }, 150)
 
-    let velocity = 150
-    let target   = 0
-    let current  = 0
+    let velocity      = 150
+    let target        = 0
+    let current       = 0
+    const ENTRANCE_FRAMES = 100
+    let entranceFrame     = 0
+    let entranceOffset    = viewWidth
 
     let raf = 0
     const tick = () => {
       target  += velocity
       velocity *= DECAY
       current += (target - current) * EASE
+      if (entranceFrame < ENTRANCE_FRAMES) {
+        const t    = entranceFrame / ENTRANCE_FRAMES
+        const ease = 1 - Math.pow(1 - t, 3)
+        entranceOffset = viewWidth * (1 - ease)
+        entranceFrame++
+      } else {
+        entranceOffset = 0
+      }
 
       const h       = half || 1
       const display = ((current % h) + h) % h
-      const tilt    = Math.max(-MAX_TILT, Math.min(MAX_TILT, (target - current) * 0.02))
+      const tilt    = Math.max(-MAX_TILT, Math.min(MAX_TILT, (target - current) * 0.5))
 
-      track.style.transform = `translateX(${-display}px)`
+      track.style.transform = `translateX(${-display + entranceOffset}px)`
       itemsRef.current.forEach(el => {
         if (el) el.style.transform = `perspective(600px) rotateY(${tilt}deg)`
       })
@@ -79,7 +90,7 @@ export default function FunMarquee({
         })
       }
 
-      if (Math.abs(velocity) > 0.1 || Math.abs(target - current) > 0.1) {
+      if (Math.abs(velocity) > 0.1 || Math.abs(target - current) > 0.1 || entranceFrame < ENTRANCE_FRAMES) {
         raf = requestAnimationFrame(tick)
       } else {
         raf = 0
