@@ -1,4 +1,4 @@
-import Footer from '@/components/layout/Footer'
+import FooterSpacer from '@/components/layout/FooterSpacer'
 import Header from '@/components/layout/Header'
 import PageTransition from '@/components/layout/PageTransition'
 
@@ -12,8 +12,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         </PageTransition>
         <div id="footer-trigger" />
       </div>
-      <div className="h-screen" />
-      <Footer />
+      <FooterSpacer />
     </>
   )
 }
