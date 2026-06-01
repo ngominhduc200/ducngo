@@ -73,7 +73,7 @@ export default function HootsuiteGraphicPage() {
       </main>
 
       {/* Full-viewport-width media */}
-      <div id="showcase" className="flex flex-col w-full overflow-hidden bg-black" data-dark-bg>
+      <div id="showcase" className="flex flex-col w-full overflow-hidden bg-black">
         <video
           src={a('preview.mp4')}
           autoPlay
