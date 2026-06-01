@@ -8,12 +8,6 @@ export default function SmoothScroll() {
   const pathname = usePathname()
 
   useEffect(() => {
-    // Skip on fun page — it has its own custom wheel handling
-    if (pathname === '/fun') {
-      document.documentElement.style.overscrollBehaviorY = 'none'
-      return () => { document.documentElement.style.overscrollBehaviorY = '' }
-    }
-
     const lenis = new Lenis({ lerp: 0.3 })
 
     let raf: number

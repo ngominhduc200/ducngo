@@ -118,10 +118,21 @@ export default function FunMarquee({
 
     const onWheel = (e: WheelEvent) => {
       e.preventDefault()
+      e.stopPropagation()
       const delta = Math.abs(e.deltaX) >= Math.abs(e.deltaY) ? e.deltaX : e.deltaY
       velocity += delta * 0.1
       if (!raf) raf = requestAnimationFrame(tick)
     }
+
+    const armWheel = () => wrapper.addEventListener('mousemove', onFirstMove, { once: true })
+    const onFirstMove = () => wrapper.addEventListener('wheel', onWheel, { passive: false })
+    const onMouseLeave = () => {
+      wrapper.removeEventListener('wheel', onWheel)
+      wrapper.removeEventListener('mousemove', onFirstMove)
+      armWheel()
+    }
+    armWheel()
+    wrapper.addEventListener('mouseleave', onMouseLeave)
 
     // Drag / touch support
     let lastPointerX = 0
@@ -170,7 +181,6 @@ export default function FunMarquee({
       hasMoved = false
     }
 
-    wrapper.addEventListener('wheel', onWheel, { passive: false })
     wrapper.addEventListener('pointerdown', onPointerDown)
     wrapper.addEventListener('pointermove', onPointerMove)
     wrapper.addEventListener('pointerup', onPointerUp)
@@ -181,6 +191,8 @@ export default function FunMarquee({
       clearTimeout(cacheTimer)
       ro.disconnect()
       pageObserver.disconnect()
+      wrapper.removeEventListener('mousemove', onFirstMove)
+      wrapper.removeEventListener('mouseleave', onMouseLeave)
       wrapper.removeEventListener('wheel', onWheel)
       wrapper.removeEventListener('pointerdown', onPointerDown)
       wrapper.removeEventListener('pointermove', onPointerMove)
