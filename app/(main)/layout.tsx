@@ -12,6 +12,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         </PageTransition>
         <div id="footer-trigger" />
       </div>
+      <div className="h-screen" />
       <Footer />
     </>
   )
