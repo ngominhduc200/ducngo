@@ -28,7 +28,7 @@ const publicSans = Public_Sans({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${instrumentSerif.variable} ${publicSans.variable} scroll-smooth overscroll-none`}>
+    <html lang="en" className={`${instrumentSerif.variable} ${publicSans.variable} scroll-smooth`}>
       <body className="bg-stone-50 text-neutral-900 font-sans font-light">
         <SmoothScroll />
         <HtmlBg />
