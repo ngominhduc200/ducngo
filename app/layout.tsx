@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
 import { Instrument_Serif, Public_Sans } from 'next/font/google'
+
+export const metadata: Metadata = {
+  themeColor: '#fafaf9',
+}
 import './globals.css'
 import HtmlBg from '@/components/layout/HtmlBg'
 import ScrollToTop from '@/components/layout/ScrollToTop'

@@ -8,8 +8,8 @@ const DECAY    = 0.95
 const MAX_TILT = 10
 
 const HEIGHTS = [
-  '43vh', '27vh', '39vh', '33vh', '49vh',
-  '23vh', '36vh', '47vh', '29vh', '41vh',
+  '53vh', '33vh', '48vh', '40vh', '60vh',
+  '28vh', '44vh', '58vh', '36vh', '50vh',
 ]
 
 export default function FunMarquee({

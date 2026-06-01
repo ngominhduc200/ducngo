@@ -6,12 +6,11 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   return (
     <>
       <Header />
-      <div id="main-wrapper" className="relative z-[1] min-h-dvh bg-stone-50 isolate">
+      <div id="main-wrapper" className="relative z-[1] min-h-dvh bg-stone-50 isolate mb-[80vh]">
         <PageTransition>
           {children}
         </PageTransition>
         <div id="footer-trigger" />
-        <div className="h-[20vh] bg-stone-50" />
       </div>
       <Footer />
     </>

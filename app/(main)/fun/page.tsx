@@ -48,7 +48,7 @@ export default function FunPage() {
         {' '}of the game.
       </PageHero>
 
-      <section aria-label="Fun work" className="w-full mt-16 md:mt-[150px] pb-16 md:pb-[165px]">
+      <section aria-label="Fun work" className="w-full mt-4 md:mt-[40px] pb-16 md:pb-[165px]">
         <FunMarquee items={ALL_ITEMS} />
       </section>
     </main>

@@ -107,7 +107,7 @@ export default function ProjectGrid() {
       scrollDirRef.current = currentY >= prevScrollYRef.current ? 'down' : 'up'
       prevScrollYRef.current = currentY
 
-      const target = window.innerHeight * 0.4
+      const target = window.innerHeight * 0.5
       let best: string | null = null
       let bestDist = Infinity
       ARCHIVE.forEach(({ id }) => {
