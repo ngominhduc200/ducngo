@@ -58,7 +58,7 @@ export default function HootsuiteGraphicPage() {
             <p className="font-sans text-base text-neutral-900">
               Check out my highlight below or view the{' '}
               <a
-                href="https://www.figma.com/design/hut5yExXNg4Vbr2Qc1XIw0/Portfolio?node-id=422-196"
+                href="https://www.figma.com/deck/vxaQ4kYPg2SEaV1PZXxeMW/Hootsuite-Deck-of-Truth?node-id=1-207&viewport=-1742%2C-1108%2C0.73&t=CY6wW3aFJDxFtzOd-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="italic text-orange-500 hover:text-sky-500 transition-colors"
