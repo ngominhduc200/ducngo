@@ -119,7 +119,7 @@ export default function ProjectGrid() {
         const dist = Math.abs(center - target)
         if (dist < bestDist) { bestDist = dist; best = id }
       })
-      if (bestDist > window.innerHeight * 0.35) best = null
+      if (bestDist > window.innerHeight * 0.1) best = null
 
       scrollActiveRef.current = best
       if (best !== prevActiveRef.current) {
