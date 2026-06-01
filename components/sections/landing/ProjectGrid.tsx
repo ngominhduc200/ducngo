@@ -156,7 +156,7 @@ export default function ProjectGrid() {
 
   return (
     <>
-      <section id="work" aria-label="Work" className="flex flex-col items-center w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] px-6 mb-16 md:mb-0">
+      <section id="work" aria-label="Work" className="flex flex-col items-center w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[50rem] px-6 mb-16 md:mb-0">
         <ProjectCard
           id="project-peak-create"
           className="pt-20 pb-0 md:py-[150px]"
@@ -168,7 +168,7 @@ export default function ProjectGrid() {
         <ProjectCard
           id="project-airbnb"
           className="pt-20 pb-0 md:py-[150px]"
-          title="Collaborative trip planning"
+          title="Helping groups align on a place to stay together with Airbnb Collaborative Trip Planning"
           meta="Product Design · Concept 2026"
           href="/work/airbnb"
           image="/images/airbnb/cover.png"
@@ -198,7 +198,7 @@ export default function ProjectGrid() {
       {mounted && activeImage && createPortal(
         <div
           className="hidden md:flex fixed right-8 top-1/2 -translate-y-1/2 pointer-events-none z-50 justify-center"
-          style={{ width: '20vw' }}
+          style={{ width: '20vw', maxWidth: 'calc((100vw - 50rem) / 2 - 2rem)' }}
         >
           {/\.(mp4|mov|webm)$/i.test(activeImage) ? (
             <video
@@ -222,7 +222,7 @@ export default function ProjectGrid() {
         aria-label="Archive"
         className="w-full flex flex-col items-center pb-16 md:pb-[150px] mb-[100px]"
       >
-        <div className="w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] px-6">
+        <div className="w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[50rem] px-6">
           <div className="flex flex-col gap-[10px] pt-[50px] pb-[30px] md:py-[50px]">
             <h2 className="font-serif font-normal text-4xl text-neutral-900">Archive</h2>
             <p className="font-sans text-base text-neutral-400">Graphic design, front-end development, and co-op work from my earlier years.</p>

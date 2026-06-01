@@ -11,7 +11,7 @@ export default function PageHero({
 }) {
   return (
     <section
-      className={`flex flex-col gap-2 w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] px-6 pt-20 md:pt-[150px] ${
+      className={`flex flex-col gap-2 w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[50rem] px-6 pt-20 md:pt-[150px] ${
         align === 'center' ? 'items-start text-left md:items-center md:text-center' : 'items-start text-left'
       }`}
     >

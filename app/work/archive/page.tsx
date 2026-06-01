@@ -70,7 +70,7 @@ export default function ArchivePage() {
     <main className="flex w-full justify-center items-start">
       <CaseStudyNav navItems={NAV_ITEMS} />
 
-      <div className="flex w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] py-16 md:py-[150px] flex-col items-start px-4 sm:px-6 md:px-0 gap-0">
+      <div className="flex w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[50rem] py-16 md:py-[150px] flex-col items-start px-4 sm:px-6 md:px-0 gap-0">
 
         {/* Header */}
         <div className="flex flex-col gap-[20px] pb-[80px] w-full">

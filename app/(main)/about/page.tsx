@@ -9,7 +9,7 @@ export default function AboutPage() {
         <em className="italic" style={{ color: '#0ea5e9' }}>Duc.</em>
       </PageHero>
 
-      <div className="flex flex-col gap-[60px] md:gap-[100px] w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] px-6 mt-16 md:mt-[150px] pb-16 md:pb-[165px]">
+      <div className="flex flex-col gap-[60px] md:gap-[100px] w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[50rem] px-6 mt-16 md:mt-[150px] pb-16 md:pb-[165px]">
 
         {/* Bio + credentials */}
         <div className="flex flex-col gap-6 font-sans text-base text-neutral-900">

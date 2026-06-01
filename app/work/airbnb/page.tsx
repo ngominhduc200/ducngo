@@ -41,10 +41,10 @@ export default function AirbnbPage() {
     <main className="flex w-full justify-center items-start">
       <CaseStudyNav navItems={NAV_ITEMS} />
 
-      <div className="flex w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[56.25rem] pt-8 pb-16 md:py-[150px] flex-col items-center px-4 sm:px-6 md:px-0">
+      <div className="flex w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[50rem] pt-8 pb-16 md:py-[150px] flex-col items-center px-4 sm:px-6 md:px-0">
 
         <CaseStudyHero
-          title="Collaborative Trip Planning"
+          title="Helping groups align on a place to stay together with Airbnb Collaborative Trip Planning"
           description="In 3 weeks, I led the user research, wireframes, and prototype for a new Airbnb feature that lets groups collaborate on finding and booking a place to stay inside the app. I worked with a UX researcher and two UX designers."
           coverSrc={a('cover.png')}
           coverAlt="Collaborative Trip Planning — cover"
