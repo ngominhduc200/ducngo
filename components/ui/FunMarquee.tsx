@@ -154,13 +154,20 @@ export default function FunMarquee({
       if (!raf) raf = requestAnimationFrame(tick)
     }
 
-    const onPointerUp = () => {
+    const onPointerUp = (e: PointerEvent) => {
       if (!isDragging) return
       isDragging = false
-      hasMoved = false
       velocity = lastDelta * 5
       wrapper.style.transition = 'opacity 300ms ease'
       wrapper.style.opacity = '1'
+      if (!hasMoved) {
+        const video = (e.target as Element)?.closest('div')?.querySelector('video') as HTMLVideoElement & { webkitEnterFullscreen?: () => void } | null
+        if (video) {
+          if (video.webkitEnterFullscreen) video.webkitEnterFullscreen()
+          else video.requestFullscreen?.()
+        }
+      }
+      hasMoved = false
     }
 
     wrapper.addEventListener('wheel', onWheel, { passive: false })
