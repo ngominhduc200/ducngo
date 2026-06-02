@@ -31,7 +31,7 @@ export default function FooterReveal({ children }: { children: React.ReactNode }
       <div id="main-wrapper" className="relative z-[1] min-h-dvh bg-stone-50 isolate">
         {children}
       </div>
-      <div id="footer-root" className="relative z-0 w-full">
+      <div id="footer-root" className="relative z-0 w-full overflow-hidden">
         <motion.div style={{ y }}>
           <motion.div style={{ y: innerY }}>
             <Footer />
