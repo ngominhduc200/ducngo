@@ -45,23 +45,21 @@ export default function LandingNav() {
     const checkTop = () => {
       const isTop = window.scrollY < 50
       setAtTop(isTop)
-      if (isTop) setAtFooter(false)
     }
     window.addEventListener('scroll', checkTop, { passive: true })
     checkTop()
 
-    const seenArchive = { current: false }
-    const handleArchiveActive = (e: Event) => {
-      const id = (e as CustomEvent).detail.id
-      if (id !== null) seenArchive.current = true
-      setAtFooter(seenArchive.current && id === null)
-    }
-    window.addEventListener('archive-active', handleArchiveActive)
+    const footerEl = document.getElementById('footer-root')
+    const footerObserver = new IntersectionObserver(
+      ([entry]) => setAtFooter(entry.isIntersecting),
+      { threshold: 0 }
+    )
+    if (footerEl) footerObserver.observe(footerEl)
 
     return () => {
       observer.disconnect()
+      footerObserver.disconnect()
       window.removeEventListener('scroll', checkTop)
-      window.removeEventListener('archive-active', handleArchiveActive)
     }
   }, [])
 

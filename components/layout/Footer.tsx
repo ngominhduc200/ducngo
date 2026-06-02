@@ -17,8 +17,8 @@ export default function Footer() {
   }
 
   return (
-    <footer id="site-footer" className="sticky bottom-0 w-full z-0 bg-stone-50">
-      <div className="bg-blue-950 min-h-[80vh] w-full flex flex-col items-center justify-center overflow-hidden">
+    <footer id="site-footer" className="w-full z-0">
+      <div className="bg-blue-950 min-h-dvh w-full flex flex-col items-center justify-center overflow-hidden">
         <div className="flex flex-col items-start md:items-center gap-[60px] w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[50rem] px-6 antialiased">
 
           <div className="flex flex-col items-start md:items-center gap-[16px] w-full">

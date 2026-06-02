@@ -2,9 +2,11 @@
 
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import { useLenis } from 'lenis/react'
 
 export default function ScrollToTop() {
   const pathname = usePathname()
+  const lenis = useLenis()
 
   useEffect(() => {
     history.scrollRestoration = 'manual'
@@ -12,9 +14,9 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     if (!window.location.hash) {
-      window.scrollTo({ top: 0, behavior: 'instant' })
+      lenis?.scrollTo(0, { immediate: true })
     }
-  }, [pathname])
+  }, [pathname, lenis])
 
   return null
 }
