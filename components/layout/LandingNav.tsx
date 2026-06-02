@@ -16,11 +16,12 @@ const baseClass = 'font-sans text-sm no-underline hover:text-orange-500 active:t
 export default function LandingNav() {
   const [activeIdx, setActiveIdx] = useState<number | null>(null)
   const [atTop, setAtTop] = useState(true)
-  const [atFooter, setAtFooter] = useState(false)
+  const [pastArchive, setPastArchive] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const wasInArchive = useRef(false)
 
-  const navVisible = !atTop && !atFooter
+  const navVisible = !atTop && !pastArchive
   const isExpanded = navVisible && isHovered
 
   useEffect(() => {
@@ -49,17 +50,28 @@ export default function LandingNav() {
     window.addEventListener('scroll', checkTop, { passive: true })
     checkTop()
 
-    const footerEl = document.getElementById('footer-root')
-    const footerObserver = new IntersectionObserver(
-      ([entry]) => setAtFooter(entry.isIntersecting),
-      { threshold: 0 }
-    )
-    if (footerEl) footerObserver.observe(footerEl)
+    const handleArchiveActive = (e: Event) => {
+      const { id } = (e as CustomEvent<{ id: string | null }>).detail
+      if (id !== null) {
+        wasInArchive.current = true
+        setPastArchive(false)
+      } else if (wasInArchive.current) {
+        const archiveEl = document.getElementById('archive')
+        const rect = archiveEl?.getBoundingClientRect()
+        if (rect && rect.top < 0) {
+          setPastArchive(true)
+        } else {
+          wasInArchive.current = false
+          setPastArchive(false)
+        }
+      }
+    }
+    window.addEventListener('archive-active', handleArchiveActive)
 
     return () => {
       observer.disconnect()
-      footerObserver.disconnect()
       window.removeEventListener('scroll', checkTop)
+      window.removeEventListener('archive-active', handleArchiveActive)
     }
   }, [])
 
