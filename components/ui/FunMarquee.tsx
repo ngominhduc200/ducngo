@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 const EASE     = 0.85
 const DECAY    = 0.95
-const MAX_TILT = 10
+const MAX_TILT = 20
 
 const HEIGHTS = [
   '53vh', '33vh', '48vh', '40vh', '60vh',
@@ -83,7 +83,7 @@ export default function FunMarquee({
 
       const h       = half || 1
       const display = ((current % h) + h) % h
-      const tilt    = Math.max(-MAX_TILT, Math.min(MAX_TILT, (target - current) * 0.5))
+      const tilt    = Math.max(-MAX_TILT, Math.min(MAX_TILT, velocity * 0.1))
 
       track.style.transform = `translateX(${-display + entranceOffset}px)`
       itemsRef.current.forEach(el => {
@@ -171,13 +171,6 @@ export default function FunMarquee({
       velocity = lastDelta * 5
       wrapper.style.transition = 'opacity 300ms ease'
       wrapper.style.opacity = '1'
-      if (!hasMoved) {
-        const video = (e.target as Element)?.closest('div')?.querySelector('video') as HTMLVideoElement & { webkitEnterFullscreen?: () => void } | null
-        if (video) {
-          if (video.webkitEnterFullscreen) video.webkitEnterFullscreen()
-          else video.requestFullscreen?.()
-        }
-      }
       hasMoved = false
     }
 

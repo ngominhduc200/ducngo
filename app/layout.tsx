@@ -9,7 +9,7 @@ import HtmlBg from '@/components/layout/HtmlBg'
 import ScrollToTop from '@/components/layout/ScrollToTop'
 import Cursor from '@/components/layout/Cursor'
 import SmoothScroll from '@/components/layout/SmoothScroll'
-import Header from '@/components/layout/Header'
+import ConditionalHeader from '@/components/layout/ConditionalHeader'
 
 const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-stone-50 text-neutral-900 font-sans font-light">
         <SmoothScroll>
           <HtmlBg />
-          <Header />
+          <ConditionalHeader />
           <Cursor />
           <ScrollToTop />
           {children}
