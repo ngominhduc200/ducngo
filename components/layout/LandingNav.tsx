@@ -109,6 +109,10 @@ export default function LandingNav() {
               <a
                 key={id}
                 href={`#${id}`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+                }}
                 className={`${baseClass} ${activeIdx === idx ? 'text-orange-500' : 'text-neutral-400'}`}
               >
                 {label}

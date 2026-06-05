@@ -1,7 +1,7 @@
 import FunMarquee from '@/components/ui/FunMarquee'
 import PageHero from '@/components/sections/PageHero'
 
-const f = (name: string) => `/images/fun/${name}`
+const f = (name: string) => `/images/fun-compressed/${name}`
 
 const ALL_ITEMS: { src: string; type: 'image' | 'video' }[] = [
   { src: f('dope-1.png'),                  type: 'image' },

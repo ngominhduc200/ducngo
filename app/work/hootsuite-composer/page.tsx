@@ -7,7 +7,7 @@ import CaseStudyHero from '@/components/sections/CaseStudyHero'
 import CaseStudySection from '@/components/sections/CaseStudySection'
 import SectionHeader from '@/components/sections/SectionHeader'
 
-const a = (name: string) => `/images/hootsuite-composer/${name}`
+const a = (name: string) => `/images/hootsuite-composer-compressed/${name}`
 
 const NAV_ITEMS = [
   { label: 'context', id: 'context' },

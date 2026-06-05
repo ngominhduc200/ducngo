@@ -30,7 +30,7 @@ const publicSans = Public_Sans({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${instrumentSerif.variable} ${publicSans.variable} scroll-smooth bg-stone-50`}>
-      <body className="bg-stone-50 text-neutral-900 font-sans font-light">
+      <body className="bg-stone-50 text-neutral-900 font-sans font-light" suppressHydrationWarning>
         <SmoothScroll>
           <HtmlBg />
           <ConditionalHeader />

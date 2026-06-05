@@ -12,7 +12,7 @@ const NAV_ITEMS = [
   { label: 'showcase', id: 'showcase' },
 ]
 
-const a = (name: string) => `/images/hootsuite-deck/${name}`
+const a = (name: string) => `/images/hootsuite-deck-compressed/${name}`
 
 export default function HootsuiteGraphicPage() {
   return (

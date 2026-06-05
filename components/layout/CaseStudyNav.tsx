@@ -97,6 +97,10 @@ export default function CaseStudyNav({ navItems = DEFAULT_navItems }: {
           <a
             key={id}
             href={`#${id}`}
+            onClick={(e) => {
+              e.preventDefault()
+              document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+            }}
             className={`${baseClass} transition-colors duration-300 ${activeId === id ? 'text-orange-500' : textColor}`}
           >
             {label}

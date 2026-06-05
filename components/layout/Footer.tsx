@@ -12,7 +12,8 @@ export default function Footer() {
     if (pathname === '/') {
       document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })
     } else {
-      router.push('/#work')
+      sessionStorage.setItem('scrollTo', 'work')
+      router.push('/')
     }
   }
 

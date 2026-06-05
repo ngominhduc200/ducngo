@@ -2,10 +2,23 @@
 
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 
 export default function Header() {
   const [visible, setVisible] = useState(true)
   const prevScrollY = useRef(0)
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const handleWorkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    if (pathname === '/') {
+      document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      sessionStorage.setItem('scrollTo', 'work')
+      router.push('/')
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,7 +50,7 @@ export default function Header() {
       </Link>
 
       <nav className="flex items-center">
-        <Link href="/#work" className="no-underline hover:text-orange-500 active:text-orange-500">work</Link>
+        <a href="/#work" onClick={handleWorkClick} className="no-underline hover:text-orange-500 active:text-orange-500">work</a>
         <span>,&nbsp;</span>
         <Link href="/fun" className="no-underline hover:text-orange-500 active:text-orange-500">fun</Link>
         <span>,&nbsp;</span>

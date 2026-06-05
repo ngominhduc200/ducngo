@@ -10,7 +10,7 @@ import CaseStudyHero from '@/components/sections/CaseStudyHero'
 import CaseStudySection from '@/components/sections/CaseStudySection'
 import SectionHeader from '@/components/sections/SectionHeader'
 
-const a = (name: string) => `/images/airbnb/${name}`
+const a = (name: string) => `/images/airbnb-compressed/${name}`
 
 const NAV_ITEMS = [
   { label: 'how it started', id: 'how-it-started' },

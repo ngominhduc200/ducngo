@@ -14,7 +14,7 @@ const ARCHIVE = [
     description:
       'Built a responsive e-commerce website using HTML and CSS, including product listing features and client information pages, deployed on GitHub Pages.',
     images: [
-      '/images/archive/discogs-shop/preview.mp4',
+      '/images/archive-compressed/discogs-shop/preview.mp4',
     ],
   },
   {
@@ -25,7 +25,7 @@ const ARCHIVE = [
     description:
       "Designed magazine spreads, covers, and section layouts for SFU's student newspaper. Transformed written content and illustrations into engaging visual compositions using layout design, typography selection, and colour palette development.",
     images: Array.from({ length: 16 }, (_, i) =>
-      i === 0 ? '/images/archive/the-peak/cover.jpg' : `/images/archive/the-peak/spread-${String(i).padStart(2, '0')}.jpg`
+      i === 0 ? '/images/archive-compressed/the-peak/cover.jpg' : `/images/archive-compressed/the-peak/spread-${String(i).padStart(2, '0')}.jpg`
     ).map((p, i) => i === 15 ? p.replace('.jpg', '.png') : p),
   },
   {
@@ -35,7 +35,7 @@ const ARCHIVE = [
     year: '2023',
     description:
       "Digital Media Specialist co-op. Created graphics and materials to improve health information delivery, deployed across Fraser Health's digital platforms and hospital locations across British Columbia.",
-    images: Array.from({ length: 11 }, (_, i) => `/images/archive/fraser-health/asset-${String(i + 1).padStart(2, '0')}.png`),
+    images: Array.from({ length: 11 }, (_, i) => `/images/archive-compressed/fraser-health/asset-${String(i + 1).padStart(2, '0')}.png`),
   },
   {
     id: 'archive-douglas-royals',
@@ -45,11 +45,11 @@ const ARCHIVE = [
     description:
       "Part-time role creating visual assets for Douglas College's athletic department — promotional posters, athlete spotlights, event schedules, and digital and physical marketing materials.",
     images: [
-      '/images/archive/douglas-royals/cover.jpg',
+      '/images/archive-compressed/douglas-royals/cover.jpg',
       ...Array.from({ length: 15 }, (_, i) => {
         const n = i + 1
         const ext = [3, 7, 8, 9, 10, 11, 12, 13, 14, 15].includes(n) ? 'png' : 'jpg'
-        return `/images/archive/douglas-royals/asset-${String(n).padStart(2, '0')}.${ext}`
+        return `/images/archive-compressed/douglas-royals/asset-${String(n).padStart(2, '0')}.${ext}`
       }),
     ],
   },
@@ -60,7 +60,7 @@ const ARCHIVE = [
     year: '2022',
     description:
       'Three-week academic project for IAT 103W at SFU. Translated the 4C framework for scholarly composition into a social media awareness campaign. Led character design through Procreate sketches to refined Illustrator vectors, combined with vibrant carousel layouts for engagement.',
-    images: Array.from({ length: 9 }, (_, i) => `/images/archive/iat103/image-${28 + i}.png`),
+    images: Array.from({ length: 9 }, (_, i) => `/images/archive-compressed/iat103/image-${28 + i}.png`),
   },
 ]
 
@@ -163,7 +163,7 @@ export default function ProjectGrid() {
           title="Streamlining how The Peak's editorial team briefs, tracks, and pays illustrators with Peak Create"
           meta="Product Design · 2026"
           href="/work/peak-create"
-          video="/images/peak-create/cover.mp4"
+          video="/images/peak-create-compressed/cover.mp4"
         />
         <ProjectCard
           id="project-airbnb"
@@ -171,7 +171,7 @@ export default function ProjectGrid() {
           title="Helping groups align on a place to stay together with Airbnb Collaborative Trip Planning"
           meta="Product Design · Concept 2026"
           href="/work/airbnb"
-          image="/images/airbnb/cover.png"
+          image="/images/airbnb-compressed/cover.png"
           imageAlt="Collaborative Trip Planning case study preview"
         />
         <ProjectCard
@@ -180,7 +180,7 @@ export default function ProjectGrid() {
           title="Increasing Feature Discovery for Hootsuite"
           meta="UX Design · Handed Off 2025"
           href="/work/hootsuite-composer"
-          image="/images/hootsuite-composer/cover.png"
+          image="/images/hootsuite-composer-compressed/cover.png"
           imageAlt="Hootsuite Composer case study preview"
         />
         <ProjectCard
@@ -189,7 +189,7 @@ export default function ProjectGrid() {
           title="Shaping Hootsuite&apos;s new branding with Deck of Truth redesigned"
           meta="Graphic Design · 2025"
           href="/work/hootsuite-deck"
-          image="/images/hootsuite-deck/preview-4.png"
+          image="/images/hootsuite-deck-compressed/preview-4.png"
           imageAlt="Hootsuite Deck of Truth preview"
         />
       </section>
