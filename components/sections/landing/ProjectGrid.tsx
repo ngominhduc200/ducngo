@@ -187,7 +187,7 @@ export default function ProjectGrid() {
           id="project-hootsuite-deck"
           className="pt-20 pb-0 md:py-[150px]"
           title="Shaping Hootsuite&apos;s new branding with Deck of Truth redesigned"
-          meta="Graphic Design · 2025"
+          meta="Graphic Design · Shipped 2025"
           href="/work/hootsuite-deck"
           image="/images/hootsuite-deck-compressed/preview-4.png"
           imageAlt="Hootsuite Deck of Truth preview"
