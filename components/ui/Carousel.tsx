@@ -68,7 +68,7 @@ export default function Carousel({ images }: {
               style={{ width: cardWidth > 0 ? cardWidth : `${CARD_RATIO * 100}%`, maxHeight: '50vh' }}
             >
               {Math.abs(i - index) <= 1 && (
-                <Image src={src} alt={alt} width={0} height={0} sizes="85vw" priority={i === 0} style={{ width: '100%', height: 'auto', display: 'block', pointerEvents: 'none' }} draggable={false} />
+                <Image src={src} alt={alt} width={0} height={0} sizes="85vw" loading="lazy" style={{ width: '100%', height: 'auto', display: 'block', pointerEvents: 'none' }} draggable={false} />
               )}
             </div>
           ))}

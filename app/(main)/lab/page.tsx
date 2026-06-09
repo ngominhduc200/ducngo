@@ -108,7 +108,7 @@ export default function FunPage() {
           {ALL_ITEMS.map((item, i) => (
             <div key={i} className="break-inside-avoid mb-4 md:mb-[100px]">
               {item.type === 'video' ? (
-                <video src={item.src} muted loop playsInline autoPlay preload={i < 4 ? 'auto' : 'metadata'} className="w-full block" />
+                <video src={item.src} muted loop playsInline autoPlay preload="none" className="w-full block" />
               ) : (
                 <Image
                   src={item.src}

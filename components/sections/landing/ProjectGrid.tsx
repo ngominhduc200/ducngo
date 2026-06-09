@@ -167,7 +167,7 @@ export default function ProjectGrid() {
                           <video
                             src={project.cover.src}
                             autoPlay loop muted playsInline
-                            preload="auto"
+                            preload="metadata"
                             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                           />
                         ) : (
@@ -175,7 +175,7 @@ export default function ProjectGrid() {
                           <img
                             src={project.cover.src}
                             alt=""
-                            fetchPriority="high"
+                            loading="lazy"
                             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                           />
                         )}
