@@ -1,6 +1,12 @@
 import type { Metadata, Viewport } from 'next'
 import { Instrument_Serif, Public_Sans } from 'next/font/google'
 
+export const metadata: Metadata = {
+  title: 'Duc Ngo — Product Designer',
+  description: 'Product and visual designer based in Vancouver. Open for Fall 2026 internship.',
+  icons: { icon: '/icon.png', apple: '/icon.png' },
+}
+
 export const viewport: Viewport = {
   themeColor: '#fafaf9',
 }
