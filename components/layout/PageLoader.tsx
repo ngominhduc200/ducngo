@@ -7,7 +7,7 @@ import { useLenis } from 'lenis/react'
 export default function PageLoader() {
   const pathname = usePathname()
   const barRef = useRef<HTMLDivElement>(null)
-  const isWork = pathname.startsWith('/work/')
+  const isWork = pathname.startsWith('/project/')
 
   // Reset bar on route change
   useEffect(() => {

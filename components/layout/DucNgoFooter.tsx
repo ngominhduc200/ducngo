@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 import { usePathname } from 'next/navigation'
 import { useViewMode } from '@/contexts/ViewModeContext'
 
-const SHOWN_PATHS = ['/', '/fun']
+const SHOWN_PATHS = ['/', '/lab']
 
 const TEXT_CLASS_EXPAND = 'font-serif italic text-9xl lg:text-[12rem] uppercase leading-none text-neutral-900'
 const TEXT_CLASS_COMPRESSED = 'font-serif italic text-5xl lg:text-6xl uppercase leading-none text-neutral-900'
@@ -19,7 +19,7 @@ export default function DucNgoFooter() {
 
   if (!mounted || !SHOWN_PATHS.includes(pathname)) return null
 
-  const label = pathname === '/fun' ? 'Lab' : 'Duc Ngo'
+  const label = pathname === '/lab' ? 'Lab' : 'Duc Ngo'
 
   // Compressed mode: fixed overlay via portal (doesn't scroll)
   if (mode === 'compressed') {

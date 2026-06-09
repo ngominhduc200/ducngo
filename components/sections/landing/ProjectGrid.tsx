@@ -13,7 +13,7 @@ const FEATURE = [
     year: '2026',
     description: 'Over one month, I designed the user experience and interface for an illustration request tool that connects Production Editors, Section Editors, and Illustrators in one shared workspace with full visibility into the workflow. I collaborated with a UX researcher and two UX writers.',
     cover: { type: 'video' as const, src: '/images/peak-create-compressed/cover.mp4' },
-    href: '/work/peak-create',
+    href: '/project/peak-create',
   },
   {
     id: 'project-airbnb',
@@ -22,7 +22,7 @@ const FEATURE = [
     year: 'Concept 2026',
     description: 'In 3 weeks, I led the user research, wireframes, and prototype for a new Airbnb feature that lets groups collaborate on finding and booking a place to stay inside the app. I worked with a UX researcher and two UX designers.',
     cover: { type: 'image' as const, src: '/images/airbnb-compressed/cover.png' },
-    href: '/work/airbnb',
+    href: '/project/airbnb',
   },
   {
     id: 'project-hootsuite',
@@ -31,7 +31,7 @@ const FEATURE = [
     year: 'Handed Off 2025',
     description: 'During my internship, I designed a homepage feature that helps Hootsuite users discover the posting options available across their social channels. The project ended with a full handoff to engineering. I worked as a UX Designer, alongside a mentor, partnered with two PMs, and supported by a Senior UX Designer.',
     cover: { type: 'image' as const, src: '/images/hootsuite-composer-compressed/cover.png' },
-    href: '/work/hootsuite-composer',
+    href: '/project/hootsuite-composer',
   },
   {
     id: 'project-hootsuite-deck',
@@ -40,7 +40,7 @@ const FEATURE = [
     year: 'Shipped 2025',
     description: "In September 2025, I spent one month with the brand marketing team auditing the current branding, and proposing a new direction to help shift Hootsuite's brand from social to enterprise. My work was first introduced as a presentation slide deck template, reflecting updated typography, colour, and layout composition that looks modern and enterprise-ready, aligned with the 2026 direction. This deck template was adopted internally across all departments.",
     cover: { type: 'image' as const, src: '/images/hootsuite-deck-compressed/preview-4.png' },
-    href: '/work/hootsuite-deck',
+    href: '/project/hootsuite-deck',
   },
 ]
 

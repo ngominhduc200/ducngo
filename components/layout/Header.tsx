@@ -13,7 +13,7 @@ export default function Header() {
       <nav className="flex items-center">
         <Link href="/" className={linkClass}>projects</Link>
         <span>,&nbsp;</span>
-        <Link href="/fun" className={linkClass}>lab</Link>
+        <Link href="/lab" className={linkClass}>lab</Link>
         <span>,&nbsp;</span>
         <button onClick={toggleAbout} className={`cursor-pointer bg-transparent border-none p-0 ${aboutOpen ? 'text-orange-500' : ''} ${linkClass}`}>about</button>
       </nav>

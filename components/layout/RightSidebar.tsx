@@ -13,7 +13,7 @@ export default function RightSidebar() {
   const { isOpen: aboutOpen, toggle: toggleAbout } = useAboutModal()
 
   // Case study and about pages have their own full-screen layout — hide sidebar
-  if (pathname.startsWith('/work/') || pathname === '/about') return null
+  if (pathname.startsWith('/project/') || pathname === '/about') return null
 
   const linkCls = 'no-underline hover:text-orange-500 active:text-orange-500'
   const btnCls  = `cursor-pointer bg-transparent border-none p-0 hover:text-orange-500 active:text-orange-500`
@@ -27,7 +27,7 @@ export default function RightSidebar() {
         <div className="flex-1 flex items-center">
           <Link href="/" className={linkCls}>projects</Link>
           <span>,&nbsp;</span>
-          <Link href="/fun" className={linkCls}>lab</Link>
+          <Link href="/lab" className={linkCls}>lab</Link>
           <span>,&nbsp;</span>
           <button onClick={toggleAbout} className={`${btnCls} ${aboutOpen ? 'text-orange-500' : ''}`}>about</button>
           <span>,&nbsp;</span>
