@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Instrument_Serif, Public_Sans } from 'next/font/google'
 
 export const metadata: Metadata = {
-  title: 'Duc Ngo Portfolio',
+  title: 'Duc Ngo',
   description: 'Product and visual designer based in Vancouver. Open for Fall 2026 internship.',
 }
 
