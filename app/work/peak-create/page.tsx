@@ -46,7 +46,7 @@ export default function PeakCreatePage() {
           <SectionHeader label="how it started">
             Being part of the team gave me a front-row view of where things broke down each week.
           </SectionHeader>
-          <div className="flex flex-col gap-6 font-sans text-base text-neutral-900">
+          <div className="flex flex-col gap-6 font-sans text-sm text-neutral-900">
             <p>The Peak is SFU&apos;s student newspaper, published weekly. I joined as an Assistant Editor in 2021. Every Production Friday, I take articles, photos, and illustrations and lay them out in InDesign for print and web.</p>
             <p>Illustrations are supposed to arrive before production day, but sometimes they&apos;d come in late. I&apos;d watch my Production Editor chase down illustrators over email.</p>
           </div>
@@ -63,7 +63,7 @@ export default function PeakCreatePage() {
               <SectionHeader label="research">
                 We interviewed both editors and watched a live working day to see how the tools were actually used.
               </SectionHeader>
-              <div className="flex flex-col gap-6 font-sans text-base text-neutral-900">
+              <div className="flex flex-col gap-6 font-sans text-sm text-neutral-900">
                 <p>I teamed up with a UX researcher and two UX writers. We interviewed the Production Editor and a Section Editor, and observed a live working day to see how the tools were actually being used.</p>
                 <p>We learned the pipeline involves three roles: 5 Section Editors who submit illustration requests, 1 Production Editor who owns the entire workflow, and 11 freelance illustrators who self-claim tasks and deliver by deadline.</p>
               </div>
@@ -80,7 +80,7 @@ export default function PeakCreatePage() {
               ].map(({ title, body }) => (
                 <div key={title} className="flex flex-col gap-3">
                   <span className="font-serif font-medium text-2xl text-neutral-900">{title}</span>
-                  <p className="font-sans text-base text-neutral-900">{body}</p>
+                  <p className="font-sans text-sm text-neutral-900">{body}</p>
                 </div>
               ))}
             </div>
@@ -94,7 +94,7 @@ export default function PeakCreatePage() {
             3 to 5 illustration requests go out each week, and the Production Editor manually tracks each one across multiple tools throughout the week.
           </SectionHeader>
           <div className="flex flex-col gap-3">
-            <p className="font-sans text-base text-neutral-900">
+            <p className="font-sans text-sm text-neutral-900">
               When I asked my Production Editor about the most consuming part of the process, she said:
             </p>
             <PullQuote>
@@ -102,7 +102,7 @@ export default function PeakCreatePage() {
             </PullQuote>
           </div>
           <ImageBlock alt="Example of Slack and email workflow" src={a('problem-tools.png')} />
-          <p className="font-sans text-base text-neutral-900">
+          <p className="font-sans text-sm text-neutral-900">
             That shifted my focus. With no single tool connecting a request from brief to payment, everything runs across Sheets, Slack, Gmail, and Drive.
           </p>
         </CaseStudySection>
@@ -114,7 +114,7 @@ export default function PeakCreatePage() {
             <SectionHeader label="findings">
               The illustration workflow is split across four tools with no connection between them.
             </SectionHeader>
-            <p className="font-sans text-base text-neutral-900">
+            <p className="font-sans text-sm text-neutral-900">
               Using everything from interviews and observation, I traced where requests break down. The pattern was consistent: briefs lacked structure because editors typed into a free-text cell, clarifications got lost across Slack and email, submissions landed in a generic Drive folder with no link back to the request, and invoices were tallied by hand at semester end.
             </p>
           </div>
@@ -147,7 +147,7 @@ export default function PeakCreatePage() {
             <SectionHeader label="design process" weight="normal">
               My first direction was a task management app.
             </SectionHeader>
-            <p className="font-sans text-base text-neutral-900">
+            <p className="font-sans text-sm text-neutral-900">
               Projects organized by semester, table and board views to track request status. But it required too much setup for 3 to 5 weekly requests, and felt no different from Trello or Asana.
             </p>
           </div>
@@ -172,7 +172,7 @@ export default function PeakCreatePage() {
           ].map(({ caption, src }) => (
             <div key={src} className="flex flex-col gap-3">
               <ImageBlock alt={caption} src={src} />
-              <p className="font-sans text-base text-neutral-900">{caption}</p>
+              <p className="font-sans text-sm text-neutral-900">{caption}</p>
             </div>
           ))}
         </CaseStudySection>
@@ -181,7 +181,7 @@ export default function PeakCreatePage() {
 
         <CaseStudySection gap={10}>
           <SectionLabel>user testing and revision</SectionLabel>
-          <p className="font-sans text-base text-neutral-900">
+          <p className="font-sans text-sm text-neutral-900">
             I led testing with 2 Production Editors while my team handled 4 illustrators. Users completed most tasks, but kept losing confidence at the same moments such as after leaving feedback, after uploading a file, after clicking a button. The interface gave no signal that anything happened. I revised the three core pages to fix this: clearer hierarchy, single primary actions, and visible confirmation at every step.
           </p>
           {[
@@ -191,7 +191,7 @@ export default function PeakCreatePage() {
           ].map(({ caption, before, after }) => (
             <div key={before} className="flex flex-col gap-3">
               <BeforeAfterSlider before={before} after={after} beforeAlt="Before revision" afterAlt="After revision" />
-              <p className="font-sans text-base text-neutral-900">{caption}</p>
+              <p className="font-sans text-sm text-neutral-900">{caption}</p>
             </div>
           ))}
         </CaseStudySection>
@@ -245,7 +245,7 @@ export default function PeakCreatePage() {
           <SectionHeader label="learning" weight="normal">
             Understanding the system helped me prototype with full confidence.
           </SectionHeader>
-          <p className="font-sans text-base text-neutral-900">
+          <p className="font-sans text-sm text-neutral-900">
             I prototyped every interaction with error states and system feedback built in, so during testing, users never had to pause between screens guessing what comes next. That meant the feedback we collected reflected real usability issues, not gaps in the prototype itself.
           </p>
         </CaseStudySection>

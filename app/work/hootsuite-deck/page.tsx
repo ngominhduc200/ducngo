@@ -38,7 +38,7 @@ export default function HootsuiteGraphicPage() {
                 Typography and colour system carried into the 2026 brand.
               </p>
             </div>
-            <p className="font-sans text-base text-neutral-900">
+            <p className="font-sans text-sm text-neutral-900">
               A lot of my work carried into 2026 such as the typography treatment and gradient colour system became part of the live brand, used to complement content in the foreground.
             </p>
           </CaseStudySection>
@@ -52,10 +52,10 @@ export default function HootsuiteGraphicPage() {
                 Designed with research-backed decision helps me work with confidence.
               </p>
             </div>
-            <p className="font-sans text-base text-neutral-900">
+            <p className="font-sans text-sm text-neutral-900">
               Working in graphic design with a research-first process taught me that validating decisions through others&apos; expertise saves testing time. Going in with research-backed choices gave me the confidence to design knowing the quality I was working with could actually hold up.
             </p>
-            <p className="font-sans text-base text-neutral-900">
+            <p className="font-sans text-sm text-neutral-900">
               Check out my highlight below or view the{' '}
               <a
                 href="https://www.figma.com/deck/vxaQ4kYPg2SEaV1PZXxeMW/Hootsuite-Deck-of-Truth?node-id=1-207&viewport=-1742%2C-1108%2C0.73&t=CY6wW3aFJDxFtzOd-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"

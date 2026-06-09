@@ -28,7 +28,7 @@ export default function CaseStudyHero({
         <h1 className="font-serif font-normal text-3xl md:text-2xl lg:text-3xl xl:text-4xl text-neutral-900 leading-[1.3]">
           {title}
         </h1>
-        <p className="font-sans text-base text-neutral-900">{description}</p>
+        <p className="font-sans text-sm text-neutral-900">{description}</p>
       </div>
       <Image
         src={coverSrc}
@@ -43,8 +43,8 @@ export default function CaseStudyHero({
         <div className={`grid grid-cols-1 ${meta.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-3'} gap-6 sm:gap-16`}>
           {meta.map(({ label, value }) => (
             <div key={label} className="flex flex-col gap-3">
-              <span className="font-sans text-base text-neutral-900 uppercase">{label}</span>
-              <span className="font-sans text-base text-neutral-900">{value}</span>
+              <span className="font-sans text-sm text-neutral-900 uppercase">{label}</span>
+              <span className="font-sans text-sm text-neutral-900">{value}</span>
             </div>
           ))}
         </div>

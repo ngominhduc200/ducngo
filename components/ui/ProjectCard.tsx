@@ -17,27 +17,30 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ id, className, title, meta, href, image, imageAlt = '', video, compact = false, dark = false, external = false }: ProjectCardProps) {
   return (
-    <Link id={id} href={href} className={`block no-underline w-full${className ? ` ${className}` : ''}`} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
-      <div className={`flex flex-col w-full ${compact ? 'items-start gap-3' : 'items-center gap-6'}`}>
+    <Link id={id} href={href} data-cursor="read-case-study" className={`group block no-underline w-full${className ? ` ${className}` : ''}`} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+      <div className={`flex flex-col w-full ${compact ? 'items-start gap-3' : 'items-center gap-4'}`}>
 
-        <div className={`relative w-full overflow-hidden rounded-none ${compact ? 'aspect-[3/4]' : 'aspect-[1440/847]'}`}>
-          {video ? (
-            <video
-              src={video}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover"
-            />
-          ) : image ? (
+        {compact ? (
+          <div className="relative w-full overflow-hidden rounded-none aspect-[3/4]">
+            {video ? (
+              <video src={video} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+            ) : image ? (
+              <Image src={image} alt={imageAlt} fill style={{ objectFit: 'cover' }} />
+            ) : null}
+          </div>
+        ) : video ? (
+          <div className="relative w-full overflow-hidden rounded-none aspect-[16/9]">
+            <video src={video} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+          </div>
+        ) : image ? (
+          <div className="relative w-full overflow-hidden rounded-none aspect-[16/9]">
             <Image src={image} alt={imageAlt} fill style={{ objectFit: 'cover' }} />
-          ) : null}
-        </div>
+          </div>
+        ) : null}
 
-        <div className={`flex flex-col w-full ${compact ? 'items-start text-left gap-1' : 'items-start text-left md:items-center md:text-center gap-[10px]'}`}>
-          <p className={compact ? `font-serif font-normal text-3xl ${dark ? 'text-white' : 'text-neutral-900'}` : 'font-serif font-normal text-3xl text-neutral-900'}>{title}</p>
-          <p className={`font-sans text-base ${dark ? 'text-neutral-500' : 'text-neutral-400'}`}>{meta}</p>
+        <div className={`flex flex-col w-full items-start text-left ${compact ? 'gap-1' : 'gap-2'}`}>
+          <p className={compact ? `font-sans text-sm font-normal group-hover:text-orange-500 transition-colors ${dark ? 'text-white' : 'text-neutral-900'}` : 'font-sans text-sm font-normal text-neutral-900 group-hover:text-orange-500 transition-colors'}>{title}</p>
+          <p className={`font-sans text-sm ${dark ? 'text-neutral-500' : 'text-neutral-400'}`}>{meta}</p>
         </div>
 
       </div>

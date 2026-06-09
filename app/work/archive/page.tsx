@@ -11,7 +11,7 @@ const NAV_ITEMS = [
 const PROJECTS = [
   {
     id: 'discogs-shop',
-    title: 'Academic Discogs Shop',
+    title: 'Discogs Shop Website Redesigned',
     category: 'Web Design · Front-End Development',
     year: '2022',
     description:
@@ -21,7 +21,7 @@ const PROJECTS = [
   },
   {
     id: 'the-peak',
-    title: "The Peak SFU",
+    title: 'The Peak SFU Magazine Spread',
     category: 'Graphic Design',
     year: '2022-2024',
     description:
@@ -31,7 +31,7 @@ const PROJECTS = [
   },
   {
     id: 'fraser-health',
-    title: 'Fraser Health Authority',
+    title: 'Fraser Health Graphic Assets',
     category: 'Graphic Design · 8-month Co-op',
     year: '2023',
     description:
@@ -41,7 +41,7 @@ const PROJECTS = [
   },
   {
     id: 'douglas-royals',
-    title: "Douglas College Royals",
+    title: 'Douglas College Royals Graphic Assets',
     category: 'Graphic Design',
     year: '2022-2023',
     description:
@@ -51,7 +51,7 @@ const PROJECTS = [
   },
   {
     id: '4c',
-    title: 'Design Communication and Collaboration',
+    title: 'Character Design for IAT 103 Course Campaign',
     category: 'Graphic Design · Academic',
     year: '2022',
     description:
@@ -74,11 +74,11 @@ export default function ArchivePage() {
 
         {/* Header */}
         <div className="flex flex-col gap-[20px] pb-[80px] w-full">
-          <h1 className="font-serif font-normal text-2xl md:text-4xl text-neutral-900 leading-[1.3]">
+          <h1 className="font-sans font-light text-neutral-900">
             Archive
           </h1>
-          <p className="font-sans text-base text-neutral-400">2022–2025</p>
-          <p className="font-sans text-base text-neutral-900 max-w-xl">
+          <p className="font-sans text-sm text-neutral-400">2022–2025</p>
+          <p className="font-sans text-sm text-neutral-900 max-w-xl">
             Graphic design, front-end development, and co-op work from my earlier years — before I moved fully into product design.
           </p>
         </div>
@@ -97,7 +97,7 @@ export default function ArchivePage() {
               <div className="flex items-start justify-between gap-6">
                 <div className="flex flex-col gap-[10px]">
                   <p className="font-sans text-sm text-neutral-400">{project.category} · {project.year}</p>
-                  <h2 className="font-serif font-normal text-2xl text-neutral-900 leading-[1.3]">
+                  <h2 className="font-sans text-sm font-light text-neutral-900">
                     {project.title}
                   </h2>
                 </div>
@@ -105,7 +105,7 @@ export default function ArchivePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
                 </svg>
               </div>
-              <p className="font-sans text-base text-neutral-600">{project.description}</p>
+              <p className="font-sans text-sm text-neutral-600">{project.description}</p>
               <div className="flex flex-wrap gap-2">
                 {project.tools.map((tool) => (
                   <span key={tool} className="font-sans text-xs text-neutral-400 border border-neutral-200 px-3 py-1 rounded-full">

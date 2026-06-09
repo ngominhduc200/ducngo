@@ -41,7 +41,7 @@ export default function HootsuiteComposerPage() {
           <SectionHeader label="context">
             Composer is where Hootsuite users draft their social posts.
           </SectionHeader>
-          <p className="font-sans text-base text-neutral-900">
+          <p className="font-sans text-sm text-neutral-900">
             Hootsuite is a social media management platform where teams plan, schedule, and publish content across multiple networks. Composer is the workspace inside it where every post actually gets written.
           </p>
           <PullQuote>
@@ -56,7 +56,7 @@ export default function HootsuiteComposerPage() {
           <SectionHeader label="problem">
             Many Hootsuite users were posting Instagram Stories without the Hootsuite app.
           </SectionHeader>
-          <div className="flex flex-col gap-6 font-sans text-base text-neutral-900">
+          <div className="flex flex-col gap-6 font-sans text-sm text-neutral-900">
             <p>Instagram Stories had grown into one of the most-used post formats on social media, but Hootsuite users were rarely creating them inside the app. The reason was that the Story option sat 4 steps inside the Composer, hidden behind a nested dropdown. Users had to know where to look.</p>
             <p>For experienced users, this was enough friction on every Story to make posting directly through Instagram the faster choice. For new users, it was a discovery problem. It only shows when they reach the Composer.</p>
           </div>
@@ -72,7 +72,7 @@ export default function HootsuiteComposerPage() {
           <SectionHeader label="solution">
             A homepage widget that puts formats in front of users before they go looking.
           </SectionHeader>
-          <div className="flex flex-col gap-6 font-sans text-base text-neutral-900">
+          <div className="flex flex-col gap-6 font-sans text-sm text-neutral-900">
             <p>The intent was to put discovery before search. Users shouldn&apos;t need to know what&apos;s possible before they can find it, especially newer users still learning what Hootsuite can do. So I designed a single-row carousel that meets users the moment they land on the dashboard. Every post format is visible upfront. Stories, Reels, Cross-Post, and the rest of the network options scroll into view through a Recommended filter that defaults to five at a time, keeping the rest of the dashboard intact.</p>
             <p>For handoff, I extended the Hootsuite design system with a new button component, mapped every state including a hover micro-animation, and documented card flows, responsive specs, and accessibility landmarks so the team could extend the widget without breaking it.</p>
           </div>
@@ -87,7 +87,7 @@ export default function HootsuiteComposerPage() {
           <SectionHeader label="learning">
             I learned how a cross-functional team sharpens the design.
           </SectionHeader>
-          <p className="font-sans text-base text-neutral-900">
+          <p className="font-sans text-sm text-neutral-900">
             Working closely with PMs helped me understand the business goals and user needs at the same time. Having a mentor got me onboarded with the system and product early on. Exchanging feedback with the team along the way shaped how I framed the solution and brought the final outcome together.
           </p>
         </CaseStudySection>

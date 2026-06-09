@@ -5,8 +5,108 @@
   --font-sans:  var(--font-public-sans-loaded), sans-serif;
 }
 
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
 ::selection {
   background-color: #f97316;
   color: #fafaf9;
+}
+
+* {
+  font-family: var(--font-public-sans-loaded), sans-serif;
+}
+
+.font-serif {
+  font-family: var(--font-instrument-serif-loaded), serif;
+}
+
+.hero-serif {
+  font-family: var(--font-instrument-serif-loaded), serif;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.hero-serif * {
+  font-family: var(--font-instrument-serif-loaded), serif;
+  text-transform: uppercase;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+[data-cursor-label] {
+  font-size: 14px !important;
+}
+
+@keyframes contentReveal {
+  from { opacity: 0; transform: translateY(2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Mode transition: smooth color shifts ───────────────────────────────── */
+html, body, .bg-stone-50 {
+  transition: background-color 500ms ease;
+}
+
+.text-neutral-900, .text-neutral-400, .text-stone-400 {
+  transition: color 500ms ease;
+}
+
+.bg-neutral-900 {
+  transition: background-color 500ms ease;
+}
+
+/* ── Immersive: on → dark mode ──────────────────────────────────────────── */
+html.dark {
+  color-scheme: dark;
+  background-color: #0a0a0a;
+}
+
+html.dark body,
+html.dark .bg-stone-50 {
+  background-color: #0a0a0a;
+}
+
+html.dark .text-neutral-900 {
+  color: rgba(250, 250, 249, 0.85);
+}
+
+html.dark .text-neutral-400 {
+  color: rgba(250, 250, 249, 0.35);
+}
+
+html.dark .text-stone-400 {
+  color: rgba(250, 250, 249, 0.3);
+}
+
+html.dark .border-neutral-900 {
+  border-color: rgba(250, 250, 249, 0.85);
+}
+
+/* ── Case study dark mode ───────────────────────────────────────────────── */
+.bg-zinc-100 {
+  transition: background-color 500ms ease;
+}
+
+html.dark .bg-neutral-900 {
+  background-color: rgba(250, 250, 249, 0.85) !important;
+}
+
+html.dark .bg-zinc-100 {
+  background-color: rgba(250, 250, 249, 0.06) !important;
+}
+
+.section-mt {
+  margin-top: 20vh;
+}
+@media (min-width: 1024px) {
+  .section-mt {
+    margin-top: 50vh;
+  }
 }
 

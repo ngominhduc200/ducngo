@@ -1,9 +1,48 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { createPortal } from 'react-dom'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import ProjectCard from '@/components/ui/ProjectCard'
+import Link from 'next/link'
+import { useViewMode } from '@/contexts/ViewModeContext'
+
+const FEATURE = [
+  {
+    id: 'project-peak-create',
+    title: "Streamlining how The Peak's editorial team briefs, tracks, and pays illustrators with Peak Create",
+    category: 'Product Design',
+    year: '2026',
+    description: 'Over one month, I designed the user experience and interface for an illustration request tool that connects Production Editors, Section Editors, and Illustrators in one shared workspace with full visibility into the workflow. I collaborated with a UX researcher and two UX writers.',
+    cover: { type: 'video' as const, src: '/images/peak-create-compressed/cover.mp4' },
+    href: '/work/peak-create',
+  },
+  {
+    id: 'project-airbnb',
+    title: 'Helping groups align on a place to stay together with Airbnb Collaborative Trip Planning',
+    category: 'Product Design',
+    year: 'Concept 2026',
+    description: 'In 3 weeks, I led the user research, wireframes, and prototype for a new Airbnb feature that lets groups collaborate on finding and booking a place to stay inside the app. I worked with a UX researcher and two UX designers.',
+    cover: { type: 'image' as const, src: '/images/airbnb-compressed/cover.png' },
+    href: '/work/airbnb',
+  },
+  {
+    id: 'project-hootsuite',
+    title: 'Increasing Feature Discovery for Hootsuite',
+    category: 'UX Design',
+    year: 'Handed Off 2025',
+    description: 'During my internship, I designed a homepage feature that helps Hootsuite users discover the posting options available across their social channels. The project ended with a full handoff to engineering. I worked as a UX Designer, alongside a mentor, partnered with two PMs, and supported by a Senior UX Designer.',
+    cover: { type: 'image' as const, src: '/images/hootsuite-composer-compressed/cover.png' },
+    href: '/work/hootsuite-composer',
+  },
+  {
+    id: 'project-hootsuite-deck',
+    title: "Shaping Hootsuite's new branding with Deck of Truth redesigned",
+    category: 'Graphic Design',
+    year: 'Shipped 2025',
+    description: "In September 2025, I spent one month with the brand marketing team auditing the current branding, and proposing a new direction to help shift Hootsuite's brand from social to enterprise. My work was first introduced as a presentation slide deck template, reflecting updated typography, colour, and layout composition that looks modern and enterprise-ready, aligned with the 2026 direction. This deck template was adopted internally across all departments.",
+    cover: { type: 'image' as const, src: '/images/hootsuite-deck-compressed/preview-4.png' },
+    href: '/work/hootsuite-deck',
+  },
+]
 
 const ARCHIVE = [
   {
@@ -35,7 +74,11 @@ const ARCHIVE = [
     year: '2023',
     description:
       "Digital Media Specialist co-op. Created graphics and materials to improve health information delivery, deployed across Fraser Health's digital platforms and hospital locations across British Columbia.",
-    images: Array.from({ length: 11 }, (_, i) => `/images/archive-compressed/fraser-health/asset-${String(i + 1).padStart(2, '0')}.png`),
+    images: [
+      '/images/archive-compressed/fraser-health/cover.png',
+      ...Array.from({ length: 9 }, (_, i) => `/images/archive-compressed/fraser-health/asset-${String(i + 1).padStart(2, '0')}.png`),
+      '/images/archive-compressed/fraser-health/asset-11.png',
+    ],
   },
   {
     id: 'archive-douglas-royals',
@@ -46,9 +89,9 @@ const ARCHIVE = [
       "Part-time role creating visual assets for Douglas College's athletic department — promotional posters, athlete spotlights, event schedules, and digital and physical marketing materials.",
     images: [
       '/images/archive-compressed/douglas-royals/cover.jpg',
-      ...Array.from({ length: 15 }, (_, i) => {
-        const n = i + 1
-        const ext = [3, 7, 8, 9, 10, 11, 12, 13, 14, 15].includes(n) ? 'png' : 'jpg'
+      ...Array.from({ length: 14 }, (_, i) => {
+        const n = i + 2
+        const ext = [3, 12, 13, 14, 15].includes(n) ? 'png' : 'jpg'
         return `/images/archive-compressed/douglas-royals/asset-${String(n).padStart(2, '0')}.${ext}`
       }),
     ],
@@ -60,34 +103,24 @@ const ARCHIVE = [
     year: '2022',
     description:
       'Three-week academic project for IAT 103W at SFU. Translated the 4C framework for scholarly composition into a social media awareness campaign. Led character design through Procreate sketches to refined Illustrator vectors, combined with vibrant carousel layouts for engagement.',
-    images: Array.from({ length: 9 }, (_, i) => `/images/archive-compressed/iat103/image-${28 + i}.png`),
+    images: [
+      '/images/archive-compressed/iat103/cover.png',
+      ...Array.from({ length: 8 }, (_, i) => `/images/archive-compressed/iat103/image-${29 + i}.png`),
+    ],
   },
 ]
 
+
 export default function ProjectGrid() {
-  const [activeId, setActiveId]     = useState<string | null>(null)
-  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set())
+  const { mode } = useViewMode()
+
+  const [activeId, setActiveId] = useState<string | null>(null)
   const [frameIndex, setFrameIndex] = useState(0)
-  const [mounted, setMounted]       = useState(false)
-  const isHoveringRef    = useRef(false)
-  const scrollDirRef     = useRef<'down' | 'up'>('down')
-  const prevScrollYRef   = useRef(0)
-  const prevActiveRef    = useRef<string | null>(null)
-  const scrollActiveRef  = useRef<string | null>(null)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => { setMounted(true) }, [])
-
-  // Reset frame index when active project changes
   useEffect(() => { setFrameIndex(0) }, [activeId])
 
-  // Broadcast activeId so other components (LandingNav) can sync
-  useEffect(() => {
-    window.dispatchEvent(new CustomEvent('archive-active', { detail: { id: activeId } }))
-  }, [activeId])
-
-  const activeImage = ARCHIVE.find(p => p.id === activeId)?.images[frameIndex] ?? null
-
-  // Cycle images every 0.5s
   useEffect(() => {
     if (!activeId) return
     const project = ARCHIVE.find(p => p.id === activeId)
@@ -98,134 +131,99 @@ export default function ProjectGrid() {
     return () => clearInterval(interval)
   }, [activeId])
 
-  // Scroll-based activation — targets text div only, not the expanded image
-  useEffect(() => {
-    const handleScroll = () => {
-      if (isHoveringRef.current) return
-
-      const currentY = window.scrollY
-      scrollDirRef.current = currentY >= prevScrollYRef.current ? 'down' : 'up'
-      prevScrollYRef.current = currentY
-
-      const target = window.innerHeight * 0.5
-      let best: string | null = null
-      let bestDist = Infinity
-      ARCHIVE.forEach(({ id }) => {
-        const el = document.querySelector<HTMLElement>(`[data-archive-text="${id}"]`)
-        if (!el) return
-        const rect = el.getBoundingClientRect()
-        if (rect.bottom < 0 || rect.top > window.innerHeight) return
-        const center = rect.top + rect.height / 2
-        const dist = Math.abs(center - target)
-        if (dist < bestDist) { bestDist = dist; best = id }
-      })
-      if (bestDist > window.innerHeight * 0.1) best = null
-
-      scrollActiveRef.current = best
-      if (best !== prevActiveRef.current) {
-        prevActiveRef.current = best
-        setActiveId(best)
-        if (best !== null && scrollDirRef.current === 'down') {
-          setExpandedIds(prev => new Set([...prev, best as string]))
-        }
-      }
-    }
-
-    const archiveEl = document.getElementById('archive')
-    const sectionObserver = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) {
-        setActiveId(null)
-        prevActiveRef.current = null
-        scrollActiveRef.current = null
-        // Also reset expanded images when scrolled up past archive
-        if (entry.boundingClientRect.top > window.innerHeight) {
-          setExpandedIds(new Set())
-        }
-      }
-    }, { threshold: 0 })
-    if (archiveEl) sectionObserver.observe(archiveEl)
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      sectionObserver.disconnect()
-    }
-  }, [])
-
 
   return (
     <>
-      <section id="work" aria-label="Work" className="flex flex-col items-center w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[50rem] px-6 mb-16 md:mb-0">
-        <ProjectCard
-          id="project-peak-create"
-          className="pt-20 pb-0 md:py-[150px]"
-          title="Streamlining how The Peak's editorial team briefs, tracks, and pays illustrators with Peak Create"
-          meta="Product Design · 2026"
-          href="/work/peak-create"
-          video="/images/peak-create-compressed/cover.mp4"
-        />
-        <ProjectCard
-          id="project-airbnb"
-          className="pt-20 pb-0 md:py-[150px]"
-          title="Helping groups align on a place to stay together with Airbnb Collaborative Trip Planning"
-          meta="Product Design · Concept 2026"
-          href="/work/airbnb"
-          image="/images/airbnb-compressed/cover.png"
-          imageAlt="Collaborative Trip Planning case study preview"
-        />
-        <ProjectCard
-          id="project-hootsuite"
-          className="pt-20 pb-0 md:py-[150px]"
-          title="Increasing Feature Discovery for Hootsuite"
-          meta="UX Design · Handed Off 2025"
-          href="/work/hootsuite-composer"
-          image="/images/hootsuite-composer-compressed/cover.png"
-          imageAlt="Hootsuite Composer case study preview"
-        />
-        <ProjectCard
-          id="project-hootsuite-deck"
-          className="pt-20 pb-0 md:py-[150px]"
-          title="Shaping Hootsuite&apos;s new branding with Deck of Truth redesigned"
-          meta="Graphic Design · Shipped 2025"
-          href="/work/hootsuite-deck"
-          image="/images/hootsuite-deck-compressed/preview-4.png"
-          imageAlt="Hootsuite Deck of Truth preview"
-        />
+
+      {/* ── Feature section ───────────────────────────────────────────────── */}
+      <section
+        id="work"
+        aria-label="Work"
+        className={`w-full section-mt${mode === 'compressed' ? ' lg:hidden' : ''}`}
+      >
+        <div className="mx-6">
+          <div className="flex flex-col gap-[10px] pb-[30px]">
+            <h2 className="font-serif text-3xl lg:text-5xl font-normal text-neutral-900">Selected Work</h2>
+          </div>
+
+          <hr className="border-t border-zinc-200 w-full" />
+
+          {FEATURE.map((project, index) => {
+            const isActive = activeId === project.id
+            const isLast = index === FEATURE.length - 1
+            return (
+              <div
+                key={project.id}
+                id={project.id}
+                onPointerEnter={(e) => { if (e.pointerType !== 'mouse') return; setActiveId(project.id) }}
+                onPointerLeave={(e) => { if (e.pointerType !== 'mouse') return; setActiveId(null) }}
+              >
+                <Link href={project.href} className="block no-underline" data-cursor="read-case-study">
+                  <div className="grid grid-cols-1 md:grid-cols-[1.5fr_0.5fr_1fr] md:gap-6 my-[30px] w-full">
+                    {/* Col 1 — Image (desktop only) */}
+                    <div className="hidden md:block w-full">
+                      <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden' }}>
+                        {project.cover.type === 'video' ? (
+                          <video
+                            src={project.cover.src}
+                            autoPlay loop muted playsInline
+                            preload="auto"
+                            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                          />
+                        ) : (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={project.cover.src}
+                            alt=""
+                            fetchPriority="high"
+                            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                          />
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Col 2 — Empty spacer */}
+                    <div className="hidden md:block" />
+
+                    {/* Col 3 — Content */}
+                    <div className="flex flex-col gap-[20px]">
+                      {/* Mobile cover */}
+                      <div className="md:hidden w-full aspect-[4/3] relative overflow-hidden">
+                        {project.cover.type === 'video' ? (
+                          <video src={project.cover.src} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                        ) : (
+                          <Image src={project.cover.src} alt="" fill style={{ objectFit: 'cover' }} />
+                        )}
+                      </div>
+                      <div className="flex flex-col gap-[10px]">
+                        <h3 className={`font-sans text-sm font-normal transition-colors duration-300 ${isActive ? 'text-orange-500' : 'text-neutral-900'}`}>
+                          {project.title}
+                        </h3>
+                        <p className="font-sans text-sm text-neutral-400">{project.category} · {project.year}</p>
+                      </div>
+                      <p className="font-sans text-sm text-neutral-600">{project.description}</p>
+                    </div>
+                  </div>
+                </Link>
+                {!isLast && <hr className="border-t border-zinc-200 w-full" />}
+              </div>
+            )
+          })}
+        </div>
       </section>
 
-      {/* Fixed media panel */}
-      {mounted && activeImage && createPortal(
-        <div
-          className="hidden md:flex fixed right-8 top-1/2 -translate-y-1/2 pointer-events-none z-50 justify-center"
-          style={{ width: '20vw', maxWidth: 'calc((100vw - 50rem) / 2 - 2rem)' }}
-        >
-          {/\.(mp4|mov|webm)$/i.test(activeImage) ? (
-            <video
-              key={activeImage}
-              src={activeImage}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="max-w-full h-auto block"
-            />
-          ) : (
-            <Image src={activeImage} alt="" width={0} height={0} sizes="20vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
-          )}
-        </div>,
-        document.body
-      )}
 
+      {/* ── Archive (hidden in compressed mode on desktop) ───────────────── */}
       <section
         id="archive"
         aria-label="Archive"
-        className="w-full flex flex-col items-center pb-16 md:pb-[150px] mb-[100px]"
+        className={`w-full flex flex-col items-center${mode === 'compressed' ? ' lg:hidden' : ''}`}
+        style={{ marginTop: '150px', marginBottom: '200px' }}
       >
-        <div className="w-full max-w-[50rem] md:max-w-[37.5rem] lg:max-w-[43.75rem] xl:max-w-[50rem] px-6">
-          <div className="flex flex-col gap-[10px] pt-[50px] pb-[30px] md:py-[50px]">
-            <h2 className="font-serif font-normal text-4xl text-neutral-900">Archive</h2>
-            <p className="font-sans text-base text-neutral-400">Graphic design, front-end development, and co-op work from my earlier years.</p>
+        <div className="mx-[1.5rem]">
+          <div className="flex flex-col gap-[10px] pt-[50px] pb-[30px]">
+            <h2 className="font-serif text-3xl lg:text-5xl font-normal text-neutral-900">Archive</h2>
+            <p className="font-sans text-sm text-neutral-400">Graphic design, front-end development, and co-op work from my earlier years.</p>
           </div>
 
           <hr className="border-t border-zinc-200 w-full" />
@@ -240,36 +238,63 @@ export default function ProjectGrid() {
                 className="cursor-default"
                 onPointerEnter={(e) => {
                   if (e.pointerType !== 'mouse') return
-                  isHoveringRef.current = true
                   setActiveId(project.id)
                 }}
                 onPointerLeave={(e) => {
                   if (e.pointerType !== 'mouse') return
-                  isHoveringRef.current = false
-                  setActiveId(scrollActiveRef.current)
+                  setActiveId(null)
                 }}
-
               >
-                <div className="flex flex-col gap-[20px] py-[30px] md:py-[50px] w-full" data-archive-text={project.id}>
-                  <div className="flex flex-col gap-[10px]">
-                    <h3 className={`font-serif font-normal text-2xl leading-[1.3] transition-colors duration-300 ${isActive ? 'italic text-orange-500' : 'text-neutral-900'}`}>
-                      {project.title}
-                    </h3>
-                    <p className="font-sans text-sm text-neutral-400">{project.category} · {project.year}</p>
-                  </div>
-                  <p className="font-sans text-base text-neutral-600">{project.description}</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 md:gap-6 my-[30px] w-full" data-cursor="playing-slideshow" data-archive-text={project.id}>
+                  {/* Col 1 — Image (desktop only) */}
+                  {(() => {
+                    const img = isActive ? project.images[frameIndex] : project.images[0]
+                    return (
+                      <div className="hidden md:block w-full">
+                        <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', display: 'flex', alignItems: 'flex-start' }}>
+                          {/\.(mp4|mov|webm)$/i.test(img) ? (
+                            <video
+                              key={img}
+                              src={img}
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              style={{ height: '100%', width: 'auto', display: 'block' }}
+                            />
+                          ) : (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              key={img}
+                              src={img}
+                              alt=""
+                              style={{ height: '100%', width: 'auto', display: 'block' }}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    )
+                  })()}
 
-                  {/* Mobile inline image — expands when active */}
-                  <div
-                    className={`md:hidden overflow-hidden transition-[max-height] duration-700 ease-in-out ${expandedIds.has(project.id) ? 'max-h-[75vw]' : 'max-h-0'}`}
-                  >
-                    <div className="relative w-full aspect-[4/3]">
+                  {/* Col 2 — Empty spacer */}
+                  <div className="hidden md:block" />
+
+                  {/* Col 3 — Content */}
+                  <div className="flex flex-col gap-[20px]">
+                    <div className="md:hidden w-full aspect-[4/3] relative overflow-hidden">
                       {/\.(mp4|mov|webm)$/i.test(project.images[0]) ? (
-                        <video src={project.images[0]} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-contain" style={{ objectPosition: 'right top' }} />
+                        <video src={project.images[0]} autoPlay loop muted playsInline className="w-full h-full object-cover" />
                       ) : (
-                        <Image src={project.images[0]} alt="" fill style={{ objectFit: 'contain', objectPosition: 'right top' }} />
+                        <Image src={project.images[0]} alt="" fill style={{ objectFit: 'cover' }} />
                       )}
                     </div>
+                    <div className="flex flex-col gap-[10px]">
+                      <h3 className={`font-sans text-sm font-normal transition-colors duration-300 ${isActive ? 'text-orange-500' : 'text-neutral-900'}`}>
+                        {project.title}
+                      </h3>
+                      <p className="font-sans text-sm text-neutral-400">{project.category} · {project.year}</p>
+                    </div>
+                    <p className="font-sans text-sm text-neutral-600">{project.description}</p>
                   </div>
                 </div>
                 {!isLast && <hr className="border-t border-zinc-200 w-full" />}
