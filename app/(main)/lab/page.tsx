@@ -117,7 +117,8 @@ export default function FunPage() {
                   height={0}
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   className="w-full h-auto block"
-                  priority={i < 8}
+                  priority={i < 12}
+                  loading={i < 12 ? undefined : 'eager'}
                 />
               )}
             </div>
