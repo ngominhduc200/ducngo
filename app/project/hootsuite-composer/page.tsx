@@ -27,7 +27,7 @@ export default function HootsuiteComposerPage() {
         <CaseStudyHero
           title="Increasing Feature Discovery for Hootsuite"
           description="During my internship, I designed a homepage feature that helps Hootsuite users discover the posting options available across their social channels. The project ended with a full handoff to engineering. I worked as a UX Designer, alongside a mentor, partnered with two PMs, and supported by a Senior UX Designer."
-          coverSrc={a('cover.png')}
+          coverSrc={a('cover.webp')}
           coverAlt="Hootsuite Composer — cover"
           meta={[
             { label: 'Team', value: 'Duc Ngo (Product Designer Lead), 1 Mentor, 2 Project Managers, 1 Senior UX Designer' },
@@ -47,7 +47,7 @@ export default function HootsuiteComposerPage() {
           <PullQuote>
             The Product Growth team flagged that one of Composer&apos;s most valuable formats was getting lost inside it.
           </PullQuote>
-          <ImageBlock alt="Composer context" src={a('context.png')} />
+          <ImageBlock alt="Composer context" src={a('context.webp')} />
         </CaseStudySection>
 
         <Divider />
@@ -63,7 +63,7 @@ export default function HootsuiteComposerPage() {
           <PullQuote>
             How might I surface Stories and Reels right from the start, closing the gap between discovery and activation?
           </PullQuote>
-          <ImageBlock alt="Problem — hidden Stories option" src={a('problem.png')} />
+          <ImageBlock alt="Problem — hidden Stories option" src={a('problem.webp')} />
         </CaseStudySection>
 
         <Divider />
@@ -77,8 +77,8 @@ export default function HootsuiteComposerPage() {
             <p>For handoff, I extended the Hootsuite design system with a new button component, mapped every state including a hover micro-animation, and documented card flows, responsive specs, and accessibility landmarks so the team could extend the widget without breaking it.</p>
           </div>
           <AutoPlayVideo src={a('prototype.mp4')} />
-          <ImageBlock alt="Final result — composer widget 2" src={a('result-2.png')} />
-          <ImageBlock alt="Final result — composer widget 3" src={a('result-3.png')} />
+          <ImageBlock alt="Final result — composer widget 2" src={a('result-2.webp')} />
+          <ImageBlock alt="Final result — composer widget 3" src={a('result-3.webp')} />
         </CaseStudySection>
 
         <Divider />

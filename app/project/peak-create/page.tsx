@@ -31,7 +31,7 @@ export default function PeakCreatePage() {
         <CaseStudyHero
           title="Streamlining how The Peak's editorial team briefs, tracks, and pays illustrators with Peak Create"
           description="Over one month, I designed the user experience and interface for an illustration request tool that connects Production Editors, Section Editors, and Illustrators in one shared workspace with full visibility into the workflow. I collaborated with a UX researcher and two UX writers."
-          coverSrc={a('cover.png')}
+          coverSrc={a('cover.webp')}
           coverAlt="Peak Create — hero"
           meta={[
             { label: 'Team', value: 'Duc Ngo (Product Designer), Kelvin Kwan (UX Researcher), Sarah Luong (UX Writer), Hazel Hau (UX Writer)' },
@@ -68,7 +68,7 @@ export default function PeakCreatePage() {
                 <p>We learned the pipeline involves three roles: 5 Section Editors who submit illustration requests, 1 Production Editor who owns the entire workflow, and 11 freelance illustrators who self-claim tasks and deliver by deadline.</p>
               </div>
             </div>
-            <ImageBlock alt="Illustration workflow" src={a('research-workflow.png')} />
+            <ImageBlock alt="Illustration workflow" src={a('research-workflow.webp')} />
           </div>
           <div className="flex flex-col gap-3">
             <SectionLabel>Who&apos;s involved</SectionLabel>
@@ -101,7 +101,7 @@ export default function PeakCreatePage() {
               It&apos;s not really time. I would say it&apos;s more like mentally draining. Throughout the week, when I see the request from a session editors and then send it out to illustrators and get to draft, I&apos;m always thinking if they are done yet.
             </PullQuote>
           </div>
-          <ImageBlock alt="Example of Slack and email workflow" src={a('problem-tools.png')} />
+          <ImageBlock alt="Example of Slack and email workflow" src={a('problem-tools.webp')} />
           <p className="font-sans text-sm text-neutral-900">
             That shifted my focus. With no single tool connecting a request from brief to payment, everything runs across Sheets, Slack, Gmail, and Drive.
           </p>
@@ -118,9 +118,9 @@ export default function PeakCreatePage() {
               Using everything from interviews and observation, I traced where requests break down. The pattern was consistent: briefs lacked structure because editors typed into a free-text cell, clarifications got lost across Slack and email, submissions landed in a generic Drive folder with no link back to the request, and invoices were tallied by hand at semester end.
             </p>
           </div>
-          <ImageBlock alt="Illustration tracker — all weeks" src={a('findings-all-weeks.png')} />
-          <ImageBlock alt="Illustration tracker — current week" src={a('findings-current-week.png')} />
-          <ImageBlock alt="Illustration tracker — invoice" src={a('findings-invoice.png')} />
+          <ImageBlock alt="Illustration tracker — all weeks" src={a('findings-all-weeks.webp')} />
+          <ImageBlock alt="Illustration tracker — current week" src={a('findings-current-week.webp')} />
+          <ImageBlock alt="Illustration tracker — invoice" src={a('findings-invoice.webp')} />
         </CaseStudySection>
 
         <Divider />
@@ -151,9 +151,9 @@ export default function PeakCreatePage() {
               Projects organized by semester, table and board views to track request status. But it required too much setup for 3 to 5 weekly requests, and felt no different from Trello or Asana.
             </p>
           </div>
-          <ImageBlock alt="First iteration wireframes — draft 1" src={a('draft-1.png')} />
-          <ImageBlock alt="First iteration wireframes — draft 2" src={a('draft-2.png')} />
-          <ImageBlock alt="First iteration wireframes — draft 3" src={a('draft-3.png')} />
+          <ImageBlock alt="First iteration wireframes — draft 1" src={a('draft-1.webp')} />
+          <ImageBlock alt="First iteration wireframes — draft 2" src={a('draft-2.webp')} />
+          <ImageBlock alt="First iteration wireframes — draft 3" src={a('draft-3.webp')} />
         </CaseStudySection>
 
         <Divider />
@@ -165,10 +165,10 @@ export default function PeakCreatePage() {
             </SectionHeader>
           </div>
           {[
-            { caption: 'The Peak runs one illustration folder per semester, three per year. The navigation only needs three items: dashboard, projects, notifications.', src: a('pivot-dashboard.png') },
-            { caption: 'The structured form replaces the free-text spreadsheet cell. Section, pricing, article content, and art direction all in one place.', src: a('pivot-request-form.png') },
-            { caption: "Requests are grouped by deadline week, synced to the Peak's weekly production cycle, so the dashboard always shows what's due now.", src: a('pivot-project.png') },
-            { caption: 'The artwork gets the most space. The brief sits alongside it so Jack can review and leave feedback without extra clicks.', src: a('pivot-request-detail.png') },
+            { caption: 'The Peak runs one illustration folder per semester, three per year. The navigation only needs three items: dashboard, projects, notifications.', src: a('pivot-dashboard.webp') },
+            { caption: 'The structured form replaces the free-text spreadsheet cell. Section, pricing, article content, and art direction all in one place.', src: a('pivot-request-form.webp') },
+            { caption: "Requests are grouped by deadline week, synced to the Peak's weekly production cycle, so the dashboard always shows what's due now.", src: a('pivot-project.webp') },
+            { caption: 'The artwork gets the most space. The brief sits alongside it so Jack can review and leave feedback without extra clicks.', src: a('pivot-request-detail.webp') },
           ].map(({ caption, src }) => (
             <div key={src} className="flex flex-col gap-3">
               <ImageBlock alt={caption} src={src} />
@@ -185,9 +185,9 @@ export default function PeakCreatePage() {
             I led testing with 2 Production Editors while my team handled 4 illustrators. Users completed most tasks, but kept losing confidence at the same moments such as after leaving feedback, after uploading a file, after clicking a button. The interface gave no signal that anything happened. I revised the three core pages to fix this: clearer hierarchy, single primary actions, and visible confirmation at every step.
           </p>
           {[
-            { caption: "The dashboard was revised to show the current week's requests on login, with expenses and recent activity surfaced upfront. Users can see what's happening without digging into any folder.", before: a('dashboard-before.png'), after: a('dashboard-after.png') },
-            { caption: 'The project page was revised to surface actions, expenses, and members all in one view, with "new request" as the clear primary action so editors can submit without guessing.', before: a('project-before.png'), after: a('project-after.png') },
-            { caption: 'The request detail was revised to collapse the brief and give more space to the artwork, with a single prominent CTA and a progress bar replacing the status pill.', before: a('request-before.png'), after: a('request-after.png') },
+            { caption: "The dashboard was revised to show the current week's requests on login, with expenses and recent activity surfaced upfront. Users can see what's happening without digging into any folder.", before: a('dashboard-before.webp'), after: a('dashboard-after.webp') },
+            { caption: 'The project page was revised to surface actions, expenses, and members all in one view, with "new request" as the clear primary action so editors can submit without guessing.', before: a('project-before.webp'), after: a('project-after.webp') },
+            { caption: 'The request detail was revised to collapse the brief and give more space to the artwork, with a single prominent CTA and a progress bar replacing the status pill.', before: a('request-before.webp'), after: a('request-after.webp') },
           ].map(({ caption, before, after }) => (
             <div key={before} className="flex flex-col gap-3">
               <BeforeAfterSlider before={before} after={after} beforeAlt="Before revision" afterAlt="After revision" />

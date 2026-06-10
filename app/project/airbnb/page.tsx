@@ -46,7 +46,7 @@ export default function AirbnbPage() {
         <CaseStudyHero
           title="Helping groups align on a place to stay together with Airbnb Collaborative Trip Planning"
           description="In 3 weeks, I led the user research, wireframes, and prototype for a new Airbnb feature that lets groups collaborate on finding and booking a place to stay inside the app. I worked with a UX researcher and two UX designers."
-          coverSrc={a('cover.png')}
+          coverSrc={a('cover.webp')}
           coverAlt="Collaborative Trip Planning — cover"
           meta={[
             { label: 'Team', value: 'Duc Ngo (Product Designer), Kelvin Kwan (UX Researcher), Sarah Luong (UX Designer), Hazel Hau (UX Designer)' },
@@ -64,10 +64,10 @@ export default function AirbnbPage() {
           <p className="font-sans text-sm text-neutral-900">
             To kickoff, we researched on Airbnb&apos;s business to understand their goal and principles. We also studied their branding and design system to get everyone in the team onboarded. In this step, I recreated their design system on Figma to help the team learn and apply it to wireframes efficiently.
           </p>
-          <ImageBlock alt="How it started" src={a('how-it-started.png')} />
+          <ImageBlock alt="How it started" src={a('how-it-started.webp')} />
           <Carousel
             images={[1, 2, 3, 4, 5, 6].map(n => ({
-              src: a(`how-it-started-0${n}.png`),
+              src: a(`how-it-started-0${n}.webp`),
               alt: `Airbnb design system study — slide ${n}`,
             }))}
           />
@@ -82,7 +82,7 @@ export default function AirbnbPage() {
           <p className="font-sans text-sm text-neutral-900">
             While Airbnb has years to develop their features and user experience, with curiosity on what we can do to improve even more on their products, we chose direct interview with both new and experienced guests and hosts. We focus on their whole trip experience rather than the app itself to learn about their behaviour while travel.
           </p>
-          <ImageBlock alt="Primary research" src={a('primary-research.png')} />
+          <ImageBlock alt="Primary research" src={a('primary-research.webp')} />
           <div className="flex flex-col gap-3">
             <SectionLabel>our focus</SectionLabel>
             <div className="flex flex-col gap-8">
@@ -120,8 +120,8 @@ export default function AirbnbPage() {
             From the interview sessions, we gathered a lot of data from the interview transcripts. While it takes time to separate into small sticky notes by small insights, it really helps for the affinity mapping where it was easy for us to identify an area to focus and where pain points exist.
           </p>
           <BeforeAfterSlider
-            before={a('research-synthesis-before.png')}
-            after={a('research-synthesis-after.png')}
+            before={a('research-synthesis-before.webp')}
+            after={a('research-synthesis-after.webp')}
             beforeAlt="Research data — before synthesis"
             afterAlt="Research data — after synthesis"
           />
@@ -157,8 +157,8 @@ export default function AirbnbPage() {
           <p className="font-sans text-sm text-neutral-900">
             Next, we developed 2 personas to keep us aligned on who we are designing for. They represent 2 distinct groups: one who plans and one who follows. Each role has different needs in the app.
           </p>
-          <ImageBlock alt="Persona 1 — Andy the organizer" src={a('persona-1.png')} />
-          <ImageBlock alt="Persona 2 — Jennie the follower" src={a('persona-2.png')} />
+          <ImageBlock alt="Persona 1 — Andy the organizer" src={a('persona-1.webp')} />
+          <ImageBlock alt="Persona 2 — Jennie the follower" src={a('persona-2.webp')} />
         </CaseStudySection>
 
         <Divider />
@@ -192,7 +192,7 @@ export default function AirbnbPage() {
           </TwoCol>
           <Carousel
             images={[1, 2, 3].map(n => ({
-              src: a(`proposed-solution-01-0${n}.png`),
+              src: a(`proposed-solution-01-0${n}.webp`),
               alt: `Arrival Pods — storyboard ${n}`,
             }))}
           />
@@ -218,7 +218,7 @@ export default function AirbnbPage() {
           </div>
           <Carousel
             images={[1, 2].map(n => ({
-              src: a(`proposed-solution-02-0${n}.png`),
+              src: a(`proposed-solution-02-0${n}.webp`),
               alt: `Collaborative planning — storyboard ${n}`,
             }))}
           />

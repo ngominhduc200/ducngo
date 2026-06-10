@@ -27,7 +27,7 @@ export default function HootsuiteGraphicPage() {
             id="context"
             title="Shaping Hootsuite's new branding with Deck of Truth redesigned"
             description="In September 2025, I spent one month with the brand marketing team auditing the current branding, and proposing a new direction to help shift Hootsuite's brand from social to enterprise. My work was first introduced as a presentation slide deck template, reflecting updated typography, colour, and layout composition that looks modern and enterprise-ready, aligned with the 2026 direction. This deck template was adopted internally across all departments."
-            coverSrc={a('preview-2.png')}
+            coverSrc={a('preview-2.webp')}
             coverAlt="Hootsuite Deck of Truth cover"
           />
 
@@ -83,10 +83,10 @@ export default function HootsuiteGraphicPage() {
           preload="none"
           className="w-full block"
         />
-        <Image src={a('preview-3.png')} alt="Hootsuite Deck of Truth preview 3" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
-        <Image src={a('preview-4.png')} alt="Hootsuite Deck of Truth preview 4" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
-        <Image src={a('preview-5.png')} alt="Hootsuite Deck of Truth preview 5" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
-        <Image src={a('preview-6.png')} alt="Hootsuite Deck of Truth preview 6" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        <Image src={a('preview-3.webp')} alt="Hootsuite Deck of Truth preview 3" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        <Image src={a('preview-4.webp')} alt="Hootsuite Deck of Truth preview 4" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        <Image src={a('preview-5.webp')} alt="Hootsuite Deck of Truth preview 5" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        <Image src={a('preview-6.webp')} alt="Hootsuite Deck of Truth preview 6" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
       </div>
     </>
   )
