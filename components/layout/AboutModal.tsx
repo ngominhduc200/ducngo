@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { useAboutModal } from '@/contexts/AboutModalContext'
 import { useViewMode } from '@/contexts/ViewModeContext'
 import AboutContent from '@/components/sections/AboutContent'
@@ -8,6 +9,7 @@ import AboutContent from '@/components/sections/AboutContent'
 export default function AboutModal() {
   const { isOpen, close } = useAboutModal()
   const { mode } = useViewMode()
+  const pathname = usePathname()
   const [show, setShow] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const animRef = useRef<Animation | null>(null)
@@ -23,6 +25,9 @@ export default function AboutModal() {
       { duration: 300, easing: 'ease-out', fill: 'forwards' }
     )
   }, [show])
+
+  // Close on navigation
+  useEffect(() => { close() }, [pathname]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Handle open/close
   useEffect(() => {
@@ -42,19 +47,17 @@ export default function AboutModal() {
 
   if (!show) return null
 
-  const handleClick = (e: React.MouseEvent) => {
-    if ((e.target as HTMLElement).closest('a')) return
-    close()
-  }
-
   return (
     <div
       ref={ref}
       style={{ opacity: 0 }}
       className={`fixed inset-0 z-[900] flex items-center backdrop-blur-xl ${mode === 'compressed' ? 'bg-[#0a0a0a]/90' : 'bg-stone-50/80'}`}
-      onClick={handleClick}
+      onClick={close}
     >
-      <AboutContent />
+      {/* Stop propagation so clicks inside content don't reach the backdrop */}
+      <div onClick={e => e.stopPropagation()} className="w-full">
+        <AboutContent />
+      </div>
     </div>
   )
 }

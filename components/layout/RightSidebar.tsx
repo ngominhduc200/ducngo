@@ -10,7 +10,7 @@ const RESUME_URL = 'https://drive.google.com/file/d/17I24nDeEwg7q8yptVhdWdWsnCFs
 export default function RightSidebar() {
   const pathname = usePathname()
   const { mode, setMode } = useViewMode()
-  const { isOpen: aboutOpen, toggle: toggleAbout } = useAboutModal()
+  const { isOpen: aboutOpen, toggle: toggleAbout, close: closeAbout } = useAboutModal()
 
   // Case study and about pages have their own full-screen layout — hide sidebar
   if (pathname.startsWith('/project/') || pathname === '/about') return null
@@ -25,9 +25,9 @@ export default function RightSidebar() {
       {/* Nav row */}
       <nav className="flex items-center pointer-events-auto" style={{ paddingTop: '1.5rem' }}>
         <div className="flex-1 flex items-center">
-          <Link href="/" className={linkCls}>projects</Link>
+          <Link href="/" className={linkCls} onClick={e => { if (pathname === '/') e.preventDefault(); closeAbout() }}>projects</Link>
           <span>,&nbsp;</span>
-          <Link href="/lab" className={linkCls}>lab</Link>
+          <Link href="/lab" className={linkCls} onClick={e => { if (pathname === '/lab') e.preventDefault(); closeAbout() }}>lab</Link>
           <span>,&nbsp;</span>
           <button onClick={toggleAbout} className={`${btnCls} ${aboutOpen ? 'text-orange-500' : ''}`}>about</button>
           <span>,&nbsp;</span>

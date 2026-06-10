@@ -6,6 +6,7 @@ import gsap from 'gsap'
 
 interface Props {
   images: string[]
+  onProgress?: (pct: number) => void
 }
 
 const FOV_DEG  = 70
@@ -24,7 +25,7 @@ function frustumPoint(camZ: number, aspect: number): THREE.Vector3 {
   )
 }
 
-export default function ImageUniverse({ images }: Props) {
+export default function ImageUniverse({ images, onProgress }: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -66,8 +67,14 @@ export default function ImageUniverse({ images }: Props) {
     })
 
     let staggerIdx = 0
+    let loadedCount = 0
+    const totalSrcs = srcGroups.size
+    onProgress?.(0)
+
     srcGroups.forEach((indices, src) => {
       loader.load(src, (tex) => {
+        loadedCount++
+        onProgress?.(Math.round((loadedCount / totalSrcs) * 100))
         tex.colorSpace = THREE.SRGBColorSpace
         toDispose.push(tex)  // shared — dispose once
 
@@ -163,15 +170,25 @@ export default function ImageUniverse({ images }: Props) {
 
     // ── Cleanup ───────────────────────────────────────────────────────────────
     return () => {
+      // Stop rendering immediately so WebGL doesn't keep firing during transition.
       gsap.ticker.remove(tick)
       window.removeEventListener('mousemove', onMouseMove)
       window.removeEventListener('wheel', onWheel)
       window.removeEventListener('resize', onResize)
       container.removeEventListener('touchstart', onTouchStart)
       container.removeEventListener('touchmove', onTouchMove)
-      toDispose.forEach(d => d.dispose())
-      renderer.dispose()
-      if (container.contains(canvas)) container.removeChild(canvas)
+      // Defer canvas removal + GPU disposal until after the page transition finishes.
+      // Removing the canvas synchronously triggers a GPU recomposite that stalls the
+      // main thread mid-transition. 1200ms clears the ~1000ms ModeTransitionOverlay fade.
+      setTimeout(() => {
+        if (container.contains(canvas)) container.removeChild(canvas)
+        const doDispose = () => toDispose.forEach(d => d.dispose())
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(doDispose, { timeout: 5000 })
+        } else {
+          setTimeout(doDispose, 1000)
+        }
+      }, 1200)
     }
   }, [images])
 
