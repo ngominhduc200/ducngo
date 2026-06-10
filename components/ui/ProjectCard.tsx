@@ -23,14 +23,14 @@ export default function ProjectCard({ id, className, title, meta, href, image, i
         {compact ? (
           <div className="relative w-full overflow-hidden rounded-none aspect-[3/4]">
             {video ? (
-              <video src={video} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+              <video src={video} autoPlay loop muted playsInline preload="auto" className="w-full h-full object-cover" />
             ) : image ? (
               <Image src={image} alt={imageAlt} fill style={{ objectFit: 'cover' }} />
             ) : null}
           </div>
         ) : video ? (
           <div className="relative w-full overflow-hidden rounded-none aspect-[16/9]">
-            <video src={video} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+            <video src={video} autoPlay loop muted playsInline preload="auto" className="w-full h-full object-cover" />
           </div>
         ) : image ? (
           <div className="relative w-full overflow-hidden rounded-none aspect-[16/9]">
