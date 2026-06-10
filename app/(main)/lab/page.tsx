@@ -98,7 +98,7 @@ function MasonryGrid({ numCols, gap }: { numCols: number; gap: number }) {
             {item.type === 'video' ? (
               <video
                 src={item.src}
-                muted loop playsInline autoPlay preload="none"
+                muted loop playsInline autoPlay preload="auto"
                 style={{ width: '100%', display: 'block' }}
               />
             ) : (

@@ -248,7 +248,7 @@ export default function CompressedCarousel() {
               {project.isArchive ? (
                 <div className="w-full h-full">
                   {project.video ? (
-                    <video src={project.video} autoPlay loop muted playsInline preload="none" className="h-full w-auto" />
+                    <video src={project.video} autoPlay loop muted playsInline preload="auto" className="h-full w-auto" />
                   ) : project.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={project.image} alt="" loading="eager" style={{ height: '100%', width: 'auto' }} />
@@ -259,7 +259,7 @@ export default function CompressedCarousel() {
               ) : (
                 <Link href={project.href} className="block w-full h-full no-underline" data-cursor="read-case-study">
                   {project.video ? (
-                    <video src={project.video} autoPlay loop muted playsInline preload="none" className="h-full w-auto" />
+                    <video src={project.video} autoPlay loop muted playsInline preload="auto" className="h-full w-auto" />
                   ) : project.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={project.image} alt="" loading="eager" style={{ height: '100%', width: 'auto' }} />

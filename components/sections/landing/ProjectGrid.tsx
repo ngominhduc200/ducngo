@@ -151,7 +151,7 @@ function ArchiveCard({ project }: { project: typeof ARCHIVE[0] }) {
       }}>
         {/\.(mp4|mov|webm)$/i.test(currentSrc) ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <video src={currentSrc} autoPlay loop muted playsInline preload="none" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block' }} />
+          <video src={currentSrc} autoPlay loop muted playsInline preload="auto" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block' }} />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={currentSrc} alt="" loading="eager" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block' }} />
@@ -202,7 +202,7 @@ export default function ProjectGrid() {
                           <video
                             src={project.cover.src}
                             autoPlay loop muted playsInline
-                            preload="none"
+                            preload="auto"
                             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                           />
                         ) : (

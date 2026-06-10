@@ -80,7 +80,7 @@ export default function HootsuiteGraphicPage() {
           loop
           muted
           playsInline
-          preload="none"
+          preload="auto"
           className="w-full block"
         />
         <Image src={a('preview-3.webp')} alt="Hootsuite Deck of Truth preview 3" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} loading="eager" />
