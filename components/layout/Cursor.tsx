@@ -18,7 +18,7 @@ export default function Cursor() {
 
     const onMove = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY })
     const onDown = () => setPressed(true)
-    const onUp = () => setPressed(false)
+    const onUp   = () => setPressed(false)
     const onOver = (e: MouseEvent) => {
       const el = (e.target as Element).closest('[data-cursor]')
       setLabel(el ? (el as HTMLElement).dataset.cursor ?? null : null)
@@ -26,14 +26,14 @@ export default function Cursor() {
 
     window.addEventListener('mousemove', onMove)
     window.addEventListener('mousedown', onDown)
-    window.addEventListener('mouseup', onUp)
+    window.addEventListener('mouseup',   onUp)
     window.addEventListener('mouseover', onOver)
 
     return () => {
       style.remove()
       window.removeEventListener('mousemove', onMove)
       window.removeEventListener('mousedown', onDown)
-      window.removeEventListener('mouseup', onUp)
+      window.removeEventListener('mouseup',   onUp)
       window.removeEventListener('mouseover', onOver)
     }
   }, [])

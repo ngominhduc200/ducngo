@@ -109,7 +109,7 @@ function MasonryGrid({ numCols, gap }: { numCols: number; gap: number }) {
                 height={0}
                 sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 style={{ width: '100%', height: 'auto', display: 'block' }}
-                loading="lazy"
+                loading="eager"
               />
             )}
           </div>

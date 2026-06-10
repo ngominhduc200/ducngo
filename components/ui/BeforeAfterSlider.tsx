@@ -51,7 +51,7 @@ export default function BeforeAfterSlider({
       onPointerCancel={(e) => { if (e.pointerType === 'touch') { isDragging.current = false; reset() } }}
     >
       {/* After — base layer, sets natural height */}
-      <Image src={after} alt={afterAlt} width={0} height={0} sizes="(max-width: 768px) 100vw, 800px" style={{ width: '100%', height: 'auto', display: 'block' }} draggable={false} />
+      <Image src={after} alt={afterAlt} width={0} height={0} sizes="(max-width: 768px) 100vw, 800px" style={{ width: '100%', height: 'auto', display: 'block' }} loading="eager" draggable={false} />
 
       {/* Before — absolutely overlays, clipped to left of handle */}
       <div
@@ -59,7 +59,7 @@ export default function BeforeAfterSlider({
         className="absolute inset-0 overflow-hidden"
         style={{ clipPath: 'inset(0 50% 0 0)' }}
       >
-        <Image src={before} alt={beforeAlt} fill style={{ objectFit: 'cover' }} draggable={false} />
+        <Image src={before} alt={beforeAlt} fill style={{ objectFit: 'cover' }} loading="eager" draggable={false} />
       </div>
 
       {/* Divider */}

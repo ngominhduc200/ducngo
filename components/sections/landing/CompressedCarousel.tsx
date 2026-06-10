@@ -251,7 +251,7 @@ export default function CompressedCarousel() {
                     <video src={project.video} autoPlay loop muted playsInline preload="none" className="h-full w-auto" />
                   ) : project.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={project.image} alt="" loading="lazy" style={{ height: '100%', width: 'auto' }} />
+                    <img src={project.image} alt="" loading="eager" style={{ height: '100%', width: 'auto' }} />
                   ) : (
                     <div className="w-full h-full bg-neutral-800" />
                   )}
@@ -262,7 +262,7 @@ export default function CompressedCarousel() {
                     <video src={project.video} autoPlay loop muted playsInline preload="none" className="h-full w-auto" />
                   ) : project.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={project.image} alt="" loading="lazy" style={{ height: '100%', width: 'auto' }} />
+                    <img src={project.image} alt="" loading="eager" style={{ height: '100%', width: 'auto' }} />
                   ) : null}
                 </Link>
               )}

@@ -154,7 +154,7 @@ function ArchiveCard({ project }: { project: typeof ARCHIVE[0] }) {
           <video src={currentSrc} autoPlay loop muted playsInline preload="none" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block' }} />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={currentSrc} alt="" loading="lazy" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block' }} />
+          <img src={currentSrc} alt="" loading="eager" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block' }} />
         )}
       </div>
       </div>
@@ -210,7 +210,7 @@ export default function ProjectGrid() {
                           <img
                             src={project.cover.src}
                             alt=""
-                            loading="lazy"
+                            loading="eager"
                             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                           />
                         )}
@@ -227,7 +227,7 @@ export default function ProjectGrid() {
                         {project.cover.type === 'video' ? (
                           <video src={project.cover.src} autoPlay loop muted playsInline className="w-full h-full object-cover" />
                         ) : (
-                          <Image src={project.cover.src} alt="" fill style={{ objectFit: 'cover' }} />
+                          <Image src={project.cover.src} alt="" fill style={{ objectFit: 'cover' }} loading="eager" />
                         )}
                       </div>
                       <div className="flex flex-col gap-[10px]">

@@ -9,6 +9,7 @@ export default function ImageBlock({ src, alt }: { src: string; alt: string }) {
       height={0}
       sizes="(max-width: 768px) 100vw, 800px"
       style={{ width: '100%', height: 'auto' }}
+      loading="eager"
     />
   )
 }

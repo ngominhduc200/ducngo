@@ -83,10 +83,10 @@ export default function HootsuiteGraphicPage() {
           preload="none"
           className="w-full block"
         />
-        <Image src={a('preview-3.webp')} alt="Hootsuite Deck of Truth preview 3" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
-        <Image src={a('preview-4.webp')} alt="Hootsuite Deck of Truth preview 4" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
-        <Image src={a('preview-5.webp')} alt="Hootsuite Deck of Truth preview 5" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
-        <Image src={a('preview-6.webp')} alt="Hootsuite Deck of Truth preview 6" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        <Image src={a('preview-3.webp')} alt="Hootsuite Deck of Truth preview 3" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} loading="eager" />
+        <Image src={a('preview-4.webp')} alt="Hootsuite Deck of Truth preview 4" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} loading="eager" />
+        <Image src={a('preview-5.webp')} alt="Hootsuite Deck of Truth preview 5" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} loading="eager" />
+        <Image src={a('preview-6.webp')} alt="Hootsuite Deck of Truth preview 6" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} loading="eager" />
       </div>
     </>
   )
