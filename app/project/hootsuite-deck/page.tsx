@@ -76,6 +76,7 @@ export default function HootsuiteGraphicPage() {
       <div id="showcase" className="flex flex-col w-full overflow-hidden bg-black">
         <video
           src={a('preview.mp4')}
+          poster={a('preview-2.webp')}
           autoPlay
           loop
           muted

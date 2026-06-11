@@ -76,7 +76,7 @@ export default function HootsuiteComposerPage() {
             <p>The intent was to put discovery before search. Users shouldn&apos;t need to know what&apos;s possible before they can find it, especially newer users still learning what Hootsuite can do. So I designed a single-row carousel that meets users the moment they land on the dashboard. Every post format is visible upfront. Stories, Reels, Cross-Post, and the rest of the network options scroll into view through a Recommended filter that defaults to five at a time, keeping the rest of the dashboard intact.</p>
             <p>For handoff, I extended the Hootsuite design system with a new button component, mapped every state including a hover micro-animation, and documented card flows, responsive specs, and accessibility landmarks so the team could extend the widget without breaking it.</p>
           </div>
-          <AutoPlayVideo src={a('prototype.mp4')} />
+          <AutoPlayVideo src={a('prototype.mp4')} poster={a('cover.webp')} />
           <ImageBlock alt="Final result — composer widget 2" src={a('result-2.webp')} />
           <ImageBlock alt="Final result — composer widget 3" src={a('result-3.webp')} />
         </CaseStudySection>

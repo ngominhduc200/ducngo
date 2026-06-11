@@ -201,6 +201,7 @@ export default function ProjectGrid() {
                         {project.cover.type === 'video' ? (
                           <video
                             src={project.cover.src}
+                            poster={project.cover.src.replace(/\.mp4$/, '.webp')}
                             autoPlay loop muted playsInline
                             preload="auto"
                             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
@@ -225,7 +226,7 @@ export default function ProjectGrid() {
                       {/* Mobile cover */}
                       <div className="md:hidden w-full aspect-[4/3] relative overflow-hidden">
                         {project.cover.type === 'video' ? (
-                          <video src={project.cover.src} autoPlay loop muted playsInline preload="auto" className="w-full h-full object-cover" />
+                          <video src={project.cover.src} poster={project.cover.src.replace(/\.mp4$/, '.webp')} autoPlay loop muted playsInline preload="auto" className="w-full h-full object-cover" />
                         ) : (
                           <Image src={project.cover.src} alt="" fill style={{ objectFit: 'cover' }} loading="eager" />
                         )}

@@ -1,7 +1,7 @@
 'use client'
 import { useRef, useEffect, useState, useCallback } from 'react'
 
-export default function AutoPlayVideo({ src }: { src: string }) {
+export default function AutoPlayVideo({ src, poster }: { src: string; poster?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [playing, setPlaying] = useState(false)
   const [progress, setProgress] = useState(0)
@@ -102,6 +102,7 @@ export default function AutoPlayVideo({ src }: { src: string }) {
       <video
         ref={videoRef}
         src={src}
+        poster={poster}
         muted
         loop
         playsInline
