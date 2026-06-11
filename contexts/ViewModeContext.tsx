@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useEffect } from 'react'
 
 type ViewMode = 'expand' | 'compressed'
 
-const COVER_MS = 500
+const COVER_MS = 650
 const STORAGE_KEY = 'viewMode'
 
 const ViewModeContext = createContext<{

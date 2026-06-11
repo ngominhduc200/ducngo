@@ -15,6 +15,7 @@ export default function ModeTransitionOverlay() {
         backgroundColor: bg,
         opacity: transitioning ? 1 : 0,
         transition: 'opacity 500ms ease-in-out',
+        willChange: 'opacity',
       }}
     />
   )
