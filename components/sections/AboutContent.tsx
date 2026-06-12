@@ -1,10 +1,13 @@
+'use client'
+
 import Image from 'next/image'
 import { BLUR_DATA_URL } from '@/lib/blur'
 
 export default function AboutContent() {
   return (
     <div
-      className="flex flex-col lg:flex-row gap-6 w-full max-h-[calc(100vh-8rem)] px-6 lg:px-[15vw]"
+      className="flex flex-col lg:flex-row gap-6 max-h-[calc(100vh-8rem)] mx-6 lg:mx-[15vw] pointer-events-auto"
+      onClick={e => e.stopPropagation()}
     >
       {/* Left column: 40% — hero, bio, experience, education */}
       <div className="flex flex-col gap-10 min-w-0" style={{ flexBasis: '40%' }}>

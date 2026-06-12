@@ -54,8 +54,7 @@ export default function AboutModal() {
       className={`fixed inset-0 z-[900] flex items-center backdrop-blur-xl ${mode === 'compressed' ? 'bg-[#0a0a0a]/90' : 'bg-stone-50/80'}`}
       onClick={close}
     >
-      {/* Stop propagation so clicks inside content don't reach the backdrop */}
-      <div onClick={e => e.stopPropagation()} className="w-full">
+      <div className="w-full pointer-events-none">
         <AboutContent />
       </div>
     </div>
