@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useViewMode } from '@/contexts/ViewModeContext'
+import { BLUR_DATA_URL } from '@/lib/blur'
 
 const FEATURE = [
   {
@@ -114,6 +115,7 @@ function ArchiveCard({ project }: { project: typeof ARCHIVE[0] }) {
   const [isActive, setIsActive] = useState(false)
   const [frameIndex, setFrameIndex] = useState(0)
   const hasMultiple = project.images.length > 1
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     if (!isActive || !hasMultiple) return
@@ -122,6 +124,17 @@ function ArchiveCard({ project }: { project: typeof ARCHIVE[0] }) {
     }, 1000)
     return () => clearInterval(interval)
   }, [isActive, hasMultiple, project.images.length])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting && video.preload === 'none') video.preload = 'auto' },
+      { threshold: 0.1 }
+    )
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [])
 
   const currentSrc = project.images[frameIndex]
 
@@ -151,10 +164,10 @@ function ArchiveCard({ project }: { project: typeof ARCHIVE[0] }) {
       }}>
         {/\.(mp4|mov|webm)$/i.test(currentSrc) ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <video src={currentSrc} autoPlay loop muted playsInline preload="auto" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block' }} />
+          <video ref={videoRef} src={currentSrc} autoPlay loop muted playsInline preload="none" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block' }} />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={currentSrc} alt="" loading="eager" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block' }} />
+          <img src={currentSrc} alt="" loading="eager" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block', backgroundColor: '#e5e5e5' }} />
         )}
       </div>
       </div>
@@ -197,7 +210,7 @@ export default function ProjectGrid() {
                   <div className="grid grid-cols-1 md:grid-cols-[1.5fr_0.5fr_1fr] md:gap-6 my-[30px] w-full">
                     {/* Col 1 — Image (desktop only) */}
                     <div className="hidden md:block w-full">
-                      <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', ...(project.cover.type === 'video' ? { backgroundImage: `url(${project.cover.src.replace(/\.mp4$/, '.webp')})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}) }}>
+                      <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', backgroundColor: '#e5e5e5', ...(project.cover.type === 'video' ? { backgroundImage: `url(${project.cover.src.replace(/\.mp4$/, '.webp')})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}) }}>
                         {project.cover.type === 'video' ? (
                           <video
                             src={project.cover.src}
@@ -228,7 +241,7 @@ export default function ProjectGrid() {
                         {project.cover.type === 'video' ? (
                           <video src={project.cover.src} poster={project.cover.src.replace(/\.mp4$/, '.webp')} autoPlay loop muted playsInline preload="auto" className="w-full h-full object-cover" />
                         ) : (
-                          <Image src={project.cover.src} alt="" fill style={{ objectFit: 'cover' }} loading="eager" />
+                          <Image src={project.cover.src} alt="" fill style={{ objectFit: 'cover' }} loading="eager" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
                         )}
                       </div>
                       <div className="flex flex-col gap-[10px]">

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useViewMode } from '@/contexts/ViewModeContext'
+import { useSlowConnection } from '@/hooks/useSlowConnection'
 
 const PROJECTS = [
   { id: 'peak-create',    label: 'Peak Create Request System',           href: '/project/peak-create',                                video: '/images/peak-create-compressed/cover.mp4',        image: null as string | null, tagline: 'Product Design · 2026',                    title: "Streamlining how The Peak's editorial team briefs, tracks, and pays illustrators with Peak Create", description: "Over one month, I designed the user experience and interface for an illustration request tool that connects Production Editors, Section Editors, and Illustrators in one shared workspace with full visibility into the workflow. I collaborated with a UX researcher and two UX writers.",                                                                                                                                        isArchive: false, external: false },
@@ -24,6 +25,7 @@ const EASE = 0.1  // lerp factor per frame
 
 export default function CompressedCarousel() {
   const { mode } = useViewMode()
+  const slowConnection = useSlowConnection()
   const [mounted, setMounted]     = useState(false)
   const [activeIdx, setActiveIdx] = useState<number | null>(null)
 
@@ -251,7 +253,10 @@ export default function CompressedCarousel() {
               {project.isArchive ? (
                 <div className="w-full h-full">
                   {project.video ? (
-                    <video src={project.video} poster={project.video.replace(/\.mp4$/, '.webp')} autoPlay loop muted playsInline preload="auto" className="h-full w-auto" />
+                    slowConnection
+                      // eslint-disable-next-line @next/next/no-img-element
+                      ? <img src={project.video.replace(/\.mp4$/, '.webp')} alt="" style={{ height: '100%', width: 'auto', objectFit: 'cover' }} />
+                      : <video src={project.video} poster={project.video.replace(/\.mp4$/, '.webp')} autoPlay loop muted playsInline preload="auto" className="h-full w-auto" />
                   ) : project.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={project.image} alt="" loading="eager" style={{ height: '100%', width: 'auto' }} />
@@ -262,7 +267,10 @@ export default function CompressedCarousel() {
               ) : (
                 <Link href={project.href} className="block w-full h-full no-underline" data-cursor="read-case-study">
                   {project.video ? (
-                    <video src={project.video} poster={project.video.replace(/\.mp4$/, '.webp')} autoPlay loop muted playsInline preload="auto" className="h-full w-auto" />
+                    slowConnection
+                      // eslint-disable-next-line @next/next/no-img-element
+                      ? <img src={project.video.replace(/\.mp4$/, '.webp')} alt="" style={{ height: '100%', width: 'auto', objectFit: 'cover' }} />
+                      : <video src={project.video} poster={project.video.replace(/\.mp4$/, '.webp')} autoPlay loop muted playsInline preload="auto" className="h-full w-auto" />
                   ) : project.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={project.image} alt="" loading="eager" style={{ height: '100%', width: 'auto' }} />

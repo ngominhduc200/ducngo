@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { useViewMode } from '@/contexts/ViewModeContext'
 import { usePathname } from 'next/navigation'
 import PageHero from '@/components/sections/PageHero'
+import { useSlowConnection } from '@/hooks/useSlowConnection'
+import { BLUR_DATA_URL } from '@/lib/blur'
 
 const ImageUniverse = dynamic(() => import('@/components/ui/ImageUniverse'), {
   ssr: false,
@@ -56,6 +58,7 @@ function MasonryGrid({ numCols, gap }: { numCols: number; gap: number }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [positions, setPositions] = useState<Pos[]>([])
   const [containerH, setContainerH] = useState(0)
+  const slowConnection = useSlowConnection()
 
   const compute = useCallback(() => {
     const el = containerRef.current
@@ -98,7 +101,7 @@ function MasonryGrid({ numCols, gap }: { numCols: number; gap: number }) {
             {item.type === 'video' ? (
               <video
                 src={item.src}
-                muted loop playsInline autoPlay preload="auto"
+                muted loop playsInline autoPlay preload={slowConnection ? 'none' : 'auto'}
                 style={{ width: '100%', display: 'block' }}
               />
             ) : (
@@ -109,7 +112,9 @@ function MasonryGrid({ numCols, gap }: { numCols: number; gap: number }) {
                 height={0}
                 sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 style={{ width: '100%', height: 'auto', display: 'block' }}
-                loading="eager"
+                loading="lazy"
+                placeholder="blur"
+                blurDataURL={BLUR_DATA_URL}
               />
             )}
           </div>

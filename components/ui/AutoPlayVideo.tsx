@@ -15,6 +15,7 @@ export default function AutoPlayVideo({ src, poster }: { src: string; poster?: s
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          if (video.preload === 'none') video.preload = 'auto'
           video.play().catch(() => {})
           setPlaying(true)
         } else {
@@ -107,7 +108,7 @@ export default function AutoPlayVideo({ src, poster }: { src: string; poster?: s
         muted
         loop
         playsInline
-        preload="auto"
+        preload="none"
         className="w-full block"
       />
       {/* Controls overlay — bottom of video */}
