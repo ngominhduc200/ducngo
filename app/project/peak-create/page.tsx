@@ -213,7 +213,7 @@ export default function PeakCreatePage() {
           ].map(({ label, heading, step }) => (
             <div key={label} className="flex flex-col gap-8">
               <SectionHeader label={label} as="h3" weight="normal">{heading}</SectionHeader>
-              <AutoPlayVideo src={a(`step-${step}.mp4`)} />
+              <AutoPlayVideo src={a(`step-${step}.mp4`)} poster={a(`step-${step}.webp`)} />
             </div>
           ))}
         </CaseStudySection>

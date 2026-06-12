@@ -99,11 +99,14 @@ function MasonryGrid({ numCols, gap }: { numCols: number; gap: number }) {
             style={{ position: 'absolute', left: pos.left, top: pos.top, width: pos.width }}
           >
             {item.type === 'video' ? (
-              <video
-                src={item.src}
-                muted loop playsInline autoPlay preload={slowConnection ? 'none' : 'auto'}
-                style={{ width: '100%', display: 'block' }}
-              />
+              <div style={{ backgroundImage: `url(${item.src.replace(/\.mp4$/, '.webp')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                <video
+                  src={item.src}
+                  poster={item.src.replace(/\.mp4$/, '.webp')}
+                  muted loop playsInline autoPlay preload={slowConnection ? 'none' : 'auto'}
+                  style={{ width: '100%', display: 'block' }}
+                />
+              </div>
             ) : (
               <Image
                 src={item.src}

@@ -252,26 +252,30 @@ export default function AirbnbPage() {
               label: '01 — Join the wishlist',
               heading: 'Jennie accepts an invitation to the "Korea Trip 2026" wishlist. Onboarding nudges her to set preferences before browsing.',
               video: a('join-wishlist.mp4'),
+              poster: a('join-wishlist.webp'),
             },
             {
               label: '02 — Set preferences',
               heading: "She picks a budget range and her must-have amenities. The app folds her input into the group's aggregated preferences, so she does not need to repeat it in a group chat.",
               video: a('add-preference.mp4'),
+              poster: a('add-preference.webp'),
             },
             {
               label: "03 — Browse with the group's filters applied",
               heading: 'On Explore, Jennie applies the merged group preferences to her search and adds a listing to the wishlist. She can see immediately which listings carry soft warnings.',
               video: a('browse-and-add-listing.mp4'),
+              poster: a('browse-and-add-listing.webp'),
             },
             {
               label: '04 — See where the group is leaning',
               heading: "Jennie opens the Summary to see every saved listing ranked by reactions. The group's favourite is at the top. She and the rest of the group can move toward booking without a separate conversation.",
               video: a('votes-summary.mp4'),
+              poster: a('votes-summary.webp'),
             },
-          ].map(({ label, heading, video }) => (
+          ].map(({ label, heading, video, poster }) => (
             <div key={label} className="flex flex-col gap-8">
               <SectionHeader label={label} as="h3" weight="normal">{heading}</SectionHeader>
-              <AutoPlayVideo src={video} />
+              <AutoPlayVideo src={video} poster={poster} />
             </div>
           ))}
         </CaseStudySection>

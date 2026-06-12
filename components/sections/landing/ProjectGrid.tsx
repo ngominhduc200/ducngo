@@ -129,7 +129,13 @@ function ArchiveCard({ project }: { project: typeof ARCHIVE[0] }) {
     const video = videoRef.current
     if (!video) return
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting && video.preload === 'none') video.preload = 'auto' },
+      ([entry]) => {
+        if (entry.isIntersecting && video.preload === 'none') {
+          video.preload = 'auto'
+          video.load()
+          video.play().catch(() => {})
+        }
+      },
       { threshold: 0.1 }
     )
     observer.observe(video)
@@ -161,10 +167,11 @@ function ArchiveCard({ project }: { project: typeof ARCHIVE[0] }) {
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         padding: isActive && hasMultiple ? '8%' : '0',
         transition: 'background-color 500ms ease, padding 500ms ease',
+        ...(/\.(mp4|mov|webm)$/i.test(currentSrc) ? { backgroundImage: `url(${currentSrc.replace(/\.(mp4|mov|webm)$/i, '.webp')})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}),
       }}>
         {/\.(mp4|mov|webm)$/i.test(currentSrc) ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <video ref={videoRef} src={currentSrc} autoPlay loop muted playsInline preload="none" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block' }} />
+          <video ref={videoRef} src={currentSrc} poster={currentSrc.replace(/\.(mp4|mov|webm)$/i, '.webp')} autoPlay loop muted playsInline preload="none" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block' }} />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={currentSrc} alt="" loading="eager" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block', backgroundColor: '#e5e5e5' }} />
