@@ -35,7 +35,7 @@ const instrumentSerif = Instrument_Serif({
 
 const publicSans = Public_Sans({
   subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  weight: ['300', '400', '500'],
   style: ['normal', 'italic'],
   variable: '--font-public-sans-loaded',
   display: 'swap',
