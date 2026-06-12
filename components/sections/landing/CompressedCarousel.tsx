@@ -242,6 +242,9 @@ export default function CompressedCarousel() {
                 transform: isActive ? 'scale(1.1)' : 'scale(1)',
                 transformOrigin: 'left center',
                 transition: 'transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                backgroundImage: project.video ? `url(${project.video.replace(/\.mp4$/, '.webp')})` : project.image ? `url(${project.image})` : undefined,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
               }}
               className="aspect-[1440/847] flex-shrink-0 overflow-hidden bg-[#0a0a0a]"
             >

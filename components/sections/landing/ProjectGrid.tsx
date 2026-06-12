@@ -197,7 +197,7 @@ export default function ProjectGrid() {
                   <div className="grid grid-cols-1 md:grid-cols-[1.5fr_0.5fr_1fr] md:gap-6 my-[30px] w-full">
                     {/* Col 1 — Image (desktop only) */}
                     <div className="hidden md:block w-full">
-                      <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden' }}>
+                      <div style={{ width: '100%', aspectRatio: '16/9', overflow: 'hidden', ...(project.cover.type === 'video' ? { backgroundImage: `url(${project.cover.src.replace(/\.mp4$/, '.webp')})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}) }}>
                         {project.cover.type === 'video' ? (
                           <video
                             src={project.cover.src}
@@ -224,7 +224,7 @@ export default function ProjectGrid() {
                     {/* Col 3 — Content */}
                     <div className="flex flex-col gap-[20px]">
                       {/* Mobile cover */}
-                      <div className="md:hidden w-full aspect-[4/3] relative overflow-hidden">
+                      <div className="md:hidden w-full aspect-[4/3] relative overflow-hidden" style={project.cover.type === 'video' ? { backgroundImage: `url(${project.cover.src.replace(/\.mp4$/, '.webp')})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}>
                         {project.cover.type === 'video' ? (
                           <video src={project.cover.src} poster={project.cover.src.replace(/\.mp4$/, '.webp')} autoPlay loop muted playsInline preload="auto" className="w-full h-full object-cover" />
                         ) : (

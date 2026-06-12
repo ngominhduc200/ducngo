@@ -98,6 +98,7 @@ export default function AutoPlayVideo({ src, poster }: { src: string; poster?: s
       className="relative w-full"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      style={poster ? { backgroundImage: `url(${poster})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
     >
       <video
         ref={videoRef}

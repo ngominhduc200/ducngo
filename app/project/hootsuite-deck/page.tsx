@@ -74,16 +74,18 @@ export default function HootsuiteGraphicPage() {
 
       {/* Full-viewport-width media */}
       <div id="showcase" className="flex flex-col w-full overflow-hidden bg-black">
-        <video
-          src={a('preview.mp4')}
-          poster={a('preview-2.webp')}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="w-full block"
-        />
+        <div style={{ backgroundImage: `url(${a('preview-2.webp')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+          <video
+            src={a('preview.mp4')}
+            poster={a('preview-2.webp')}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="w-full block"
+          />
+        </div>
         <Image src={a('preview-3.webp')} alt="Hootsuite Deck of Truth preview 3" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} loading="eager" />
         <Image src={a('preview-4.webp')} alt="Hootsuite Deck of Truth preview 4" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} loading="eager" />
         <Image src={a('preview-5.webp')} alt="Hootsuite Deck of Truth preview 5" width={0} height={0} sizes="100vw" style={{ width: '100%', height: 'auto', display: 'block' }} loading="eager" />
