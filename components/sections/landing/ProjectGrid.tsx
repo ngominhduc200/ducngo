@@ -163,9 +163,9 @@ function ArchiveCard({ project }: { project: typeof ARCHIVE[0] }) {
       <div className="flex-1" />
       <div style={{
         width: '100%', aspectRatio: '16/9', overflow: 'hidden',
-        backgroundColor: isActive && hasMultiple ? '#e5e5e5' : 'transparent',
+        backgroundColor: 'transparent',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: isActive && hasMultiple ? '8%' : '0',
+        padding: isActive && hasMultiple ? '1%' : '0',
         transition: 'background-color 500ms ease, padding 500ms ease',
         ...(/\.(mp4|mov|webm)$/i.test(currentSrc) ? { backgroundImage: `url(${currentSrc.replace(/\.(mp4|mov|webm)$/i, '.webp')})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}),
       }}>
@@ -174,7 +174,7 @@ function ArchiveCard({ project }: { project: typeof ARCHIVE[0] }) {
           <video ref={videoRef} src={currentSrc} poster={currentSrc.replace(/\.(mp4|mov|webm)$/i, '.webp')} autoPlay loop muted playsInline preload="none" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block' }} />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={currentSrc} alt="" loading="eager" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block', backgroundColor: '#e5e5e5' }} />
+          <img src={currentSrc} alt="" loading="eager" style={{ width: '100%', height: '100%', objectFit: isActive && hasMultiple ? 'contain' : 'cover', display: 'block' }} />
         )}
       </div>
       </div>
