@@ -9,7 +9,7 @@ import CaseStudyHero from '@/components/sections/CaseStudyHero'
 import CaseStudySection from '@/components/sections/CaseStudySection'
 import SectionHeader from '@/components/sections/SectionHeader'
 
-const a = (name: string) => `/images/peak-create-compressed/${name}`
+const a = (name: string) => `/images/peak-create/${name}`
 
 export default function PeakCreatePage() {
   return (

@@ -13,7 +13,7 @@ const FEATURE = [
     category: 'Product Design',
     year: '2026',
     description: 'Over one month, I designed the user experience and interface for an illustration request tool that connects Production Editors, Section Editors, and Illustrators in one shared workspace with full visibility into the workflow. I collaborated with a UX researcher and two UX writers.',
-    cover: { type: 'video' as const, src: '/images/peak-create-compressed/cover.mp4' },
+    cover: { type: 'video' as const, src: '/images/peak-create/cover.mp4' },
     href: '/project/peak-create',
   },
   {
@@ -22,7 +22,7 @@ const FEATURE = [
     category: 'Product Design',
     year: 'Concept 2026',
     description: 'In 3 weeks, I led the user research, wireframes, and prototype for a new Airbnb feature that lets groups collaborate on finding and booking a place to stay inside the app. I worked with a UX researcher and two UX designers.',
-    cover: { type: 'image' as const, src: '/images/airbnb-compressed/cover.webp' },
+    cover: { type: 'image' as const, src: '/images/airbnb/cover.webp' },
     href: '/project/airbnb',
   },
   {
@@ -31,16 +31,16 @@ const FEATURE = [
     category: 'UX Design',
     year: 'Handed Off 2025',
     description: 'During my internship, I designed a homepage feature that helps Hootsuite users discover the posting options available across their social channels. The project ended with a full handoff to engineering. I worked as a UX Designer, alongside a mentor, partnered with two PMs, and supported by a Senior UX Designer.',
-    cover: { type: 'image' as const, src: '/images/hootsuite-composer-compressed/cover.webp' },
+    cover: { type: 'image' as const, src: '/images/hootsuite-composer/cover.webp' },
     href: '/project/hootsuite-composer',
   },
   {
     id: 'project-hootsuite-deck',
     title: "Shaping Hootsuite's new branding with Deck of Truth redesigned",
-    category: 'Graphic Design',
+    category: 'Brand Design',
     year: 'Shipped 2025',
-    description: "In September 2025, I spent one month with the brand marketing team auditing the current branding, and proposing a new direction to help shift Hootsuite's brand from social to enterprise. My work was first introduced as a presentation slide deck template, reflecting updated typography, colour, and layout composition that looks modern and enterprise-ready, aligned with the 2026 direction. This deck template was adopted internally across all departments.",
-    cover: { type: 'image' as const, src: '/images/hootsuite-deck-compressed/preview-4.webp' },
+    description: "In September 2025, I spent one month with the brand marketing team auditing the current branding, and proposing a new direction to help shift Hootsuite's brand from social to enterprise.",
+    cover: { type: 'image' as const, src: '/images/hootsuite-deck/preview-4.webp' },
     href: '/project/hootsuite-deck',
   },
 ]
@@ -54,7 +54,7 @@ const ARCHIVE = [
     description:
       'Built a responsive e-commerce website using HTML and CSS, including product listing features and client information pages, deployed on GitHub Pages.',
     images: [
-      '/images/archive-compressed/discogs-shop/preview.mp4',
+      '/images/archive/discogs-shop/preview.mp4',
     ],
   },
   {
@@ -65,7 +65,7 @@ const ARCHIVE = [
     description:
       "Designed magazine spreads, covers, and section layouts for SFU's student newspaper. Transformed written content and illustrations into engaging visual compositions using layout design, typography selection, and colour palette development.",
     images: Array.from({ length: 16 }, (_, i) =>
-      i === 0 ? '/images/archive-compressed/the-peak/cover.webp' : `/images/archive-compressed/the-peak/spread-${String(i).padStart(2, '0')}.webp`
+      i === 0 ? '/images/archive/the-peak/cover.webp' : `/images/archive/the-peak/spread-${String(i).padStart(2, '0')}.webp`
     ),
   },
   {
@@ -76,9 +76,9 @@ const ARCHIVE = [
     description:
       "Digital Media Specialist co-op. Created graphics and materials to improve health information delivery, deployed across Fraser Health's digital platforms and hospital locations across British Columbia.",
     images: [
-      '/images/archive-compressed/fraser-health/cover.webp',
-      ...Array.from({ length: 9 }, (_, i) => `/images/archive-compressed/fraser-health/asset-${String(i + 1).padStart(2, '0')}.webp`),
-      '/images/archive-compressed/fraser-health/asset-11.webp',
+      '/images/archive/fraser-health/cover.webp',
+      ...Array.from({ length: 9 }, (_, i) => `/images/archive/fraser-health/asset-${String(i + 1).padStart(2, '0')}.webp`),
+      '/images/archive/fraser-health/asset-11.webp',
     ],
   },
   {
@@ -89,10 +89,10 @@ const ARCHIVE = [
     description:
       "Part-time role creating visual assets for Douglas College's athletic department — promotional posters, athlete spotlights, event schedules, and digital and physical marketing materials.",
     images: [
-      '/images/archive-compressed/douglas-royals/cover.webp',
+      '/images/archive/douglas-royals/cover.webp',
       ...Array.from({ length: 14 }, (_, i) => {
         const n = i + 2
-        return `/images/archive-compressed/douglas-royals/asset-${String(n).padStart(2, '0')}.webp`
+        return `/images/archive/douglas-royals/asset-${String(n).padStart(2, '0')}.webp`
       }),
     ],
   },
@@ -104,8 +104,8 @@ const ARCHIVE = [
     description:
       'Three-week academic project for IAT 103W at SFU. Translated the 4C framework for scholarly composition into a social media awareness campaign. Led character design through Procreate sketches to refined Illustrator vectors, combined with vibrant carousel layouts for engagement.',
     images: [
-      '/images/archive-compressed/iat103/cover.webp',
-      ...Array.from({ length: 8 }, (_, i) => `/images/archive-compressed/iat103/image-${29 + i}.webp`),
+      '/images/archive/iat103/cover.webp',
+      ...Array.from({ length: 8 }, (_, i) => `/images/archive/iat103/image-${29 + i}.webp`),
     ],
   },
 ]

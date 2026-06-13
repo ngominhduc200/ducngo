@@ -4,8 +4,13 @@ import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import gsap from 'gsap'
 
+interface ImageItem {
+  src: string
+  name: string
+}
+
 interface Props {
-  images: string[]
+  items: ImageItem[]
   onProgress?: (pct: number) => void
 }
 
@@ -25,12 +30,14 @@ function frustumPoint(camZ: number, aspect: number): THREE.Vector3 {
   )
 }
 
-export default function ImageUniverse({ images, onProgress }: Props) {
+export default function ImageUniverse({ items, onProgress }: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const tooltipRef   = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const container = containerRef.current
-    if (!container || images.length === 0) return
+    const tooltip   = tooltipRef.current
+    if (!container || items.length === 0) return
 
     const W = container.clientWidth
     const H = container.clientHeight
@@ -54,16 +61,15 @@ export default function ImageUniverse({ images, onProgress }: Props) {
     const camera = new THREE.PerspectiveCamera(FOV_DEG, aspect, 1, 12000)
     camera.position.set(0, 0, 0)
 
-    // ── Load textures, share across repeated srcs ─────────────────────────────
+    // ── Load textures ─────────────────────────────────────────────────────────
     const loader   = new THREE.TextureLoader()
     const meshes: THREE.Mesh[] = []
     const toDispose: Array<THREE.BufferGeometry | THREE.Material | THREE.Texture> = []
 
-    // Group indices by src so each unique image loads once
-    const srcGroups = new Map<string, number[]>()
-    images.forEach((src, i) => {
-      if (!srcGroups.has(src)) srcGroups.set(src, [])
-      srcGroups.get(src)!.push(i)
+    const srcGroups = new Map<string, ImageItem[]>()
+    items.forEach((item) => {
+      if (!srcGroups.has(item.src)) srcGroups.set(item.src, [])
+      srcGroups.get(item.src)!.push(item)
     })
 
     let staggerIdx = 0
@@ -71,21 +77,22 @@ export default function ImageUniverse({ images, onProgress }: Props) {
     const totalSrcs = srcGroups.size
     onProgress?.(0)
 
-    srcGroups.forEach((indices, src) => {
+    srcGroups.forEach((groupItems, src) => {
       loader.load(src, (tex) => {
         loadedCount++
         onProgress?.(Math.round((loadedCount / totalSrcs) * 100))
         tex.colorSpace = THREE.SRGBColorSpace
-        toDispose.push(tex)  // shared — dispose once
+        toDispose.push(tex)
 
-        const img      = tex.image as HTMLImageElement
+        const img       = tex.image as HTMLImageElement
         const imgAspect = (img.naturalWidth || img.width || 1.5) / (img.naturalHeight || img.height || 1)
 
-        indices.forEach(() => {
+        groupItems.forEach((item) => {
           const baseH = 170 + Math.random() * 210
           const geo   = new THREE.PlaneGeometry(baseH * imgAspect, baseH)
           const mat   = new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0 })
           const mesh  = new THREE.Mesh(geo, mat)
+          mesh.userData.name = item.name
 
           mesh.position.copy(frustumPoint(camera.position.z, aspect))
           scene.add(mesh)
@@ -102,6 +109,12 @@ export default function ImageUniverse({ images, onProgress }: Props) {
         })
       })
     })
+
+    // ── Raycaster ─────────────────────────────────────────────────────────────
+    const raycaster = new THREE.Raycaster()
+    const mouse     = new THREE.Vector2()
+    let mouseX = 0
+    let mouseY = 0
 
     // ── Scroll velocity ───────────────────────────────────────────────────────
     let scrollVel = 0
@@ -128,12 +141,18 @@ export default function ImageUniverse({ images, onProgress }: Props) {
     const lookY = gsap.quickTo(look, 'y', { duration: 1.2, ease: 'power3.out' })
 
     const onMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX
+      mouseY = e.clientY
+      mouse.x =  (e.clientX / window.innerWidth)  * 2 - 1
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1
       lookX( (e.clientX / window.innerWidth  - 0.5) * 2)
       lookY(-(e.clientY / window.innerHeight - 0.5) * 2)
     }
     window.addEventListener('mousemove', onMouseMove)
 
     // ── GSAP render ticker ────────────────────────────────────────────────────
+    let hoveredName = ''
+
     const tick = () => {
       scrollVel *= 0.90
       camera.position.z -= scrollVel
@@ -151,6 +170,21 @@ export default function ImageUniverse({ images, onProgress }: Props) {
       camera.position.x = 0
       camera.position.y = 0
       camera.lookAt(look.x * 500, look.y * 300, camZ - 700)
+
+      raycaster.setFromCamera(mouse, camera)
+      const hits = raycaster.intersectObjects(meshes)
+      const name = hits.length > 0 ? (hits[0].object.userData.name as string) : ''
+
+      if (tooltip && name !== hoveredName) {
+        hoveredName = name
+        tooltip.textContent = name
+        tooltip.style.opacity = name ? '1' : '0'
+      }
+      if (tooltip && name) {
+        tooltip.style.left = (mouseX - 10) + 'px'
+        tooltip.style.top  = (mouseY + 16) + 'px'
+      }
+
       renderer.render(scene, camera)
     }
 
@@ -170,16 +204,12 @@ export default function ImageUniverse({ images, onProgress }: Props) {
 
     // ── Cleanup ───────────────────────────────────────────────────────────────
     return () => {
-      // Stop rendering immediately so WebGL doesn't keep firing during transition.
       gsap.ticker.remove(tick)
       window.removeEventListener('mousemove', onMouseMove)
       window.removeEventListener('wheel', onWheel)
       window.removeEventListener('resize', onResize)
       container.removeEventListener('touchstart', onTouchStart)
       container.removeEventListener('touchmove', onTouchMove)
-      // Defer canvas removal + GPU disposal until after the page transition finishes.
-      // Removing the canvas synchronously triggers a GPU recomposite that stalls the
-      // main thread mid-transition. 1200ms clears the ~1000ms ModeTransitionOverlay fade.
       setTimeout(() => {
         if (container.contains(canvas)) container.removeChild(canvas)
         const doDispose = () => toDispose.forEach(d => d.dispose())
@@ -190,13 +220,31 @@ export default function ImageUniverse({ images, onProgress }: Props) {
         }
       }, 1200)
     }
-  }, [images])
+  }, [items])
 
   return (
     <div
       ref={containerRef}
       className="relative w-full h-full"
       style={{ background: '#080808' }}
-    />
+    >
+      <div
+        ref={tooltipRef}
+        style={{
+          position: 'fixed',
+          pointerEvents: 'none',
+          opacity: 0,
+          transition: 'opacity 0.15s ease',
+          transform: 'none',
+          fontFamily: 'var(--font-public-sans-loaded, sans-serif)',
+          fontWeight: 300,
+          fontSize: '0.75rem',
+          color: '#a3a3a3',
+          letterSpacing: '0.01em',
+          zIndex: 10,
+          whiteSpace: 'nowrap',
+        }}
+      />
+    </div>
   )
 }

@@ -1,155 +1,112 @@
 'use client'
 
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import dynamic from 'next/dynamic'
-import Image from 'next/image'
 import { useViewMode } from '@/contexts/ViewModeContext'
 import { usePathname } from 'next/navigation'
 import PageHero from '@/components/sections/PageHero'
-import { useSlowConnection } from '@/hooks/useSlowConnection'
-import { BLUR_DATA_URL } from '@/lib/blur'
 
 const ImageUniverse = dynamic(() => import('@/components/ui/ImageUniverse'), {
   ssr: false,
   loading: () => <div className="absolute inset-0 bg-[#080808]" />,
 })
 
-const f = (name: string) => `/images/fun-compressed/${name}`
+const f = (name: string) => `/images/fun/${name}`
 
-const ALL_ITEMS: { src: string; type: 'image' | 'video'; ratio: number }[] = [
-  { src: f('dope-1.webp'),             type: 'image', ratio: 1.247  },
-  { src: f('img-0372.webp'),           type: 'image', ratio: 1.328  },
-  { src: f('attack-on-titan.webp'),    type: 'image', ratio: 0.490  },
-  { src: f('photo-1-1.webp'),          type: 'image', ratio: 1.500  },
-  { src: f('late-night-poster.webp'),  type: 'image', ratio: 1.778  },
-  { src: f('ngo-minh.webp'),           type: 'image', ratio: 1.000  },
-  { src: f('game-1.mp4'),             type: 'video', ratio: 0.532  },
-  { src: f('photo-2-1.webp'),          type: 'image', ratio: 0.667  },
-  { src: f('your-name-fake.webp'),     type: 'image', ratio: 1.415  },
-  { src: f('img-0683.webp'),           type: 'image', ratio: 1.500  },
-  { src: f('poster-design-1.webp'),    type: 'image', ratio: 1.000  },
-  { src: f('abstract-model.webp'),     type: 'image', ratio: 0.563  },
-  { src: f('d.mp4'),                  type: 'video', ratio: 0.590  },
-  { src: f('photo-3-1.webp'),          type: 'image', ratio: 1.333  },
-  { src: f('ngo-minh-bg.webp'),        type: 'image', ratio: 1.000  },
-  { src: f('a4-23.webp'),              type: 'image', ratio: 1.415  },
-  { src: f('img-1409.mp4'),           type: 'video', ratio: 0.563  },
-  { src: f('photo-1-2.webp'),          type: 'image', ratio: 1.333  },
-  { src: f('duc-13a.webp'),            type: 'image', ratio: 1.294  },
-  { src: f('test-poster-1.webp'),      type: 'image', ratio: 1.415  },
-  { src: f('photo-4-1.webp'),          type: 'image', ratio: 1.778  },
-  { src: f('letter-2.webp'),           type: 'image', ratio: 1.294  },
-  { src: f('bunny-4.webp'),            type: 'image', ratio: 1.778  },
-  { src: f('kinetic-typography.mp4'), type: 'video', ratio: 0.563  },
-  { src: f('photo-2-2.webp'),          type: 'image', ratio: 1.500  },
-  { src: f('screenshot-2023.webp'),    type: 'image', ratio: 0.628  },
-  { src: f('photo-3-2.webp'),          type: 'image', ratio: 0.547  },
-  { src: f('game-2.mp4'),             type: 'video', ratio: 0.658  },
-  { src: f('donut.webp'),              type: 'image', ratio: 1.000  },
-  { src: f('photo-4-2.webp'),          type: 'image', ratio: 1.333  },
-  { src: f('untitled-3.mp4'),         type: 'video', ratio: 0.563  },
+type Item = {
+  num: string
+  name: string
+  src: string
+  type: 'image' | 'video'
+  poster?: string
+}
+
+const ITEMS: Item[] = [
+  // Row 1: L P L P L L
+  { num: '001', name: '3D illustration DOPE poster', src: f('dope-1.webp'), type: 'image' },
+  { num: '002', name: 'AoT Fan Art Wall Maria', src: f('attack-on-titan.webp'), type: 'image' },
+  { num: '003', name: 'Hornby St Photography', src: f('photo-1-1.webp'),        type: 'image' },
+  { num: '004', name: 'Pixel Shooter Game',  src: f('game-1.mp4'),               type: 'video', poster: f('game-1.webp') },
+  { num: '005', name: 'Late Night Bus Poster', src: f('late-night-poster.webp'), type: 'image' },
+  { num: '006', name: 'Yellow Brush Illustration', src: f('ngo-minh.webp'),    type: 'image' },
+  // Row 2: P L P L L P
+  { num: '007', name: 'Gastown Vancouver Photography', src: f('photo-2-1.webp'), type: 'image' },
+  { num: '008', name: '3D Flower Render',    src: f('abstract-model.webp'),      type: 'image' },
+  { num: '009', name: 'Sky Scene Painting',  src: f('your-name-fake.webp'),      type: 'image' },
+  { num: '010', name: '"Vietnam" Isometric Lettering Illustration', src: f('img-0683.webp'), type: 'image' },
+  { num: '011', name: '"D" Landing Page Concept', src: f('d.mp4'),              type: 'video', poster: f('d.webp') },
+  // Row 3: L L P L L L
+  { num: '012', name: 'Granville St Photography', src: f('photo-3-1.webp'),    type: 'image' },
+  { num: '013', name: '"Finding Adventure Under the Blue Sky" Poster', src: f('poster-design-1.webp'), type: 'image' },
+  { num: '014', name: 'Daisies in a Field', src: f('img-1409.mp4'),             type: 'video', poster: f('img-1409.webp') },
+  { num: '015', name: 'Abstract Liquify Colours', src: f('ngo-minh-bg.webp'),   type: 'image' },
+  { num: '016', name: 'Holland Festival Poster', src: f('a4-23.webp'),          type: 'image' },
+  { num: '017', name: 'Street Photography', src: f('photo-1-2.webp'),           type: 'image' },
+  // Row 4: P L P L L P
+  { num: '018', name: 'Kinetic Typography Animation', src: f('kinetic-typography.mp4'), type: 'video', poster: f('kinetic-typography.webp') },
+  { num: '019', name: 'Fondazione Prada Exhibition Poster', src: f('duc-13a.webp'), type: 'image' },
+  { num: '020', name: 'Portfolio Landing Page Concept', src: f('screenshot-2023.webp'), type: 'image' },
+  { num: '021', name: 'Holland Festival Poster — Swiss Grid', src: f('test-poster-1.webp'), type: 'image' },
+  { num: '022', name: 'Downtown Vancouver Street Photography', src: f('photo-4-1.webp'), type: 'image' },
+  { num: '023', name: 'Granville St Photography II', src: f('photo-3-2.webp'),  type: 'image' },
+  // Row 5: L L P L L P
+  { num: '024', name: '"Audition Bounded" SFU Event Poster', src: f('letter-2.webp'), type: 'image' },
+  { num: '025', name: '3D Render — Dark Bunny Head', src: f('bunny-4.webp'),    type: 'image' },
+  { num: '026', name: 'Demon Slayer Pixel RPG Game', src: f('game-2.mp4'),      type: 'video', poster: f('game-2.webp') },
+  { num: '027', name: 'Donut Vector Illustration', src: f('donut.webp'),        type: 'image' },
+  { num: '028', name: 'Gastown — "Water Street Garage" Photography', src: f('photo-2-2.webp'), type: 'image' },
+  { num: '029', name: 'Abstract 3D Animation', src: f('untitled-3.mp4'),        type: 'video', poster: f('untitled-3.webp') },
+  // Row 6
+  { num: '030', name: 'Vancouver Art Gallery Photography', src: f('photo-4-2.webp'), type: 'image' },
 ]
 
-const IMAGE_FILES = ALL_ITEMS.filter(i => i.type === 'image').map(i => i.src)
-
-type Pos = { left: number; top: number; width: number; height: number }
-
-function MasonryGrid({ numCols, gap }: { numCols: number; gap: number }) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [positions, setPositions] = useState<Pos[]>([])
-  const [containerH, setContainerH] = useState(0)
-  const slowConnection = useSlowConnection()
-
-  const compute = useCallback(() => {
-    const el = containerRef.current
-    if (!el) return
-    const totalW = el.offsetWidth
-    if (!totalW) return
-    const colW = (totalW - gap * (numCols - 1)) / numCols
-    const heights = new Array(numCols).fill(0)
-
-    const pos: Pos[] = ALL_ITEMS.map(item => {
-      const col = heights.indexOf(Math.min(...heights))
-      const left = col * (colW + gap)
-      const top = heights[col]
-      const height = colW * item.ratio
-      heights[col] += height + gap
-      return { left, top, width: colW, height }
-    })
-
-    setPositions(pos)
-    setContainerH(Math.max(...heights) - gap)
-  }, [numCols, gap])
-
-  useEffect(() => {
-    compute()
-    const ro = new ResizeObserver(compute)
-    if (containerRef.current) ro.observe(containerRef.current)
-    return () => ro.disconnect()
-  }, [compute])
-
+const IMAGE_ITEMS = ITEMS.filter(i => i.type === 'image').map(i => ({ src: i.src, name: i.name }))
+function LabCard({ item }: { item: Item }) {
   return (
-    <div ref={containerRef} className="mx-6 relative" style={{ height: containerH }}>
-      {ALL_ITEMS.map((item, i) => {
-        const pos = positions[i]
-        if (!pos) return null
-        return (
-          <div
-            key={i}
-            style={{ position: 'absolute', left: pos.left, top: pos.top, width: pos.width }}
-          >
-            {item.type === 'video' ? (
-              <div style={{ backgroundImage: `url(${item.src.replace(/\.mp4$/, '.webp')})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                <video
-                  src={item.src}
-                  poster={item.src.replace(/\.mp4$/, '.webp')}
-                  muted loop playsInline autoPlay preload={slowConnection ? 'none' : 'auto'}
-                  style={{ width: '100%', display: 'block' }}
-                />
-              </div>
-            ) : (
-              <Image
-                src={item.src}
-                alt=""
-                width={0}
-                height={0}
-                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                style={{ width: '100%', height: 'auto', display: 'block' }}
-                loading="lazy"
-                placeholder="blur"
-                blurDataURL={BLUR_DATA_URL}
-              />
-            )}
-          </div>
-        )
-      })}
+    <div className="flex flex-col gap-2 min-w-0">
+      <div className="overflow-hidden">
+        <div>
+          {item.type === 'video' ? (
+            <video
+              src={item.src}
+              poster={item.poster}
+              autoPlay loop muted playsInline preload="auto"
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={item.src}
+              alt=""
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+          )}
+        </div>
+      </div>
+      <div className="flex flex-col gap-0.5">
+        <span className="font-sans font-light text-xs text-neutral-400">{item.num}</span>
+        <span className="font-sans font-light text-xs text-neutral-900">{item.name}</span>
+      </div>
     </div>
   )
 }
 
-function useGrid(): { numCols: number; gap: number } {
-  const [grid, setGrid] = useState({ numCols: 4, gap: 100 })
-  useEffect(() => {
-    const update = () => {
-      if (window.innerWidth < 768)       setGrid({ numCols: 2, gap: 16 })
-      else if (window.innerWidth < 1024) setGrid({ numCols: 3, gap: 40 })
-      else                               setGrid({ numCols: 4, gap: 100 })
-    }
-    update()
-    window.addEventListener('resize', update)
-    return () => window.removeEventListener('resize', update)
-  }, [])
-  return grid
+function LabGrid() {
+  return (
+    <div
+      className="mx-6 grid grid-cols-2 gap-x-3 gap-y-8 md:grid-cols-4 md:gap-x-10 md:gap-y-12 lg:grid-cols-6 lg:gap-x-20 lg:gap-y-[6.25rem]"
+    >
+      {ITEMS.map(item => <LabCard key={item.num} item={item} />)}
+    </div>
+  )
 }
 
 export default function FunPage() {
   const { mode } = useViewMode()
   const pathname = usePathname()
-  const { numCols, gap } = useGrid()
   const [universeReady, setUniverseReady] = useState(false)
   const overlayRef = useRef<HTMLDivElement>(null)
 
-  // Idle-preload Three.js so repeat visits skip the parse freeze
   useEffect(() => {
     const load = () => import('@/components/ui/ImageUniverse')
     if ('requestIdleCallback' in window) {
@@ -167,8 +124,6 @@ export default function FunPage() {
       return () => clearTimeout(t)
     } else {
       document.documentElement.style.overflow = ''
-      // intentionally not resetting universeReady — expand mode doesn't use it,
-      // and the state update would re-render and override the expand overlay's DOM mutation
     }
     return () => { document.documentElement.style.overflow = '' }
   }, [mode])
@@ -192,7 +147,7 @@ export default function FunPage() {
         <div className="relative w-full" style={{ height: '100dvh', background: '#080808' }}>
           {universeReady && (
             <div className="absolute inset-0">
-              <ImageUniverse images={[...IMAGE_FILES, ...IMAGE_FILES]} />
+              <ImageUniverse items={[...IMAGE_ITEMS, ...IMAGE_ITEMS]} />
             </div>
           )}
           <div
@@ -235,9 +190,9 @@ export default function FunPage() {
               <em className="italic text-pink-400">love</em> of the game.
             </PageHero>
           </div>
-          <main className="w-full section-mt" style={{ paddingBottom: '200px' }}>
+          <main className="w-full section-mt pb-[12.5rem]">
             <hr className="border-t border-zinc-200 mx-6 mb-6" />
-            <MasonryGrid numCols={numCols} gap={gap} />
+            <LabGrid />
           </main>
           <div
             className="hidden lg:flex absolute right-0 top-0 h-screen flex-col z-[10] pointer-events-auto"

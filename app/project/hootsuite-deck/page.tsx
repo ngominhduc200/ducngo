@@ -4,15 +4,18 @@ import Divider from '@/components/ui/Divider'
 import SectionLabel from '@/components/ui/SectionLabel'
 import CaseStudyHero from '@/components/sections/CaseStudyHero'
 import CaseStudySection from '@/components/sections/CaseStudySection'
+import BeforeAfterSlider from '@/components/ui/BeforeAfterSlider'
+import PullQuote from '@/components/ui/PullQuote'
 
 const NAV_ITEMS = [
   { label: 'context', id: 'context' },
   { label: 'result', id: 'result' },
   { label: 'learning', id: 'learning' },
+  { label: 'testimonial', id: 'testimonial' },
   { label: 'showcase', id: 'showcase' },
 ]
 
-const a = (name: string) => `/images/hootsuite-deck-compressed/${name}`
+const a = (name: string) => `/images/hootsuite-deck/${name}`
 
 export default function HootsuiteGraphicPage() {
   return (
@@ -39,9 +42,18 @@ export default function HootsuiteGraphicPage() {
               </p>
             </div>
             <p className="font-sans text-sm text-neutral-900">
-              A lot of my work carried into 2026 such as the typography treatment and gradient colour system became part of the live brand, used to complement content in the foreground.
+              A lot of my work carried into 2026, the typography treatment and gradient colour system became part of the live brand, used to complement content in the foreground. Below is one example of a recent Q1 product update on Hootsuite&apos;s Instagram reflecting the new brand direction: shifting from a social to an enterprise look and feel, with attention to background colour gradient, mature and consistent typography, and professional image choices.
             </p>
           </CaseStudySection>
+
+          <BeforeAfterSlider
+            before={a('before.webp')}
+            after={a('after.webp')}
+            beforeAlt="Hootsuite deck before redesign"
+            afterAlt="Hootsuite deck after redesign"
+          />
+
+          <div className="mt-12" />
 
           <Divider />
 
@@ -67,6 +79,20 @@ export default function HootsuiteGraphicPage() {
               </a>
               {' '}for full proposal!
             </p>
+          </CaseStudySection>
+
+          <Divider />
+
+          <CaseStudySection id="testimonial">
+            <div className="flex flex-col gap-3">
+              <SectionLabel>Testimonial</SectionLabel>
+              <p className="font-serif font-normal text-xl md:text-2xl text-neutral-900 leading-[1.3]">
+                Some kind words from my manager.
+              </p>
+            </div>
+            <PullQuote attribution="Anne Buchan, Interim Design Team Lead">
+              Duc consistently exceeded expectations for a co-op student. He ramped up quickly, produced high-quality, on-brand design work, and required very few rounds of revision. He worked independently, was reliable, and showed maturity and ownership closer to a junior designer than a student.
+            </PullQuote>
           </CaseStudySection>
 
         </div>

@@ -105,7 +105,7 @@ export default function AboutContent() {
         <div className="flex-1 grid grid-cols-4 gap-4 min-h-0 overflow-hidden">
           {['Vertical 1.webp', 'Vertical 2.webp', 'Vertical 3.webp', 'Vertical 4.webp'].map((img, i) => (
             <div key={i} className="relative overflow-hidden">
-              <Image src={`/images/about-compressed/${img}`} alt="" fill sizes="(min-width: 1024px) 20vw, 50vw" style={{ objectFit: 'cover' }} loading="eager" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+              <Image src={`/images/about/${img}`} alt="" fill sizes="(min-width: 1024px) 20vw, 50vw" style={{ objectFit: 'cover' }} loading="eager" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
             </div>
           ))}
         </div>
@@ -114,7 +114,7 @@ export default function AboutContent() {
         <div className="flex-[2] grid grid-cols-2 gap-4 min-h-0">
           {['IMG_0595.webp', 'IMG_1226.webp'].map((img, i) => (
             <div key={i} className="relative overflow-hidden w-full h-full">
-              <Image src={`/images/about-compressed/${img}`} alt="" fill sizes="(min-width: 1024px) 26vw, 50vw" style={{ objectFit: 'cover' }} loading="eager" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+              <Image src={`/images/about/${img}`} alt="" fill sizes="(min-width: 1024px) 26vw, 50vw" style={{ objectFit: 'cover' }} loading="eager" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
             </div>
           ))}
         </div>

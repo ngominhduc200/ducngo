@@ -14,7 +14,7 @@ export default function PageHero({
   return (
     <section
       style={{ animation: 'contentReveal 0.5s ease-out both' }}
-      className={`w-full px-6 pt-20 md:pt-[250px] pb-8 md:pb-[40px] ${
+      className={`w-full px-6 pt-20 pb-8 ${
         align === 'left'
           ? 'flex flex-col gap-2 items-start text-left'
           : 'flex flex-col gap-2 items-start text-left md:items-center md:text-center'
