@@ -37,7 +37,7 @@ export default function HootsuiteGraphicPage() {
           <CaseStudySection id="result">
             <div className="flex flex-col gap-3">
               <SectionLabel>Result</SectionLabel>
-              <p className="font-serif font-normal text-xl md:text-2xl text-neutral-900 leading-[1.3]">
+              <p className="font-serif font-light text-xl md:text-2xl text-neutral-900 leading-[1.3]">
                 Typography and colour system carried into the 2026 brand.
               </p>
             </div>
@@ -60,7 +60,7 @@ export default function HootsuiteGraphicPage() {
           <CaseStudySection id="learning">
             <div className="flex flex-col gap-3">
               <SectionLabel>Learning</SectionLabel>
-              <p className="font-serif font-normal text-xl md:text-2xl text-neutral-900 leading-[1.3]">
+              <p className="font-serif font-light text-xl md:text-2xl text-neutral-900 leading-[1.3]">
                 Designed with research-backed decision helps me work with confidence.
               </p>
             </div>
@@ -86,7 +86,7 @@ export default function HootsuiteGraphicPage() {
           <CaseStudySection id="testimonial">
             <div className="flex flex-col gap-3">
               <SectionLabel>Testimonial</SectionLabel>
-              <p className="font-serif font-normal text-xl md:text-2xl text-neutral-900 leading-[1.3]">
+              <p className="font-serif font-light text-xl md:text-2xl text-neutral-900 leading-[1.3]">
                 Some kind words from my manager.
               </p>
             </div>

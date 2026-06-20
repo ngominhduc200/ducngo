@@ -7,8 +7,8 @@ import { useViewMode } from '@/contexts/ViewModeContext'
 
 const SHOWN_PATHS = ['/', '/lab']
 
-const TEXT_CLASS_EXPAND = 'font-serif italic text-9xl lg:text-[12rem] uppercase leading-none text-neutral-900'
-const TEXT_CLASS_COMPRESSED = 'font-serif italic text-5xl lg:text-6xl uppercase leading-none text-neutral-900'
+const TEXT_CLASS_EXPAND = 'font-serif font-thin italic text-9xl lg:text-[12rem] uppercase leading-none text-neutral-900'
+const TEXT_CLASS_COMPRESSED = 'font-serif font-thin italic text-5xl lg:text-6xl uppercase leading-none text-neutral-900'
 
 export default function DucNgoFooter() {
   const pathname = usePathname()

@@ -13,7 +13,7 @@ export default function AboutContent() {
       <div className="flex flex-col gap-10 min-w-0" style={{ flexBasis: '40%' }}>
 
         {/* Hero */}
-        <h1 className="hero-serif font-normal text-2xl lg:text-xl xl:text-2xl text-neutral-900">
+        <h1 className="hero-serif font-normal text-3xl lg:text-2xl xl:text-3xl text-neutral-900">
           Hello, I&apos;m{' '}
           <em className="italic" style={{ color: '#0ea5e9' }}>Duc.</em>
         </h1>

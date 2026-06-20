@@ -30,7 +30,7 @@ function TwoCol({ children }: { children: React.ReactNode }) {
 function FocusItem({ heading, body }: { heading: string; body: string }) {
   return (
     <div className="flex flex-col gap-3">
-      <p className="font-serif font-medium text-2xl text-neutral-900">{heading}</p>
+      <p className="font-serif font-light text-2xl text-neutral-900">{heading}</p>
       <p className="font-sans text-sm text-neutral-900">{body}</p>
     </div>
   )
@@ -129,7 +129,7 @@ export default function AirbnbPage() {
             <SectionLabel>findings</SectionLabel>
             <TwoCol>
               <div className="flex flex-col gap-3">
-                <p className="font-serif font-medium text-2xl text-neutral-900">
+                <p className="font-serif font-light text-2xl text-neutral-900">
                   Check-in instruction sits in long message and users report to film video when entering to check for pre-existing damage
                 </p>
                 <p className="font-sans text-sm text-neutral-900">
@@ -137,7 +137,7 @@ export default function AirbnbPage() {
                 </p>
               </div>
               <div className="flex flex-col gap-3">
-                <p className="font-serif font-medium text-2xl text-neutral-900">
+                <p className="font-serif font-light text-2xl text-neutral-900">
                   Planning that leads to booking doesn&apos;t happen in Airbnb.
                 </p>
                 <p className="font-sans text-sm text-neutral-900">
@@ -173,7 +173,7 @@ export default function AirbnbPage() {
           <TwoCol>
             <div className="flex flex-col gap-3">
               <SectionLabel>andy&apos;s pain point 1</SectionLabel>
-              <p className="font-serif font-medium text-2xl text-neutral-900">
+              <p className="font-serif font-light text-2xl text-neutral-900">
                 Critical info is buried in long chat
               </p>
               <p className="font-sans text-sm text-neutral-900">
@@ -182,7 +182,7 @@ export default function AirbnbPage() {
             </div>
             <div className="flex flex-col gap-3">
               <SectionLabel>andy&apos;s pain point 2</SectionLabel>
-              <p className="font-serif font-medium text-2xl text-neutral-900">
+              <p className="font-serif font-light text-2xl text-neutral-900">
                 No place to report existing damage
               </p>
               <p className="font-sans text-sm text-neutral-900">
@@ -209,7 +209,7 @@ export default function AirbnbPage() {
           </p>
           <div className="flex flex-col gap-3">
             <SectionLabel>jennie&apos;s pain point</SectionLabel>
-            <p className="font-serif font-medium text-2xl text-neutral-900">
+            <p className="font-serif font-light text-2xl text-neutral-900">
               No structured way to contribute in group planning
             </p>
             <p className="font-sans text-sm text-neutral-900">
@@ -240,7 +240,7 @@ export default function AirbnbPage() {
 
         <CaseStudySection id="prototype" gap={16}>
           <div className="flex flex-col gap-8">
-            <SectionHeader label="prototype walkthrough" weight="normal">
+            <SectionHeader label="prototype walkthrough" weight="light">
               Final prototype is built with interactions that feel native with the app.
             </SectionHeader>
             <p className="font-sans text-sm text-neutral-900">
@@ -274,7 +274,7 @@ export default function AirbnbPage() {
             },
           ].map(({ label, heading, video, poster }) => (
             <div key={label} className="flex flex-col gap-8">
-              <SectionHeader label={label} as="h3" weight="normal">{heading}</SectionHeader>
+              <SectionHeader label={label} as="h3" weight="light">{heading}</SectionHeader>
               <AutoPlayVideo src={video} poster={poster} />
             </div>
           ))}
@@ -283,7 +283,7 @@ export default function AirbnbPage() {
         <Divider />
 
         <CaseStudySection id="result">
-          <SectionHeader label="result" weight="normal">
+          <SectionHeader label="result" weight="light">
             User testing shows positive feedback about how it made group consensus visible without a separate conversation.
           </SectionHeader>
           <p className="font-sans text-sm text-neutral-900">
@@ -297,7 +297,7 @@ export default function AirbnbPage() {
         <Divider />
 
         <CaseStudySection id="learning">
-          <SectionHeader label="learning" weight="normal">
+          <SectionHeader label="learning" weight="light">
             The storyboard is where good ideas get tested.
           </SectionHeader>
           <p className="font-sans text-sm text-neutral-900">

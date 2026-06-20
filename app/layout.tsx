@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Instrument_Serif, Public_Sans } from 'next/font/google'
+import localFont from 'next/font/local'
 
 export const metadata: Metadata = {
   title: 'Duc Ngo',
@@ -25,26 +25,36 @@ import SiteCredit from '@/components/layout/SiteCredit'
 import { ViewModeProvider } from '@/contexts/ViewModeContext'
 import { AboutModalProvider } from '@/contexts/AboutModalContext'
 
-const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal', 'italic'],
-  variable: '--font-instrument-serif-loaded',
+const reckless = localFont({
+  src: [
+    { path: '../public/fonts/font-serif/Reckless Condensed S/RecklessCondensedS-TRIAL-Thin.woff2', style: 'normal', weight: '100' },
+    { path: '../public/fonts/font-serif/Reckless Condensed S/RecklessCondensedS-TRIAL-ThinItalic.woff2', style: 'italic', weight: '100' },
+    { path: '../public/fonts/font-serif/Reckless Condensed S/RecklessCondensedS-TRIAL-Light.woff2', style: 'normal', weight: '300' },
+    { path: '../public/fonts/font-serif/Reckless Condensed S/RecklessCondensedS-TRIAL-LightItalic.woff2', style: 'italic', weight: '300' },
+    { path: '../public/fonts/font-serif/Reckless Condensed S/RecklessCondensedS-TRIAL-Regular.woff2', style: 'normal', weight: '400' },
+    { path: '../public/fonts/font-serif/Reckless Condensed S/RecklessCondensedS-TRIAL-RegularItalic.woff2', style: 'italic', weight: '400' },
+  ],
+  variable: '--font-reckless-loaded',
   display: 'swap',
 })
 
-const publicSans = Public_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  style: ['normal', 'italic'],
+const neueHaasUnica = localFont({
+  src: [
+    { path: '../public/fonts/font-sans/NeueHaasUnica-Light.woff2', style: 'normal', weight: '300' },
+    { path: '../public/fonts/font-sans/NeueHaasUnica-LightItalic.woff2', style: 'italic', weight: '300' },
+    { path: '../public/fonts/font-sans/NeueHaasUnica-Regular.woff2', style: 'normal', weight: '400' },
+    { path: '../public/fonts/font-sans/NeueHaasUnica-Italic.woff2', style: 'italic', weight: '400' },
+    { path: '../public/fonts/font-sans/NeueHaasUnica-Medium.woff2', style: 'normal', weight: '500' },
+    { path: '../public/fonts/font-sans/NeueHaasUnica-MediumItalic.woff2', style: 'italic', weight: '500' },
+  ],
   variable: '--font-public-sans-loaded',
   display: 'swap',
 })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${instrumentSerif.variable} ${publicSans.variable} scroll-smooth bg-stone-50`}>
-      <body className="bg-stone-50 text-neutral-900 font-sans text-sm font-light" suppressHydrationWarning>
+    <html lang="en" className={`${reckless.variable} ${neueHaasUnica.variable} scroll-smooth bg-stone-50`}>
+      <body className="bg-stone-50 text-neutral-900 font-sans text-sm font-normal" suppressHydrationWarning>
         <ViewModeProvider>
           <AboutModalProvider>
             <Cursor />

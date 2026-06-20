@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: var(--font-instrument-serif-loaded), serif;
+  --font-serif: var(--font-reckless-loaded), Georgia, serif;
   --font-sans:  var(--font-public-sans-loaded), sans-serif;
 }
 
@@ -23,18 +23,17 @@
 }
 
 .font-serif {
-  font-family: var(--font-instrument-serif-loaded), serif;
+  font-family: var(--font-reckless-loaded), serif;
 }
 
 .hero-serif {
-  font-family: var(--font-instrument-serif-loaded), serif;
-  text-transform: uppercase;
+  font-family: var(--font-reckless-loaded), serif;
+  font-weight: 300;
   line-height: 1.2;
 }
 
 .hero-serif * {
-  font-family: var(--font-instrument-serif-loaded), serif;
-  text-transform: uppercase;
+  font-family: var(--font-reckless-loaded), serif;
   font-size: inherit;
   line-height: inherit;
 }

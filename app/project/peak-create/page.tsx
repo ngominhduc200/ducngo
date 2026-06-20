@@ -79,7 +79,7 @@ export default function PeakCreatePage() {
                 { title: '~11 Illustrators', body: 'browses weekly requests, claims work, delivers artwork by deadline.' },
               ].map(({ title, body }) => (
                 <div key={title} className="flex flex-col gap-3">
-                  <span className="font-serif font-medium text-2xl text-neutral-900">{title}</span>
+                  <span className="font-serif font-light text-2xl text-neutral-900">{title}</span>
                   <p className="font-sans text-sm text-neutral-900">{body}</p>
                 </div>
               ))}
@@ -133,7 +133,7 @@ export default function PeakCreatePage() {
           ].map(({ label, italic }) => (
             <div key={label} className="flex flex-col gap-3 items-start">
               <SectionLabel>{label}</SectionLabel>
-              <p className="font-serif font-normal text-xl md:text-3xl text-neutral-900">
+              <p className="font-serif font-light text-xl md:text-3xl text-neutral-900">
                 How might we {italic}
               </p>
             </div>
@@ -144,7 +144,7 @@ export default function PeakCreatePage() {
 
         <CaseStudySection id="design-process" gap={10}>
           <div className="flex flex-col gap-8">
-            <SectionHeader label="design process" weight="normal">
+            <SectionHeader label="design process" weight="light">
               My first direction was a task management app.
             </SectionHeader>
             <p className="font-sans text-sm text-neutral-900">
@@ -160,7 +160,7 @@ export default function PeakCreatePage() {
 
         <CaseStudySection gap={10}>
           <div className="flex flex-col gap-8">
-            <SectionHeader label="pivot" weight="normal">
+            <SectionHeader label="pivot" weight="light">
               I rebuilt it around how The Peak actually works in their fixed weekly structure. Below are four major changes.
             </SectionHeader>
           </div>
@@ -199,7 +199,7 @@ export default function PeakCreatePage() {
         <Divider />
 
         <CaseStudySection id="final-solution" gap={16}>
-          <SectionHeader label="final solution" weight="normal">
+          <SectionHeader label="final solution" weight="light">
             Here&apos;s how everything comes together: one place for editors to brief, illustrators to submit, and the Production Editor to track it all without switching tools.
           </SectionHeader>
           {[
@@ -212,7 +212,7 @@ export default function PeakCreatePage() {
             { label: '07 — semester invoice per contributor', heading: "At the end of semester, Jack checks the total of completed request and downloads Artie's invoice for payment.", step: 7 },
           ].map(({ label, heading, step }) => (
             <div key={label} className="flex flex-col gap-8">
-              <SectionHeader label={label} as="h3" weight="normal">{heading}</SectionHeader>
+              <SectionHeader label={label} as="h3" weight="light">{heading}</SectionHeader>
               <AutoPlayVideo src={a(`step-${step}.mp4`)} poster={a(`step-${step}.webp`)} />
             </div>
           ))}
@@ -222,7 +222,7 @@ export default function PeakCreatePage() {
 
         <CaseStudySection id="result" gap={12}>
           <div className="flex flex-col gap-10">
-            <SectionHeader label="result" weight="normal">
+            <SectionHeader label="result" weight="light">
               Stakeholder feedback showed strong potential to better support for managing requests from draft to completion,...
             </SectionHeader>
             <PullQuote attribution="Abbey Perley, Peak's Production Editor">
@@ -230,7 +230,7 @@ export default function PeakCreatePage() {
             </PullQuote>
           </div>
           <div className="flex flex-col gap-10">
-            <h2 className="font-serif font-normal text-xl md:text-3xl text-neutral-900">
+            <h2 className="font-serif font-light text-xl md:text-3xl text-neutral-900">
               ...and reduce manual tracking, real confidence in adopting the system as a full replacement for the current workflow.
             </h2>
             <PullQuote attribution="Josh Ralla, former Peak's Production Editor" align="center">
@@ -242,7 +242,7 @@ export default function PeakCreatePage() {
         <Divider />
 
         <CaseStudySection id="learning">
-          <SectionHeader label="learning" weight="normal">
+          <SectionHeader label="learning" weight="light">
             Understanding the system helped me prototype with full confidence.
           </SectionHeader>
           <p className="font-sans text-sm text-neutral-900">

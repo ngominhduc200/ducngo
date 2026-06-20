@@ -4,16 +4,16 @@ export default function SectionHeader({
   label,
   children,
   as: Tag = 'h2',
-  weight = 'medium',
+  weight = 'light',
   dark,
 }: {
   label: string
   children: React.ReactNode
   as?: 'h1' | 'h2' | 'h3'
-  weight?: 'normal' | 'medium'
+  weight?: 'light' | 'normal' | 'medium'
   dark?: boolean
 }) {
-  const weightClass = weight === 'medium' ? 'font-medium' : 'font-normal'
+  const weightClass = weight === 'medium' ? 'font-medium' : weight === 'normal' ? 'font-normal' : 'font-light'
   return (
     <div className="flex flex-col gap-3">
       <SectionLabel dark={dark}>{label}</SectionLabel>

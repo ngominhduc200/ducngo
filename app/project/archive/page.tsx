@@ -74,7 +74,7 @@ export default function ArchivePage() {
 
         {/* Header */}
         <div className="flex flex-col gap-[20px] pb-[80px] w-full">
-          <h1 className="font-sans font-light text-neutral-900">
+          <h1 className="font-sans font-normal text-sm text-neutral-900">
             Archive
           </h1>
           <p className="font-sans text-sm text-neutral-400">2022–2025</p>
@@ -97,7 +97,7 @@ export default function ArchivePage() {
               <div className="flex items-start justify-between gap-6">
                 <div className="flex flex-col gap-[10px]">
                   <p className="font-sans text-sm text-neutral-400">{project.category} · {project.year}</p>
-                  <h2 className="font-sans text-sm font-light text-neutral-900">
+                  <h2 className="font-sans text-sm font-normal text-neutral-900">
                     {project.title}
                   </h2>
                 </div>

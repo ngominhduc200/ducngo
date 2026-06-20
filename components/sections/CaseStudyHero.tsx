@@ -25,7 +25,7 @@ export default function CaseStudyHero({
         <span className="font-sans text-sm">work</span>
       </Link>
       <div className="flex flex-col gap-8">
-        <h1 className="font-serif font-normal text-3xl md:text-2xl lg:text-3xl xl:text-4xl text-neutral-900 leading-[1.3]">
+        <h1 className="font-serif font-light text-3xl md:text-2xl lg:text-3xl xl:text-4xl text-neutral-900 leading-[1.3]">
           {title}
         </h1>
         <p className="font-sans text-sm text-neutral-900">{description}</p>

@@ -15,14 +15,14 @@ interface Props {
 }
 
 const FOV_DEG  = 70
-const MIN_DIST = 300
+const MIN_DIST = 2000
 const MAX_DIST = 6000
 const HALF_FOV = (FOV_DEG * 0.5 * Math.PI) / 180
 
-function frustumPoint(camZ: number, aspect: number): THREE.Vector3 {
-  const depth = MIN_DIST + Math.pow(Math.random(), 0.35) * (MAX_DIST - MIN_DIST)
-  const halfH = depth * Math.tan(HALF_FOV) * 1.05
-  const halfW = halfH * aspect * 1.05
+function frustumPoint(camZ: number, aspect: number, minDepth = MIN_DIST): THREE.Vector3 {
+  const depth = minDepth + Math.random() * (MAX_DIST - minDepth)
+  const halfH = depth * Math.tan(HALF_FOV) * 0.7
+  const halfW = halfH * aspect * 1.1
   return new THREE.Vector3(
     (Math.random() * 2 - 1) * halfW,
     (Math.random() * 2 - 1) * halfH,
@@ -94,7 +94,7 @@ export default function ImageUniverse({ items, onProgress }: Props) {
           const mesh  = new THREE.Mesh(geo, mat)
           mesh.userData.name = item.name
 
-          mesh.position.copy(frustumPoint(camera.position.z, aspect))
+          mesh.position.copy(frustumPoint(camera.position.z, aspect, 600))
           scene.add(mesh)
           meshes.push(mesh)
           toDispose.push(geo, mat)
@@ -109,12 +109,6 @@ export default function ImageUniverse({ items, onProgress }: Props) {
         })
       })
     })
-
-    // ── Raycaster ─────────────────────────────────────────────────────────────
-    const raycaster = new THREE.Raycaster()
-    const mouse     = new THREE.Vector2()
-    let mouseX = 0
-    let mouseY = 0
 
     // ── Scroll velocity ───────────────────────────────────────────────────────
     let scrollVel = 0
@@ -140,6 +134,11 @@ export default function ImageUniverse({ items, onProgress }: Props) {
     const lookX = gsap.quickTo(look, 'x', { duration: 1.2, ease: 'power3.out' })
     const lookY = gsap.quickTo(look, 'y', { duration: 1.2, ease: 'power3.out' })
 
+    const raycaster = new THREE.Raycaster()
+    const mouse     = new THREE.Vector2()
+    let mouseX = 0
+    let mouseY = 0
+
     const onMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX
       mouseY = e.clientY
@@ -164,7 +163,7 @@ export default function ImageUniverse({ items, onProgress }: Props) {
         if (dz > 200 || dz < -(MAX_DIST + 400)) {
           m.position.copy(frustumPoint(camZ, aspect))
         }
-        m.lookAt(camera.position)
+        m.quaternion.copy(camera.quaternion)
       })
 
       camera.position.x = 0
@@ -237,8 +236,8 @@ export default function ImageUniverse({ items, onProgress }: Props) {
           transition: 'opacity 0.15s ease',
           transform: 'none',
           fontFamily: 'var(--font-public-sans-loaded, sans-serif)',
-          fontWeight: 300,
-          fontSize: '0.75rem',
+          fontWeight: 400,
+          fontSize: '0.875rem',
           color: '#a3a3a3',
           letterSpacing: '0.01em',
           zIndex: 10,

@@ -12,7 +12,7 @@ export default function PullQuote({
     <div className={`flex gap-3.5 ${alignClass}`}>
       <div className="w-[2px] self-stretch bg-neutral-900 shrink-0" />
       <div className="flex flex-col gap-4 flex-1">
-        <p className="font-serif font-medium italic text-xl md:text-2xl text-neutral-900">
+        <p className="font-serif font-light italic text-xl md:text-2xl text-neutral-900">
           {children}
         </p>
         {attribution && <p className="font-sans text-sm text-neutral-400">{attribution}</p>}

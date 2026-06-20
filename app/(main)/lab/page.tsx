@@ -84,8 +84,8 @@ function LabCard({ item }: { item: Item }) {
         </div>
       </div>
       <div className="flex flex-col gap-0.5">
-        <span className="font-sans font-light text-xs text-neutral-400">{item.num}</span>
-        <span className="font-sans font-light text-xs text-neutral-900">{item.name}</span>
+        <span className="font-sans font-normal text-sm text-neutral-400">{item.num}</span>
+        <span className="font-sans font-normal text-sm text-neutral-900">{item.name}</span>
       </div>
     </div>
   )
@@ -147,7 +147,7 @@ export default function FunPage() {
         <div className="relative w-full" style={{ height: '100dvh', background: '#080808' }}>
           {universeReady && (
             <div className="absolute inset-0">
-              <ImageUniverse items={[...IMAGE_ITEMS, ...IMAGE_ITEMS]} />
+              <ImageUniverse items={IMAGE_ITEMS} />
             </div>
           )}
           <div
@@ -171,11 +171,11 @@ export default function FunPage() {
               style={{ paddingTop: '5.25rem', animation: 'contentReveal 400ms ease-out both' }}
               className="text-neutral-900"
             >
-              <p className="hero-serif text-2xl lg:text-xl xl:text-2xl">
+              <p className="hero-serif text-3xl lg:text-2xl xl:text-3xl">
                 I draw, code, animate, photograph. For the{' '}
                 <em className="italic text-pink-400">love</em> of the game.
               </p>
-              <p className="font-sans text-sm text-neutral-400 mt-1">
+              <p className="font-sans text-sm text-neutral-400 mt-2">
                 This is what keeps me sharp.
               </p>
             </div>
@@ -203,11 +203,11 @@ export default function FunPage() {
               style={{ paddingTop: '5.25rem', animation: 'contentReveal 400ms ease-out both' }}
               className="text-neutral-900"
             >
-              <p className="hero-serif text-2xl lg:text-xl xl:text-2xl">
+              <p className="hero-serif text-3xl lg:text-2xl xl:text-3xl">
                 I draw, code, animate, photograph. For the{' '}
                 <em className="italic text-pink-400">love</em> of the game.
               </p>
-              <p className="font-sans text-sm text-neutral-400 mt-1">
+              <p className="font-sans text-sm text-neutral-400 mt-2">
                 This is what keeps me sharp.
               </p>
             </div>

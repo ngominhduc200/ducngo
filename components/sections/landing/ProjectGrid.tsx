@@ -12,7 +12,7 @@ const FEATURE = [
     title: "Streamlining how The Peak's editorial team briefs, tracks, and pays illustrators with Peak Create",
     category: 'Product Design',
     year: '2026',
-    description: 'Over one month, I designed the user experience and interface for an illustration request tool that connects Production Editors, Section Editors, and Illustrators in one shared workspace with full visibility into the workflow. I collaborated with a UX researcher and two UX writers.',
+    description: "At The Peak, illustration requests ran across Sheets, Slack, Gmail, and Drive with no connection between them. I designed Peak Create: a single tool where editors brief, illustrators submit, and the Production Editor tracks everything from request to invoice. Production Editors said it reduced mental load and saw it as a full replacement for how they work today.",
     cover: { type: 'video' as const, src: '/images/peak-create/cover.mp4' },
     href: '/project/peak-create',
   },
@@ -21,7 +21,7 @@ const FEATURE = [
     title: 'Helping groups align on a place to stay together with Airbnb Collaborative Trip Planning',
     category: 'Product Design',
     year: 'Concept 2026',
-    description: 'In 3 weeks, I led the user research, wireframes, and prototype for a new Airbnb feature that lets groups collaborate on finding and booking a place to stay inside the app. I worked with a UX researcher and two UX designers.',
+    description: 'Group trip planning happens outside Airbnb, with one person carrying all the links and opinions across separate group chats. I designed Collaborative Trip Planning: a feature where members set preferences, browse with merged group filters, react to listings, and see a ranked summary to align without leaving the app. In testing, all 3 participants completed the full flow without prompting and said the summary made group consensus visible without a separate conversation.',
     cover: { type: 'image' as const, src: '/images/airbnb/cover.webp' },
     href: '/project/airbnb',
   },
@@ -30,7 +30,7 @@ const FEATURE = [
     title: 'Increasing Feature Discovery for Hootsuite',
     category: 'UX Design',
     year: 'Handed Off 2025',
-    description: 'During my internship, I designed a homepage feature that helps Hootsuite users discover the posting options available across their social channels. The project ended with a full handoff to engineering. I worked as a UX Designer, alongside a mentor, partnered with two PMs, and supported by a Senior UX Designer.',
+    description: 'Instagram Stories was one of the most-used formats on social media, but inside Hootsuite it sat 4 steps deep in Composer behind a nested dropdown. I designed a homepage widget that surfaces all post formats on the dashboard before users go looking. The project ended with a full engineering handoff, closing the gap between feature discovery and activation for both new and experienced users.',
     cover: { type: 'image' as const, src: '/images/hootsuite-composer/cover.webp' },
     href: '/project/hootsuite-composer',
   },
@@ -39,7 +39,7 @@ const FEATURE = [
     title: "Shaping Hootsuite's new branding with Deck of Truth redesigned",
     category: 'Brand Design',
     year: 'Shipped 2025',
-    description: "In September 2025, I spent one month with the brand marketing team auditing the current branding, and proposing a new direction to help shift Hootsuite's brand from social to enterprise.",
+    description: "Hootsuite's slide deck template was misaligned with where the brand was heading: from social media tool to enterprise platform. I audited the current branding and proposed a new direction built on updated typography, colour gradients, and layout composition. The redesigned Deck of Truth was adopted across all departments, and the typography and gradient system carried into the live 2026 brand.",
     cover: { type: 'image' as const, src: '/images/hootsuite-deck/preview-4.webp' },
     href: '/project/hootsuite-deck',
   },
@@ -198,7 +198,7 @@ export default function ProjectGrid() {
       >
         <div className="mx-6">
           <div className="flex flex-col gap-[10px] pb-[30px]">
-            <h2 className="font-serif text-3xl lg:text-5xl font-normal text-neutral-900">Selected Work</h2>
+            <h2 className="font-serif text-3xl lg:text-5xl font-light text-neutral-900">Selected Work</h2>
           </div>
 
           <hr className="border-t border-zinc-200 w-full" />
@@ -278,7 +278,7 @@ export default function ProjectGrid() {
       >
         <div className="mx-6">
           <div className="flex flex-col gap-[10px] pt-[50px] pb-[30px]">
-            <h2 className="font-serif text-3xl lg:text-5xl font-normal text-neutral-900">Archive</h2>
+            <h2 className="font-serif text-3xl lg:text-5xl font-light text-neutral-900">Archive</h2>
             <p className="font-sans text-sm text-neutral-400">Graphic design, front-end development, and co-op work from my earlier years.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-10">

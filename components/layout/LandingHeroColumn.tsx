@@ -11,14 +11,14 @@ const INNER_STYLE = { paddingTop: '5.25rem', animation: 'contentReveal 400ms eas
 function HeroContent({ pathname }: { pathname: string }) {
   return (
     <div key={pathname} style={INNER_STYLE} className="text-neutral-900">
-      <p className="hero-serif text-2xl lg:text-xl xl:text-2xl">
+      <p className="hero-serif text-3xl lg:text-2xl xl:text-3xl">
         I&apos;m a{' '}
         <em className="italic text-orange-500">product</em>{' '}
         and{' '}
         <em className="italic text-sky-500">visual</em>{' '}
         designer grounded in research and systems thinking.
       </p>
-      <p className="font-sans text-sm text-neutral-400 mt-1">
+      <p className="font-sans text-sm text-neutral-400 mt-2">
         Open for Fall 2026 Internship. Currently designing at Hootsuite and The Peak SFU.
       </p>
     </div>
