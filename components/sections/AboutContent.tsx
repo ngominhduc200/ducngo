@@ -53,6 +53,15 @@ export default function AboutContent() {
             >
               mdn7@sfu.ca
             </a>
+            . I also post my design work on{' '}
+            <a
+              href="https://x.com/ngominhduc200"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="italic text-orange-500 hover:text-sky-500 transition-colors"
+            >
+              Twitter
+            </a>
             .
           </p>
 
