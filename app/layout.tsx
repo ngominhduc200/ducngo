@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
+import { Analytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = {
   title: 'Duc Ngo',
@@ -72,6 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <SiteCredit />
           </AboutModalProvider>
         </ViewModeProvider>
+        <Analytics />
       </body>
     </html>
   )
