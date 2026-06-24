@@ -1,10 +1,11 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
+import { isCaseStudy } from '@/lib/case-study-paths'
 
 export default function SiteCredit() {
   const pathname = usePathname()
-  if (pathname.startsWith('/project/')) return null
+  if (isCaseStudy(pathname)) return null
   return (
     <p className="fixed bottom-0 right-0 font-sans text-sm text-neutral-400 pointer-events-auto" style={{ paddingBottom: '1.5rem', paddingRight: '1.5rem' }}>
       Design and built by Duc.

@@ -14,7 +14,7 @@ const FEATURE = [
     year: '2026',
     description: "At The Peak, illustration requests ran across Sheets, Slack, Gmail, and Drive with no connection between them. I designed Peak Create: a single tool where editors brief, illustrators submit, and the Production Editor tracks everything from request to invoice. Production Editors said it reduced mental load and saw it as a full replacement for how they work today.",
     cover: { type: 'video' as const, src: '/images/peak-create/cover.mp4' },
-    href: '/project/peak-create',
+    href: '/peak-create',
   },
   {
     id: 'project-airbnb',
@@ -23,7 +23,7 @@ const FEATURE = [
     year: 'Concept 2026',
     description: 'Group trip planning happens outside Airbnb, with one person carrying all the links and opinions across separate group chats. I designed Collaborative Trip Planning: a feature where members set preferences, browse with merged group filters, react to listings, and see a ranked summary to align without leaving the app. In testing, all 3 participants completed the full flow without prompting and said the summary made group consensus visible without a separate conversation.',
     cover: { type: 'image' as const, src: '/images/airbnb/cover.webp' },
-    href: '/project/airbnb',
+    href: '/airbnb',
   },
   {
     id: 'project-hootsuite',
@@ -32,7 +32,7 @@ const FEATURE = [
     year: 'Handed Off 2025',
     description: 'Instagram Stories was one of the most-used formats on social media, but inside Hootsuite it sat 4 steps deep in Composer behind a nested dropdown. I designed a homepage widget that surfaces all post formats on the dashboard before users go looking. The project ended with a full engineering handoff, closing the gap between feature discovery and activation for both new and experienced users.',
     cover: { type: 'image' as const, src: '/images/hootsuite-composer/cover.webp' },
-    href: '/project/hootsuite-composer',
+    href: '/hootsuite-composer',
   },
   {
     id: 'project-hootsuite-deck',
@@ -41,7 +41,7 @@ const FEATURE = [
     year: 'Shipped 2025',
     description: "Hootsuite's slide deck template was misaligned with where the brand was heading: from social media tool to enterprise platform. I audited the current branding and proposed a new direction built on updated typography, colour gradients, and layout composition. The redesigned Deck of Truth was adopted across all departments, and the typography and gradient system carried into the live 2026 brand.",
     cover: { type: 'image' as const, src: '/images/hootsuite-deck/preview-4.webp' },
-    href: '/project/hootsuite-deck',
+    href: '/hootsuite-deck',
   },
 ]
 

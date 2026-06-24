@@ -3,11 +3,12 @@
 import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { useLenis } from 'lenis/react'
+import { isCaseStudy } from '@/lib/case-study-paths'
 
 export default function PageLoader() {
   const pathname = usePathname()
   const barRef = useRef<HTMLDivElement>(null)
-  const isWork = pathname.startsWith('/project/')
+  const isWork = isCaseStudy(pathname)
 
   // Reset bar on route change
   useEffect(() => {

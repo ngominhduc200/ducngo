@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useViewMode } from '@/contexts/ViewModeContext'
 import { useAboutModal } from '@/contexts/AboutModalContext'
+import { isCaseStudy } from '@/lib/case-study-paths'
 
 const RESUME_URL = 'https://drive.google.com/file/d/17I24nDeEwg7q8yptVhdWdWsnCFsJbNuD/view?usp=sharing'
 
@@ -12,8 +13,7 @@ export default function RightSidebar() {
   const { mode, setMode } = useViewMode()
   const { isOpen: aboutOpen, toggle: toggleAbout, close: closeAbout } = useAboutModal()
 
-  // Case study and about pages have their own full-screen layout — hide sidebar
-  if (pathname.startsWith('/project/') || pathname === '/about') return null
+  if (isCaseStudy(pathname) || pathname === '/about') return null
 
   const linkCls = 'no-underline hover:text-orange-500 active:text-orange-500'
   const btnCls  = `cursor-pointer bg-transparent border-none p-0 hover:text-orange-500 active:text-orange-500`
