@@ -19,7 +19,7 @@ function HeroContent({ pathname }: { pathname: string }) {
         designer grounded in research and systems thinking.
       </p>
       <p className="font-sans text-sm text-neutral-400 mt-2">
-        Open for Fall 2026 Internship. Currently designing at Hootsuite and The Peak SFU.
+        Currently designing at Hootsuite and The Peak SFU.
       </p>
     </div>
   )
